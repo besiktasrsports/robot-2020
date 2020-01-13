@@ -22,11 +22,12 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("visiontable");
 
-  private RobotContainer m_robotContainer;
+  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -36,10 +37,11 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
-    m_robotContainer.m_robotDrive.m_gyro.calibrate();
-    m_robotContainer.m_robotDrive.zeroHeading();
+    //m_robotContainer.m_robotDrive.m_gyro.calibrate();
+    //m_robotContainer.m_robotDrive.zeroHeading();
     angle = table.getEntry("angle");
+    m_robotContainer = new RobotContainer();
+    
   }
 
   /**

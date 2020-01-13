@@ -9,9 +9,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -34,8 +36,10 @@ public class DriveSubsystem extends SubsystemBase {
       new SpeedControllerGroup(rightRearMotor, rightFrontMotor);
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
-  private final Gyro m_gyro = new ADXRS450_Gyro();
-  
+  public final Gyro m_gyro = new ADXRS450_Gyro();
+  private final BuiltInAccelerometer m_accel = new BuiltInAccelerometer();
+  private double angular_velocity;
+
   public DriveSubsystem() {
     
     leftRearMotor.setSafetyEnabled(false);
@@ -51,6 +55,9 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     // System.out.print("Robot angle:");
     // System.out.println(getHeading());
+    angular_velocity = m_gyro.getRate();
+    SmartDashboard.putNumber("Angular velocity", angular_velocity);
+
   }
 
   public void arcadeDrive(double fwd, double rot) {

@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 // import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -32,6 +33,7 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  // Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */

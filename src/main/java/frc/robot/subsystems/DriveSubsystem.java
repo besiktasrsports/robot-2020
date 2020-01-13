@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -37,8 +36,9 @@ public class DriveSubsystem extends SubsystemBase {
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
   public final Gyro m_gyro = new ADXRS450_Gyro();
-  private final BuiltInAccelerometer m_accel = new BuiltInAccelerometer();
+  // private final BuiltInAccelerometer m_accel = new BuiltInAccelerometer();
   private double angular_velocity;
+  private double target;
 
   public DriveSubsystem() {
     
@@ -58,6 +58,14 @@ public class DriveSubsystem extends SubsystemBase {
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
 
+  }
+
+  public double getTarget(){
+    return getHeading()+target;
+  }
+  
+  public void setTarget(double val){
+    target = val;
   }
 
   public void arcadeDrive(double fwd, double rot) {

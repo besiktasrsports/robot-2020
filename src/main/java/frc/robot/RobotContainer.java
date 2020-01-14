@@ -14,8 +14,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.FieldOrientedTurn;
 import frc.robot.commands.JoystickDrive;
+import frc.robot.commands.RunShooter;
+import frc.robot.commands.SetShooterToRPM;
 import frc.robot.commands.VisionTurnProfiled;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -30,7 +33,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final DriveSubsystem m_robotDrive = new DriveSubsystem();
-
+  public final ShooterSubsystem m_shooter = new ShooterSubsystem();
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
@@ -63,7 +66,12 @@ public class RobotContainer {
     new POVButton(m_driverController, 215).whileHeld(new FieldOrientedTurn(-135, m_robotDrive));
     new POVButton(m_driverController, 270).whileHeld(new FieldOrientedTurn(-90, m_robotDrive));
     new POVButton(m_driverController, 315).whileHeld(new FieldOrientedTurn(-45, m_robotDrive));
-    
+    new JoystickButton(m_driverController, Button.kY.value)
+      .whileHeld(new RunShooter(m_shooter, 1.0));
+    new JoystickButton(m_driverController, Button.kA.value)
+      .whileHeld(new SetShooterToRPM(50, m_shooter));
+    new JoystickButton(m_driverController, Button.kB.value)
+      .whileHeld(new SetShooterToRPM(30, m_shooter));
   }
 
 

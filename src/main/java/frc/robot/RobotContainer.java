@@ -8,16 +8,17 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-// import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.FieldOrientedTurn;
 import frc.robot.commands.JoystickDrive;
-import frc.robot.commands.TurnToAngleProfiled;
+import frc.robot.commands.VisionTurnProfiled;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 
 /**
@@ -32,7 +33,7 @@ public class RobotContainer {
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-  XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
   // Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -40,7 +41,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    m_robotDrive.setDefaultCommand(new JoystickDrive(m_robotDrive,() -> -m_driverController.getRawAxis(1), () -> m_driverController.getRawAxis(0)));
+    m_robotDrive.setDefaultCommand(new JoystickDrive(m_robotDrive,() -> -m_driverController.getRawAxis(1),
+     () -> m_driverController.getRawAxis(0)));
   }
 
   /**
@@ -52,14 +54,16 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // Turn to 90 degrees when the 'X' button is pressed, with a 5 second timeout
-     new JoystickButton(m_driverController, Button.kX.value)
-        .whileHeld(new TurnToAngleProfiled(0, m_robotDrive));
-    // new JoystickButton(m_driverController, Button.kX.value)
-    //   .whenPressed(new TurnToAngleProfiled(0, m_robotDrive).withTimeout(2));
-
-    // Turn to -90 degrees with a profile when the 'A' button is pressed, with a 5 second timeout
-    // new JoystickButton(m_driverController, Button.kA.value).whenPressed(new TurnToAngleProfiled(-90, m_robotDrive).withTimeout(1));
-
+    new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
+    new POVButton(m_driverController, 0).whileHeld(new FieldOrientedTurn(0, m_robotDrive));
+    new POVButton(m_driverController, 45).whileHeld(new FieldOrientedTurn(45, m_robotDrive));    
+    new POVButton(m_driverController, 90).whileHeld(new FieldOrientedTurn(90, m_robotDrive));
+    new POVButton(m_driverController, 135).whileHeld(new FieldOrientedTurn(135, m_robotDrive));    
+    new POVButton(m_driverController, 180).whileHeld(new FieldOrientedTurn(180, m_robotDrive));
+    new POVButton(m_driverController, 215).whileHeld(new FieldOrientedTurn(-135, m_robotDrive));
+    new POVButton(m_driverController, 270).whileHeld(new FieldOrientedTurn(-90, m_robotDrive));
+    new POVButton(m_driverController, 315).whileHeld(new FieldOrientedTurn(-45, m_robotDrive));
+    
   }
 
 

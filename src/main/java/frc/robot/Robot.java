@@ -111,8 +111,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    System.out.println(angle.getDouble(0));
-    m_robotContainer.m_robotDrive.setTarget(angle.getDouble(0));
+    //System.out.println(angle.getDouble(0));
+    //m_robotContainer.m_robotDrive.setTarget(angle.getDouble(0));
+    // System.out.println(m_robotContainer.m_driverController.getPOV()==90);
   }
 
   @Override

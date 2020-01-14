@@ -14,8 +14,11 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.JoystickDrive;
+import frc.robot.commands.RunShooter;
+import frc.robot.commands.SetShooterToRPM;
 import frc.robot.commands.TurnToAngleProfiled;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -29,7 +32,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final DriveSubsystem m_robotDrive = new DriveSubsystem();
-
+  public final ShooterSubsystem m_shooter = new ShooterSubsystem();
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -56,7 +59,12 @@ public class RobotContainer {
         .whileHeld(new TurnToAngleProfiled(0, m_robotDrive));
     // new JoystickButton(m_driverController, Button.kX.value)
     //   .whenPressed(new TurnToAngleProfiled(0, m_robotDrive).withTimeout(2));
-
+    new JoystickButton(m_driverController, Button.kY.value)
+      .whileHeld(new RunShooter(m_shooter, 1.0));
+    new JoystickButton(m_driverController, Button.kA.value)
+      .whileHeld(new SetShooterToRPM(50, m_shooter));
+    new JoystickButton(m_driverController, Button.kB.value)
+      .whileHeld(new SetShooterToRPM(30, m_shooter));
     // Turn to -90 degrees with a profile when the 'A' button is pressed, with a 5 second timeout
     // new JoystickButton(m_driverController, Button.kA.value).whenPressed(new TurnToAngleProfiled(-90, m_robotDrive).withTimeout(1));
 

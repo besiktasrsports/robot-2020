@@ -37,7 +37,7 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  // Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
+  // XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -56,8 +56,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    // Turn to 90 degrees when the 'X' button is pressed, with a 5 second timeout
+    // Vision Drive
     new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
+    // Field oriented drive
     new POVButton(m_driverController, 0).whileHeld(new FieldOrientedTurn(0, m_robotDrive));
     new POVButton(m_driverController, 45).whileHeld(new FieldOrientedTurn(45, m_robotDrive));    
     new POVButton(m_driverController, 90).whileHeld(new FieldOrientedTurn(90, m_robotDrive));
@@ -66,12 +67,10 @@ public class RobotContainer {
     new POVButton(m_driverController, 215).whileHeld(new FieldOrientedTurn(-135, m_robotDrive));
     new POVButton(m_driverController, 270).whileHeld(new FieldOrientedTurn(-90, m_robotDrive));
     new POVButton(m_driverController, 315).whileHeld(new FieldOrientedTurn(-45, m_robotDrive));
-    new JoystickButton(m_driverController, Button.kY.value)
-      .whileHeld(new RunShooter(m_shooter, 1.0));
-    new JoystickButton(m_driverController, Button.kA.value)
-      .whileHeld(new SetShooterToRPM(50, m_shooter));
-    new JoystickButton(m_driverController, Button.kB.value)
-      .whileHeld(new SetShooterToRPM(30, m_shooter));
+    // Shooter commands
+    new JoystickButton(m_driverController, 4).whileHeld(new RunShooter(m_shooter, 1.0));
+    new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50, m_shooter));
+    new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30, m_shooter));
   }
 
 

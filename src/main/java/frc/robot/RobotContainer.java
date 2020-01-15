@@ -15,6 +15,7 @@ import frc.robot.commands.FieldOrientedTurn;
 import frc.robot.commands.JoystickDrive;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.SetShooterToRPM;
+import frc.robot.commands.ToggleLED;
 import frc.robot.commands.VisionTurnProfiled;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -70,6 +71,8 @@ public class RobotContainer {
     new JoystickButton(m_driverController, 4).whileHeld(new RunShooter(m_shooter, 1.0));
     new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50, m_shooter));
     new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30, m_shooter));
+    // Misc commands
+    new JoystickButton(m_driverController, 5).whenPressed(new ToggleLED(m_shooter));
   }
 
   /**

@@ -9,8 +9,10 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -20,6 +22,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(ShooterConstants.shooterMotorPort);
   public final Encoder shooterEncoder = new Encoder(ShooterConstants.shooterEncoderA, ShooterConstants.shooterEncoderB,
       ShooterConstants.shooterEncoderIsReversed);
+  public final DigitalOutput m_relay= new DigitalOutput(MiscConstants.LEDRelayPort);
 
   public ShooterSubsystem() {
     shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.shooterEncoderPPR / 4));

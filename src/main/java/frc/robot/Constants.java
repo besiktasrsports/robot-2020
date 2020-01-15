@@ -52,6 +52,11 @@ public final class Constants {
         public static final double KShootI = 0.000;
         public static final double KShootD = 0.000;// 0.01;
     }
+    
+    public static final class MiscConstants {
+        public static final int LEDRelayPort = 2;
+    }
+    
 
     public static final class OIConstants {
         public static final int kDriverControllerPort = 0;

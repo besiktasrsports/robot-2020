@@ -7,8 +7,6 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -18,7 +16,8 @@ public class RunShooter extends CommandBase {
    */
   private final ShooterSubsystem m_shooter;
   private final double m_speed;
-  public RunShooter(ShooterSubsystem shooter,double speed) {
+
+  public RunShooter(ShooterSubsystem shooter, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_speed = speed;
     m_shooter = shooter;

@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    System.out.println("RPM: " + m_robotContainer.m_shooter.shooterEncoder.getRate()*60);
+    System.out.println("RPM: " + m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
   }
 
   @Override

@@ -9,7 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.FieldOrientedTurn;
@@ -23,12 +22,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-
 /**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a "declarative" paradigm, very little robot logic should
+ * actually be handled in the {@link Robot} periodic methods (other than the
+ * scheduler calls). Instead, the structure of the robot (including subsystems,
+ * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -37,22 +36,22 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  // XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+
   /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
+   * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    m_robotDrive.setDefaultCommand(new JoystickDrive(m_robotDrive,() -> -m_driverController.getRawAxis(1),
-     () -> m_driverController.getRawAxis(0)));
+    m_robotDrive.setDefaultCommand(new JoystickDrive(m_robotDrive, () -> -m_driverController.getRawAxis(1),
+        () -> m_driverController.getRawAxis(0)));
   }
 
   /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by instantiating a {@link GenericHID} or one of its subclasses
+   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
 
@@ -60,9 +59,9 @@ public class RobotContainer {
     new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
     // Field oriented drive
     new POVButton(m_driverController, 0).whileHeld(new FieldOrientedTurn(0, m_robotDrive));
-    new POVButton(m_driverController, 45).whileHeld(new FieldOrientedTurn(45, m_robotDrive));    
+    new POVButton(m_driverController, 45).whileHeld(new FieldOrientedTurn(45, m_robotDrive));
     new POVButton(m_driverController, 90).whileHeld(new FieldOrientedTurn(90, m_robotDrive));
-    new POVButton(m_driverController, 135).whileHeld(new FieldOrientedTurn(135, m_robotDrive));    
+    new POVButton(m_driverController, 135).whileHeld(new FieldOrientedTurn(135, m_robotDrive));
     new POVButton(m_driverController, 180).whileHeld(new FieldOrientedTurn(180, m_robotDrive));
     new POVButton(m_driverController, 215).whileHeld(new FieldOrientedTurn(-135, m_robotDrive));
     new POVButton(m_driverController, 270).whileHeld(new FieldOrientedTurn(-90, m_robotDrive));
@@ -72,7 +71,6 @@ public class RobotContainer {
     new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50, m_shooter));
     new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30, m_shooter));
   }
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -19,7 +19,7 @@ public class JoystickDrive extends CommandBase {
   private final DriveSubsystem m_drive;
   private final DoubleSupplier m_forward;
   private final DoubleSupplier m_rotation;
-  
+
   public JoystickDrive(DriveSubsystem subsystem, DoubleSupplier forward, DoubleSupplier rotation) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drive = subsystem;

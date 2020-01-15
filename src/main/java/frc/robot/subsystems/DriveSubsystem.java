@@ -27,12 +27,10 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_VictorSPX rightRearMotor = new WPI_VictorSPX(DriveConstants.kRightRearMotorPort);
   private final WPI_VictorSPX rightFrontMotor = new WPI_VictorSPX(DriveConstants.kRightFrontMotorPort);
 
-  private final SpeedControllerGroup m_leftMotors =
-      new SpeedControllerGroup(leftRearMotor, leftFrontMotor);
+  private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(leftRearMotor, leftFrontMotor);
 
   // The motors on the right side of the drive.
-  private final SpeedControllerGroup m_rightMotors =
-      new SpeedControllerGroup(rightRearMotor, rightFrontMotor);
+  private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(rightRearMotor, rightFrontMotor);
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
   public final Gyro m_gyro = new ADXRS450_Gyro();
@@ -41,7 +39,7 @@ public class DriveSubsystem extends SubsystemBase {
   private double target;
 
   public DriveSubsystem() {
-    
+
     leftRearMotor.setSafetyEnabled(false);
     leftFrontMotor.setSafetyEnabled(false);
 
@@ -60,11 +58,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   }
 
-  public double getTarget(){
-    return getHeading()+target;
+  public double getTarget() {
+    return getHeading() + target;
   }
-  
-  public void setTarget(double val){
+
+  public void setTarget(double val) {
     target = val;
   }
 

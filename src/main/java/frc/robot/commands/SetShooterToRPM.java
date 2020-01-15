@@ -35,13 +35,11 @@ public class SetShooterToRPM extends ProfiledPIDCommand {
         // This should return the goal (can also be a constant)
         targetRPM,
         // This uses the output
-        (output, setpoint) -> {shooter.runShooter(lastOutput + output);
-        lastOutput = lastOutput+output;},
-        shooter
-    );
+        (output, setpoint) -> {
+          shooter.runShooter(lastOutput + output);
+          lastOutput = lastOutput + output;
+        }, shooter);
 
-    //getController().enableContinuousInput(0, 85);
-    //getController().setTolerance(positionTolerance, velocityTolerance);
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
   }

@@ -15,7 +15,8 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
- * A command that will turn the robot to the specified angle using a motion profile.
+ * A command that will turn the robot to the specified angle using a motion
+ * profile.
  */
 public class VisionTurnProfiled extends ProfiledPIDCommand {
   /**
@@ -26,26 +27,27 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
    */
 
   DriveSubsystem m_drive;
+
   // double targetHeading;
   public VisionTurnProfiled(DriveSubsystem drive) {
-      
+
     super(
-        new ProfiledPIDController(DriveConstants.kTurnP, DriveConstants.kTurnI,
-                                  DriveConstants.kTurnD, new TrapezoidProfile.Constraints(
-            DriveConstants.kMaxTurnRateDegPerS,
-            DriveConstants.kMaxTurnAccelerationDegPerSSquared)),
+        new ProfiledPIDController(DriveConstants.kTurnP, DriveConstants.kTurnI, DriveConstants.kTurnD,
+            new TrapezoidProfile.Constraints(DriveConstants.kMaxTurnRateDegPerS,
+                DriveConstants.kMaxTurnAccelerationDegPerSSquared)),
         // Close loop on heading
         drive::getHeading,
-        // targetAngleDegrees,
+        // Goal is set after the PID controller
         0,
         // Pipe output to turn robot
-        (output, setpoint) -> drive.arcadeDrive(0, (output > 0) ? 0.0+output/12 : -0.0+output/12), // min command = 0.07
+        (output, setpoint) -> drive.arcadeDrive(0, (output > 0) ? 0.0 + output / 12 : -0.0 + output / 12), // min
+                                                                                                           // command =
+                                                                                                           // 0.07
         // Require the drive
         drive);
-  this.m_goal = () -> new TrapezoidProfile.State(Robot.getVisionYawAngle()+drive.getHeading(), 0);
-  
-  getController()
-        .setTolerance(DriveConstants.kTurnToleranceDeg, DriveConstants.kTurnRateToleranceDegPerS);
+    this.m_goal = () -> new TrapezoidProfile.State(Robot.getVisionYawAngle() + drive.getHeading(), 0);
+
+    getController().setTolerance(DriveConstants.kTurnToleranceDeg, DriveConstants.kTurnRateToleranceDegPerS);
 
   }
 

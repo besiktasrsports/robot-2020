@@ -66,7 +66,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double fwd, double rot) {
-    m_drive.arcadeDrive(fwd, rot);
+    m_drive.arcadeDrive(fwd, rot, true);
   }
 
   public void zeroHeading() {

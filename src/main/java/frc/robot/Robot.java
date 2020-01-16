@@ -11,6 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
     angle = table.getEntry("angle");
+    //CameraServer.getInstance().addAxisCamera("10.72.85.12");
     m_robotContainer = new RobotContainer();
 
   }
@@ -64,6 +66,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     // System.out.println(m_robotContainer.m_robotDrive.getHeading());
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
   }
 
   /**
@@ -117,7 +120,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    System.out.println("RPM: " + m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
   }
 
   @Override

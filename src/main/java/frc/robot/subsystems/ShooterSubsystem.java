@@ -41,4 +41,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public double getRPM() {
     return shooterEncoder.getRate() * 60;
   }
+
+  public void toggleRelay(boolean _status){
+    m_relay.set(_status);
+  }
 }

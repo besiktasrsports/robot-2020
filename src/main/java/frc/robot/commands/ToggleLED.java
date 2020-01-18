@@ -24,6 +24,6 @@ public class ToggleLED extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.m_relay.set(!m_shooter.m_relay.get());
+    m_shooter.toggleRelay(!m_shooter.m_relay.get());
   }
 }

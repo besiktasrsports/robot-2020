@@ -8,13 +8,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
+import com.kauailabs.navx.frc.AHRS;
 
 public class DriveSubsystem extends SubsystemBase {
   /**
@@ -33,7 +33,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(rightRearMotor, rightFrontMotor);
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
-  public final Gyro m_gyro = new ADXRS450_Gyro();
+  public final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   // private final BuiltInAccelerometer m_accel = new BuiltInAccelerometer();
   private double angular_velocity;
   private double target;
@@ -52,7 +52,6 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // System.out.print("Robot angle:");
-    // System.out.println(getHeading());
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
 
@@ -67,7 +66,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double fwd, double rot) {
-    m_drive.arcadeDrive(fwd, rot);
+    m_drive.arcadeDrive(fwd, rot, true);
   }
 
   public void zeroHeading() {

@@ -15,6 +15,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class ToggleLED extends InstantCommand {
   private final ShooterSubsystem m_shooter;
+
   public ToggleLED(ShooterSubsystem shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = shooter;

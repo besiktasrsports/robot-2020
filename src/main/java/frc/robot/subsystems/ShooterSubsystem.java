@@ -22,7 +22,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(ShooterConstants.shooterMotorPort);
   public final Encoder shooterEncoder = new Encoder(ShooterConstants.shooterEncoderA, ShooterConstants.shooterEncoderB,
       ShooterConstants.shooterEncoderIsReversed);
-  public final DigitalOutput m_relay= new DigitalOutput(MiscConstants.LEDRelayPort);
+  public final DigitalOutput m_relay = new DigitalOutput(MiscConstants.LEDRelayPort);
 
   public ShooterSubsystem() {
     shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.shooterEncoderPPR / 4));
@@ -42,7 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
     return shooterEncoder.getRate() * 60;
   }
 
-  public void toggleRelay(boolean _status){
+  public void toggleRelay(boolean _status) {
     m_relay.set(_status);
   }
 }

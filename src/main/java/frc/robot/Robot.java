@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = inst.getTable("visiontable");
+  NetworkTable table = inst.getTable("chameleon-vision").getSubTable("PS3 Eye");
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -44,9 +44,12 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
-    angle = table.getEntry("angle");
-    autoChooser.addDefault("Auto1", 1);
-    autoChooser.addObject("Auto2", 2);
+    
+    angle = table.getEntry("yaw");
+    autoChooser.setDefaultOption("Auto1", 1);
+    autoChooser.addOption("Auto2", 2);
+    // autoChooser.addDefault("Auto1", 1);
+    // autoChooser.addObject("Auto2", 2);
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
@@ -97,7 +100,9 @@ public class Robot extends TimedRobot {
     m_robotContainer.m_robotDrive.zeroHeading();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     int autoMode = autoChooser.getSelected();
-    
+    switch (autoMode) {
+
+    }
   }
 
   /**

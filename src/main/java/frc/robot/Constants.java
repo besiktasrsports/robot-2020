@@ -41,20 +41,33 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        public static final int shooterMotorPort = 16;
+        public static final int kShooterMotorPort = 16;
 
-        public static final int shooterEncoderA = 0;
-        public static final int shooterEncoderB = 1;
-        public static final int shooterEncoderPPR = 2048;
-        public static final boolean shooterEncoderIsReversed = true;
+        public static final int kShooterEncoderA = 0;
+        public static final int kShooterEncoderB = 1;
+        public static final int kShooterEncoderPPR = 2048;
+        public static final boolean kShooterEncoderIsReversed = true;
 
-        public static final double KShootP = 0.2; // 0.02;
-        public static final double KShootI = 0.000;
-        public static final double KShootD = 0.000;// 0.01;
+        public static final double kShootP = 0.2; // 0.02;
+        public static final double kShootI = 0.000;
+        public static final double kShootD = 0.000;// 0.01;
+    }
+    public static final class HopperConstants {
+        public static final int kHopperMotor1Port = 20;
+        public static final int kHopperMotor2Port = 21;
+    }
+    public static final class IntakeConstants {
+        public static final int kIntakeMotorPort = 0; //PWM Port
+    }
+    public static final class ClimbConstants {
+        public static final int kPCMPort = 0;
+        public static final int kCompressorPort = 0;
+        public static final int kClimbDoubleSolenoidPort1 = 0;
+        public static final int kClimbDoubleSolenoidPort2 = 1;
     }
     
     public static final class MiscConstants {
-        public static final int LEDRelayPort = 2;
+        public static final int kLEDRelayPort = 2;
     }
     
 

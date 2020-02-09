@@ -27,7 +27,7 @@ public class SetShooterToRPM extends ProfiledPIDCommand {
         // The ProfiledPIDController used by the command
         new ProfiledPIDController(
             // The PID gains
-            ShooterConstants.KShootP, ShooterConstants.KShootI, ShooterConstants.KShootD,
+            ShooterConstants.kShootP, ShooterConstants.kShootI, ShooterConstants.kShootD,
             // The motion profile constraints
             new TrapezoidProfile.Constraints(85, 200)),
         // This should return the measurement

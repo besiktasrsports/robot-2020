@@ -18,6 +18,7 @@ import frc.robot.commands.SetShooterToRPM;
 import frc.robot.commands.ToggleLED;
 import frc.robot.commands.VisionTurnProfiled;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -34,6 +35,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final DriveSubsystem m_robotDrive = new DriveSubsystem();
   public final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  public final HopperSubsystem m_hopper = new HopperSubsystem();
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);

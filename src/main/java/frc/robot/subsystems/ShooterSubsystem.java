@@ -24,6 +24,7 @@ public class ShooterSubsystem extends SubsystemBase {
       ShooterConstants.kShooterEncoderIsReversed);
   public final DigitalOutput m_relay= new DigitalOutput(MiscConstants.kLEDRelayPort);
 
+
   public ShooterSubsystem() {
     shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR / 4));
   }
@@ -42,7 +43,7 @@ public class ShooterSubsystem extends SubsystemBase {
     return shooterEncoder.getRate() * 60;
   }
 
-  public void toggleRelay(boolean _status){
+  public void toggleRelay(boolean _status) {
     m_relay.set(_status);
   }
 }

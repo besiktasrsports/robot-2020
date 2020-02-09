@@ -65,11 +65,10 @@ public final class Constants {
         public static final int kClimbDoubleSolenoidPort1 = 0;
         public static final int kClimbDoubleSolenoidPort2 = 1;
     }
-    
+
     public static final class MiscConstants {
         public static final int kLEDRelayPort = 2;
     }
-    
 
     public static final class OIConstants {
         public static final int kDriverControllerPort = 0;

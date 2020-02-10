@@ -11,15 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.FieldOrientedTurn;
-import frc.robot.commands.JoystickDrive;
-import frc.robot.commands.RunShooter;
-import frc.robot.commands.SetShooterToRPM;
-import frc.robot.commands.ToggleLED;
-import frc.robot.commands.VisionTurnProfiled;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.HopperSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -36,6 +29,10 @@ public class RobotContainer {
   public final DriveSubsystem m_robotDrive = new DriveSubsystem();
   public final ShooterSubsystem m_shooter = new ShooterSubsystem();
   public final HopperSubsystem m_hopper = new HopperSubsystem();
+  public final ClimbSubsystem m_climb = new ClimbSubsystem();
+  public final IntakeSubsystem m_intake = new IntakeSubsystem();
+  public final WoFSubsystem m_wof = new WoFSubsystem();
+  
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
@@ -70,11 +67,22 @@ public class RobotContainer {
     new POVButton(m_driverController, 270).whileHeld(new FieldOrientedTurn(-90, m_robotDrive));
     new POVButton(m_driverController, 315).whileHeld(new FieldOrientedTurn(-45, m_robotDrive));
     // Shooter commands
-    new JoystickButton(m_driverController, 4).whileHeld(new RunShooter(m_shooter, 1.0));
-    new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50, m_shooter));
-    new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30, m_shooter));
+    // new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50, m_shooter));
+    // new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30, m_shooter));
+    new JoystickButton(m_driverController, 4).whileHeld(new RunShooter(m_shooter, 0.8));
+    // Hopper Commands
+    new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
+    // Climb commands
+    new JoystickButton(m_driverController, 7).whenPressed(new ToggleClimb(m_climb));
+    // WoF Commands
+    new JoystickButton(m_driverController, 2).whileHeld(new RunWoF(1, m_wof));
+    // Intake Commands
+    new JoystickButton(m_driverController, 3).whileHeld(new RunIntake(-0.5, m_intake));
     // Misc commands
-    new JoystickButton(m_driverController, 5).whenPressed(new ToggleLED(m_shooter));
+    // new JoystickButton(m_driverController, 5).whenPressed(new ToggleLED(m_shooter));
+    new JoystickButton(m_driverController, 5).whenPressed(new OpenClimb(m_climb));
+    new JoystickButton(m_driverController, 6).whenPressed(new CloseClimb(m_climb));
+    new JoystickButton(m_driverController, 8).whileHeld(new ToggleCompressor(m_climb));
   }
 
   /**
@@ -86,4 +94,7 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_chooser.getSelected();
   }
+
+public class m_climb {
+}
 }

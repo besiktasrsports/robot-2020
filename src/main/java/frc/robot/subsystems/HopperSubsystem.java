@@ -20,6 +20,7 @@ public class HopperSubsystem extends SubsystemBase {
   private final WPI_VictorSPX hopperMotor2 = new WPI_VictorSPX(HopperConstants.kHopperMotor2Port);
 
   public HopperSubsystem() {
+    hopperMotor1.setInverted(true);
 
   }
 

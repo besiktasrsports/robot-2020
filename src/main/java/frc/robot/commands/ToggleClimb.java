@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.ClimbSubsystem;
 
 public class ToggleClimb extends CommandBase {
@@ -24,17 +25,26 @@ public class ToggleClimb extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.climbState = !Robot.climbState;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climb.toggleCyclinders();
+    if(Robot.compressorState == true)
+    {
+      m_climb.climberUp();
+    }
+    else
+    {
+      m_climb.climberDown();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_climb.stopCyclinders();
   }
 
   // Returns true when the command should end.

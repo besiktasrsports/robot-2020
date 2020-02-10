@@ -8,19 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.WoFSubsystem;
 
-public class RunIntake extends CommandBase {
+public class RunWoF extends CommandBase {
   /**
-   * Creates a new RunIntake.
+   * Creates a new RunWoF.
    */
   private final double speed;
-  private final IntakeSubsystem m_intake;
-  public RunIntake(double _speed, IntakeSubsystem _intake){
-    this.speed = _speed;
-    this.m_intake = _intake;
-    addRequirements(m_intake);
+  private final WoFSubsystem m_wof;
+
+  public RunWoF(double _speed, WoFSubsystem _wof) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_wof = _wof;
+    speed = _speed;
+    addRequirements(m_wof);
   }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -29,13 +32,13 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.runIntake(0.8); // hadi kocum
+    m_wof.runWoF(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intake.stopIntake();
+    m_wof.runWoF(0);
   }
 
   // Returns true when the command should end.

@@ -32,6 +32,9 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("chameleon-vision").getSubTable("PS3 Eye");
+  public static boolean compressorState = false;
+  public static boolean climbState = false;
+
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -54,6 +57,8 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_shooter.toggleRelay(true);
+    // m_robotContainer.m_climb.compressor.setClosedLoopControl(false);
+
 
   }
 

@@ -7,18 +7,17 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedController;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.WoFConstants;
 
-public class IntakeSubsystem extends SubsystemBase {
+public class WoFSubsystem extends SubsystemBase {
   /**
-   * Creates a new IntakeSubsystem.
+   * Creates a new WoFSubsystem.
    */
-  private final Spark intakeMotor = new Spark(IntakeConstants.kIntakeMotorPort);
-
-  public IntakeSubsystem() {
+  private final WPI_VictorSPX WoFMotor = new WPI_VictorSPX(WoFConstants.kWoFMotor);
+  public WoFSubsystem() {
 
   }
 
@@ -27,12 +26,8 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void runIntake(double _speed){
-    intakeMotor.set(_speed);
-  }
-
-  public void stopIntake()
+  public void runWoF(double speed)
   {
-    intakeMotor.set(0);
+    WoFMotor.set(speed);
   }
 }

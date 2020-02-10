@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -22,17 +23,17 @@ public class DriveSubsystem extends SubsystemBase {
    */
 
   private final WPI_VictorSPX leftRearMotor = new WPI_VictorSPX(DriveConstants.kLeftRearMotorPort);
-  private final WPI_VictorSPX leftFrontMotor = new WPI_VictorSPX(DriveConstants.kLeftFrontMotorPort);
+  private final WPI_TalonSRX leftFrontMotor = new WPI_TalonSRX(DriveConstants.kLeftFrontMotorPort);
 
   private final WPI_VictorSPX rightRearMotor = new WPI_VictorSPX(DriveConstants.kRightRearMotorPort);
-  private final WPI_VictorSPX rightFrontMotor = new WPI_VictorSPX(DriveConstants.kRightFrontMotorPort);
+  private final WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(DriveConstants.kRightFrontMotorPort);
 
-  private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(leftRearMotor, leftFrontMotor);
+  // private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(leftRearMotor, leftFrontMotor);
 
   // The motors on the right side of the drive.
-  private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(rightRearMotor, rightFrontMotor);
+  // private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(rightRearMotor, rightFrontMotor);
   // The robot's drive
-  private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+  private final DifferentialDrive m_drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
   public final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   // private final BuiltInAccelerometer m_accel = new BuiltInAccelerometer();
   private double angular_velocity;
@@ -40,11 +41,14 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DriveSubsystem() {
 
+    leftRearMotor.follow(leftFrontMotor);
+    rightRearMotor.follow(rightFrontMotor);
+    
     leftRearMotor.setSafetyEnabled(false);
     leftFrontMotor.setSafetyEnabled(false);
-
     rightRearMotor.setSafetyEnabled(false);
     rightFrontMotor.setSafetyEnabled(false);
+    m_drive.setSafetyEnabled(false);
 
   }
 

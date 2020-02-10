@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.Constants.ClimbConstants;
 
 public class ClimbSubsystem extends SubsystemBase {
@@ -22,14 +23,16 @@ public class ClimbSubsystem extends SubsystemBase {
   ClimbConstants.kClimbDoubleSolenoidPort2);
 
   public ClimbSubsystem() {
-
+    compressor.setClosedLoopControl(false);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(Robot.compressorState);
   }
 
+  /*
   public void toggleCyclinders(){
     boolean status = false;
     if(status == false){
@@ -41,8 +44,29 @@ public class ClimbSubsystem extends SubsystemBase {
       status = !status;
     }
   }
-  
-  public void stopCyclinders(){
+  */
+  public void climberUp()
+  {
+    climbSolenoid.set(Value.kForward);
+  }
+
+  public void climberDown()
+  {
+    climbSolenoid.set(Value.kReverse);
+  }
+
+  public void stopCyclinders()
+  {
     climbSolenoid.set(Value.kOff);
+  }
+
+  public void openCompressor()
+  {
+    compressor.setClosedLoopControl(true);
+  }
+
+  public void closeCompressor()
+  {
+    compressor.setClosedLoopControl(false);
   }
 }

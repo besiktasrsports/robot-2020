@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -19,7 +20,10 @@ public class ShooterSubsystem extends SubsystemBase {
   /**
    * Creates a new ShooterSubsystem.
    */
-  private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(ShooterConstants.kShooterMotorPort);
+  private WPI_VictorSPX shooterMotor1 = new WPI_VictorSPX(ShooterConstants.kShooterMotor1Port);
+  private WPI_VictorSPX shooterMotor2 = new WPI_VictorSPX(ShooterConstants.kShooterMotor2Port);
+  
+  private final SpeedControllerGroup shooterMotorGroup = new SpeedControllerGroup(shooterMotor1, shooterMotor2);
   public final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA, ShooterConstants.kShooterEncoderB,
       ShooterConstants.kShooterEncoderIsReversed);
   public final DigitalOutput m_relay= new DigitalOutput(MiscConstants.kLEDRelayPort);
@@ -27,6 +31,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public ShooterSubsystem() {
     shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR / 4));
+    shooterMotor1.setInverted(true);
+    shooterMotor2.setInverted(true);
   }
 
   @Override
@@ -35,8 +41,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void runShooter(double val) {
-    // shooterMotor.set(val);
-    shooterMotor.setVoltage(val);
+    shooterMotorGroup.set(val);
+    // shooterMotorGroup.setVoltage(val);
   }
 
   public double getRPM() {

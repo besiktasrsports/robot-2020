@@ -57,7 +57,6 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_shooter.toggleRelay(true);
-    // m_robotContainer.m_climb.compressor.setClosedLoopControl(false);
 
 
   }

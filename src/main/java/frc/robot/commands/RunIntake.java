@@ -29,7 +29,7 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.runIntake(0.8); // hadi kocum
+    m_intake.runIntake(speed); // hadi kocum
   }
 
   // Called once the command ends or is interrupted.

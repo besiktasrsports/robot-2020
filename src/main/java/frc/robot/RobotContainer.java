@@ -57,7 +57,7 @@ public class RobotContainer {
 
     // Vision Drive
     new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
-    // Field oriented drive
+    // Field Oriented Drive
     new POVButton(m_driverController, 0).whileHeld(new FieldOrientedTurn(0, m_robotDrive));
     new POVButton(m_driverController, 45).whileHeld(new FieldOrientedTurn(45, m_robotDrive));
     new POVButton(m_driverController, 90).whileHeld(new FieldOrientedTurn(90, m_robotDrive));
@@ -66,13 +66,13 @@ public class RobotContainer {
     new POVButton(m_driverController, 215).whileHeld(new FieldOrientedTurn(-135, m_robotDrive));
     new POVButton(m_driverController, 270).whileHeld(new FieldOrientedTurn(-90, m_robotDrive));
     new POVButton(m_driverController, 315).whileHeld(new FieldOrientedTurn(-45, m_robotDrive));
-    // Shooter commands
+    // Shooter Commands
     // new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50, m_shooter));
     // new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30, m_shooter));
-    new JoystickButton(m_driverController, 4).whileHeld(new RunShooter(m_shooter, 0.8));
+    new JoystickButton(m_driverController, 4).whileHeld(new RunShooter(0.8, m_shooter));
     // Hopper Commands
     new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
-    // Climb commands
+    // Climb Commands
     new JoystickButton(m_driverController, 7).whileHeld(new ToggleClimb(m_climb));
     // WoF Commands
     new JoystickButton(m_driverController, 2).whileHeld(new RunWoF(1, m_wof));

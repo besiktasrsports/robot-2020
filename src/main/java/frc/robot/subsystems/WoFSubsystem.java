@@ -16,7 +16,7 @@ public class WoFSubsystem extends SubsystemBase {
   /**
    * Creates a new WoFSubsystem.
    */
-  private final WPI_VictorSPX WoFMotor = new WPI_VictorSPX(WoFConstants.kWoFMotor);
+  private final WPI_VictorSPX WoFMotor = new WPI_VictorSPX(WoFConstants.kWoFMotorPort);
   public WoFSubsystem() {
 
   }

@@ -68,7 +68,7 @@ public final class Constants {
     }
 
     public static final class WoFConstants {
-        public static final int kWoFMotor = 40;
+        public static final int kWoFMotorPort = 40;
     }
 
     public static final class MiscConstants {

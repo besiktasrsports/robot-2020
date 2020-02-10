@@ -23,7 +23,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private WPI_VictorSPX shooterMotor1 = new WPI_VictorSPX(ShooterConstants.kShooterMotor1Port);
   private WPI_VictorSPX shooterMotor2 = new WPI_VictorSPX(ShooterConstants.kShooterMotor2Port);
   
-  private final SpeedControllerGroup shooterMotorGroup = new SpeedControllerGroup(shooterMotor1, shooterMotor2);
+  // private final SpeedControllerGroup shooterMotorGroup = new SpeedControllerGroup(shooterMotor1, shooterMotor2);
   public final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA, ShooterConstants.kShooterEncoderB,
       ShooterConstants.kShooterEncoderIsReversed);
   public final DigitalOutput m_relay= new DigitalOutput(MiscConstants.kLEDRelayPort);
@@ -33,6 +33,7 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR / 4));
     shooterMotor1.setInverted(true);
     shooterMotor2.setInverted(true);
+    shooterMotor2.follow(shooterMotor1);
   }
 
   @Override
@@ -41,7 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void runShooter(double val) {
-    shooterMotorGroup.set(val);
+    shooterMotor1.set(val);
     // shooterMotorGroup.setVoltage(val);
   }
 

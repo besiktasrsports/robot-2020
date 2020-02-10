@@ -73,7 +73,7 @@ public class RobotContainer {
     // Hopper Commands
     new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
     // Climb commands
-    new JoystickButton(m_driverController, 7).whenPressed(new ToggleClimb(m_climb));
+    new JoystickButton(m_driverController, 7).whileHeld(new ToggleClimb(m_climb));
     // WoF Commands
     new JoystickButton(m_driverController, 2).whileHeld(new RunWoF(1, m_wof));
     // Intake Commands

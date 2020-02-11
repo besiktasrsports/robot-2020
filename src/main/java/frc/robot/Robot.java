@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.auto.Autonomous;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
 
   private Command m_autonomousCommand;
+  private static Autonomous autoCG;
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -57,6 +59,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_shooter.toggleRelay(true);
+    autoCG = new Autonomous();
 
 
   }
@@ -103,10 +106,17 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_robotContainer.m_robotDrive.zeroHeading();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
+    // autoCG.addSe
+    // m_autonomousCommand.
+    /*
     int autoMode = autoChooser.getSelected();
     switch (autoMode) {
 
     }
+    */
   }
 
   /**

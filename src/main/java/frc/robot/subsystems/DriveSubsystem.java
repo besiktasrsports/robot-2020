@@ -7,10 +7,15 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
@@ -26,13 +31,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final WPI_VictorSPX rightRearMotor = new WPI_VictorSPX(DriveConstants.kRightRearMotorPort);
   private final WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(DriveConstants.kRightFrontMotorPort);
+  
+  static private int PIDIDX = 0;
 
-  // private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(leftRearMotor, leftFrontMotor);
-
-  // The motors on the right side of the drive.
-  // private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(rightRearMotor, rightFrontMotor);
-  // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+  private final DifferentialDriveOdometry m_odometry;
   public final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   // private final BuiltInAccelerometer m_accel = new BuiltInAccelerometer();
   private double angular_velocity;
@@ -48,7 +51,14 @@ public class DriveSubsystem extends SubsystemBase {
     rightRearMotor.setSafetyEnabled(false);
     rightFrontMotor.setSafetyEnabled(false);
     m_drive.setSafetyEnabled(false);
+    
+    leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PIDIDX, 10);
+    rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PIDIDX, 10);
+    // leftFrontMotor.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
+    // rightFrontMotor.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
 
+    resetEncoders();
+    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
 
   @Override
@@ -57,7 +67,35 @@ public class DriveSubsystem extends SubsystemBase {
     // System.out.print("Robot angle:");
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
+    m_odometry.update(Rotation2d.fromDegrees(getHeading()), leftFrontMotor.getSelectedSensorPosition(),
+    rightFrontMotor.getSelectedSensorPosition());
+  }
 
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(leftFrontMotor.getSelectedSensorVelocity(), rightFrontMotor.getSelectedSensorVelocity());
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
+  }
+
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    leftFrontMotor.setVoltage(leftVolts);
+    rightFrontMotor.setVoltage(-rightVolts); // eksi
+    m_drive.feed();
+  }
+  
+  public double getAverageEncoderDistance() {
+    return (leftFrontMotor.getSelectedSensorPosition() + rightFrontMotor.getSelectedSensorPosition()) / 2.0;
+  }
+
+  public void setMaxOutput(double maxOutput) {
+    m_drive.setMaxOutput(maxOutput);
   }
 
   public double getTarget() {
@@ -82,6 +120,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double getTurnRate() {
     return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+  }
+
+  public void resetEncoders() {
+    rightFrontMotor.setSelectedSensorPosition(0);
+    leftFrontMotor.setSelectedSensorPosition(0);
   }
 
 }

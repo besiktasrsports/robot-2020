@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -38,6 +40,22 @@ public final class Constants {
         public static final double kTurnToleranceDeg = 2;
         public static final double kTurnRateToleranceDegPerS = 8; // 10
 
+        public static final double ksVolts = 1.41;
+        public static final double kvVoltSecondsPerMeter = 3.14;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.326;
+
+        public static final double kPDriveVel = 12;
+        public static final double kTrackWidthMeters = 0.572;
+        public static final double kMaxSpeedMetersPerSecond = 2.5;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+        
+        public static final double kRamseteB = 2;
+        public static final double kRamseteZeta = 0.7;
+
+        public static final double kEncoderDistancePerPulse = 4096;
+
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(DriveConstants.kTrackWidthMeters);
+
     }
 
     public static final class ShooterConstants {
@@ -53,13 +71,16 @@ public final class Constants {
         public static final double kShootI = 0.000;
         public static final double kShootD = 0.000;// 0.01;
     }
+
     public static final class HopperConstants {
         public static final int kHopperMotor1Port = 30;
         public static final int kHopperMotor2Port = 31;
     }
+
     public static final class IntakeConstants {
-        public static final int kIntakeMotorPort = 0; //PWM Port
+        public static final int kIntakeMotorPort = 0; // PWM Port
     }
+
     public static final class ClimbConstants {
         public static final int kPCMPort = 0;
         public static final int kCompressorPort = 0;

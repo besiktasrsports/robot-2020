@@ -18,8 +18,8 @@ public class ClimbSubsystem extends SubsystemBase {
    * Creates a new ClimbSubsystem.
    */
   private final Compressor compressor = new Compressor(ClimbConstants.kCompressorPort);
-  private final DoubleSolenoid climbSolenoid = new DoubleSolenoid(ClimbConstants.kPCMPort,ClimbConstants.kClimbDoubleSolenoidPort1,
-  ClimbConstants.kClimbDoubleSolenoidPort2);
+  private final DoubleSolenoid climbSolenoid = new DoubleSolenoid(ClimbConstants.kPCMPort,
+      ClimbConstants.kClimbDoubleSolenoidPort1, ClimbConstants.kClimbDoubleSolenoidPort2);
 
   public ClimbSubsystem() {
     compressor.setClosedLoopControl(false);
@@ -32,40 +32,27 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   /*
-  public void toggleCyclinders(){
-    boolean status = false;
-    if(status == false){
-      climbSolenoid.set(Value.kForward);
-      status = !status;
-    }
-    else if(status == true){
-      climbSolenoid.set(Value.kReverse);
-      status = !status;
-    }
-  }
-  */
-  public void climberUp()
-  {
+   * public void toggleCyclinders(){ boolean status = false; if(status == false){
+   * climbSolenoid.set(Value.kForward); status = !status; } else if(status ==
+   * true){ climbSolenoid.set(Value.kReverse); status = !status; } }
+   */
+  public void climberUp() {
     climbSolenoid.set(Value.kForward);
   }
 
-  public void climberDown()
-  {
+  public void climberDown() {
     climbSolenoid.set(Value.kReverse);
   }
 
-  public void stopCyclinders()
-  {
+  public void stopCyclinders() {
     climbSolenoid.set(Value.kOff);
   }
 
-  public void openCompressor()
-  {
+  public void openCompressor() {
     compressor.setClosedLoopControl(true);
   }
 
-  public void closeCompressor()
-  {
+  public void closeCompressor() {
     compressor.setClosedLoopControl(false);
   }
 }

@@ -16,6 +16,7 @@ public class RunHopper extends CommandBase {
    */
   private final String mode;
   private final HopperSubsystem m_hopper;
+
   public RunHopper(final String _mode, final HopperSubsystem _hopper) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.mode = _mode;
@@ -35,17 +36,14 @@ public class RunHopper extends CommandBase {
 
     if (mode == "sync") {
       m_hopper.runHopper("sync", 0.5, 0);
-    }
-    else if (mode == "up"){
+    } else if (mode == "up") {
       m_hopper.runHopper("up", 0.3, 0);
-    }
-    else if (mode == "down"){
+    } else if (mode == "down") {
       m_hopper.runHopper("down", 0, 0.3);
-    }
-    else{
+    } else {
       m_hopper.runHopper("", 0, 0);
 
-    } 
+    }
 
   }
 

@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.auto.Autonomous;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,14 +28,13 @@ public class Robot extends TimedRobot {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
 
   private Command m_autonomousCommand;
-  private static Autonomous autoCG;
+  //private static Autonomous autoCG;
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("chameleon-vision").getSubTable("PS3 Eye");
   public static boolean compressorState = false;
   public static boolean climbState = false;
-
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -49,7 +47,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
-    
+
     angle = table.getEntry("yaw");
     autoChooser.setDefaultOption("Auto1", 1);
     autoChooser.addOption("Auto2", 2);
@@ -59,8 +57,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_shooter.toggleRelay(true);
-    autoCG = new Autonomous();
-
+    //autoCG = new Autonomous();
 
   }
 
@@ -112,11 +109,10 @@ public class Robot extends TimedRobot {
     // autoCG.addSe
     // m_autonomousCommand.
     /*
-    int autoMode = autoChooser.getSelected();
-    switch (autoMode) {
-
-    }
-    */
+     * int autoMode = autoChooser.getSelected(); switch (autoMode) {
+     * 
+     * }
+     */
   }
 
   /**

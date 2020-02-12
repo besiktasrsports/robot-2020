@@ -30,22 +30,19 @@ public class HopperSubsystem extends SubsystemBase {
   }
 
   public void runHopper(String _mode, double _speed1, double _speed2) {
-    if(_mode == "sync"){
+    if (_mode == "sync") {
       hopperMotor1.set(_speed1);
       hopperMotor2.set(-_speed1);
-    }
-    else if(_mode == "up"){
+    } else if (_mode == "up") {
       hopperMotor1.set(_speed1);
       hopperMotor2.set(0);
-    }
-    else if(_mode == "down"){
+    } else if (_mode == "down") {
       hopperMotor1.set(0);
       hopperMotor2.set(_speed2);
-    }
-    else{
+    } else {
       hopperMotor1.set(_speed1);
       hopperMotor2.set(_speed2);
     }
-    
+
   }
 }

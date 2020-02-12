@@ -12,13 +12,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
-public class IntakeSubsystem extends SubsystemBase {
+public class CellIntakeSubsystem extends SubsystemBase {
   /**
-   * Creates a new IntakeSubsystem.
+   * Creates a new CellIntakeSubsystem.
    */
   private final WPI_VictorSPX intakeMotor = new WPI_VictorSPX(IntakeConstants.kIntakeMotorPort);
 
-  public IntakeSubsystem() {
+  public CellIntakeSubsystem() {
 
   }
 
@@ -27,12 +27,11 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void runIntake(double _speed){
+  public void runIntake(double _speed) {
     intakeMotor.set(_speed);
   }
 
-  public void stopIntake()
-  {
+  public void stopIntake() {
     intakeMotor.set(0);
   }
 }

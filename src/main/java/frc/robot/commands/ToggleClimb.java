@@ -16,6 +16,7 @@ public class ToggleClimb extends CommandBase {
    * Creates a new ToggleClimb.
    */
   private final ClimbSubsystem m_climb;
+
   public ToggleClimb(ClimbSubsystem _climb) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_climb = _climb;
@@ -31,12 +32,9 @@ public class ToggleClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.climbState == true)
-    {
+    if (Robot.climbState == true) {
       m_climb.climberUp();
-    }
-    else
-    {
+    } else {
       m_climb.climberDown();
     }
   }

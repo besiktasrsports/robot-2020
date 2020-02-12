@@ -16,6 +16,7 @@ public class ToggleCompressor extends CommandBase {
    * Creates a new ToggleCompressor.
    */
   private final ClimbSubsystem m_climb;
+
   public ToggleCompressor(ClimbSubsystem _climb) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_climb = _climb;
@@ -32,14 +33,12 @@ public class ToggleCompressor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.compressorState == true){
+    if (Robot.compressorState == true) {
       m_climb.openCompressor();
-    }
-    else{
+    } else {
       m_climb.closeCompressor();
     }
   }
-  
 
   // Called once the command ends or is interrupted.
   @Override

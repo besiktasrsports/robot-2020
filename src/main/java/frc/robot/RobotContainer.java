@@ -45,9 +45,8 @@ public class RobotContainer {
   public final ShooterSubsystem m_shooter = new ShooterSubsystem();
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
-  public final IntakeSubsystem m_intake = new IntakeSubsystem();
+  public final CellIntakeSubsystem m_intake = new CellIntakeSubsystem();
 
-  
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
@@ -82,8 +81,10 @@ public class RobotContainer {
     new POVButton(m_driverController, 270).whileHeld(new FieldOrientedTurn(-90, m_robotDrive));
     new POVButton(m_driverController, 315).whileHeld(new FieldOrientedTurn(-45, m_robotDrive));
     // Shooter Commands
-    // new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50, m_shooter));
-    // new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30, m_shooter));
+    // new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50,
+    // m_shooter));
+    // new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30,
+    // m_shooter));
     new JoystickButton(m_driverController, 4).whileHeld(new RunShooter(0.8, m_shooter));
     // Hopper Commands
     new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
@@ -92,7 +93,8 @@ public class RobotContainer {
     // Intake Commands
     new JoystickButton(m_driverController, 3).whileHeld(new RunIntake(0.5, m_intake));
     // Misc commands
-    // new JoystickButton(m_driverController, 5).whenPressed(new ToggleLED(m_shooter));
+    // new JoystickButton(m_driverController, 5).whenPressed(new
+    // ToggleLED(m_shooter));
     new JoystickButton(m_driverController, 5).whenPressed(new OpenClimb(m_climb));
     new JoystickButton(m_driverController, 6).whenPressed(new CloseClimb(m_climb));
     new JoystickButton(m_driverController, 8).whileHeld(new ToggleCompressor(m_climb));
@@ -107,52 +109,39 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     // return m_chooser.getSelected();
     // Create a voltage constraint to ensure we don't accelerate too fast
-    var autoVoltageConstraint =
-        new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(DriveConstants.ksVolts,
-                                       DriveConstants.kvVoltSecondsPerMeter,
-                                       DriveConstants.kaVoltSecondsSquaredPerMeter),
-            DriveConstants.kDriveKinematics,
-            10);
+    var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
+        new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
+            DriveConstants.kaVoltSecondsSquaredPerMeter),
+        DriveConstants.kDriveKinematics, 10);
 
     // Create config for trajectory
-    TrajectoryConfig config =
-        new TrajectoryConfig(DriveConstants.kMaxSpeedMetersPerSecond,
+    TrajectoryConfig config = new TrajectoryConfig(DriveConstants.kMaxSpeedMetersPerSecond,
         DriveConstants.kMaxAccelerationMetersPerSecondSquared)
             // Add kinematics to ensure max speed is actually obeyed
             .setKinematics(DriveConstants.kDriveKinematics)
             // Apply the voltage constraint
             .addConstraint(autoVoltageConstraint);
 
-    // An example trajectory to follow.  All units in meters.
+    // An example trajectory to follow. All units in meters.
     Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
         new Pose2d(0, 0, new Rotation2d(0)),
         // Pass through these two interior waypoints, making an 's' curve path
-        List.of(
-            new Translation2d(1, 0.5) // new Translation
+        List.of(new Translation2d(1, 0.5) // new Translation
         ),
         // End 3 meters straight ahead of where we started, facing forward
         new Pose2d(3, 0, new Rotation2d(0)),
         // Pass config
-        config
-    );
+        config);
 
-    RamseteCommand ramseteCommand = new RamseteCommand(
-        exampleTrajectory,
-        m_robotDrive::getPose,
+    RamseteCommand ramseteCommand = new RamseteCommand(exampleTrajectory, m_robotDrive::getPose,
         new RamseteController(DriveConstants.kRamseteB, DriveConstants.kRamseteZeta),
-        new SimpleMotorFeedforward(DriveConstants.ksVolts,
-                                   DriveConstants.kvVoltSecondsPerMeter,
-                                   DriveConstants.kaVoltSecondsSquaredPerMeter),
-        DriveConstants.kDriveKinematics,
-        m_robotDrive::getWheelSpeeds,
-        new PIDController(DriveConstants.kPDriveVel, 0, 0),
-        new PIDController(DriveConstants.kPDriveVel, 0, 0),
+        new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
+            DriveConstants.kaVoltSecondsSquaredPerMeter),
+        DriveConstants.kDriveKinematics, m_robotDrive::getWheelSpeeds,
+        new PIDController(DriveConstants.kPDriveVel, 0, 0), new PIDController(DriveConstants.kPDriveVel, 0, 0),
         // RamseteCommand passes volts to the callback
-        m_robotDrive::tankDriveVolts,
-        m_robotDrive
-    );
+        m_robotDrive::tankDriveVolts, m_robotDrive);
 
     // Run path following command, then stop at the end.
     return ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));

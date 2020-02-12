@@ -8,19 +8,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.CellIntakeSubsystem;
 
 public class RunIntake extends CommandBase {
   /**
    * Creates a new RunIntake.
    */
   private final double speed;
-  private final IntakeSubsystem m_intake;
-  public RunIntake(double _speed, IntakeSubsystem _intake){
+  private final CellIntakeSubsystem m_intake;
+
+  public RunIntake(double _speed, CellIntakeSubsystem _intake) {
     this.speed = _speed;
     this.m_intake = _intake;
     addRequirements(m_intake);
   }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {

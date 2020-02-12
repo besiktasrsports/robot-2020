@@ -31,7 +31,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final WPI_VictorSPX rightRearMotor = new WPI_VictorSPX(DriveConstants.kRightRearMotorPort);
   private final WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(DriveConstants.kRightFrontMotorPort);
-  
+
   static private int PIDIDX = 0;
 
   private final DifferentialDrive m_drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
@@ -45,13 +45,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     leftRearMotor.follow(leftFrontMotor);
     rightRearMotor.follow(rightFrontMotor);
-    
+
     leftRearMotor.setSafetyEnabled(false);
     leftFrontMotor.setSafetyEnabled(false);
     rightRearMotor.setSafetyEnabled(false);
     rightFrontMotor.setSafetyEnabled(false);
     m_drive.setSafetyEnabled(false);
-    
+
     leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PIDIDX, 10);
     rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PIDIDX, 10);
     // leftFrontMotor.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
@@ -68,7 +68,7 @@ public class DriveSubsystem extends SubsystemBase {
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), leftFrontMotor.getSelectedSensorPosition(),
-    rightFrontMotor.getSelectedSensorPosition());
+        rightFrontMotor.getSelectedSensorPosition());
   }
 
   public Pose2d getPose() {
@@ -76,7 +76,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(leftFrontMotor.getSelectedSensorVelocity(), rightFrontMotor.getSelectedSensorVelocity());
+    return new DifferentialDriveWheelSpeeds(leftFrontMotor.getSelectedSensorVelocity(),
+        rightFrontMotor.getSelectedSensorVelocity());
   }
 
   public void resetOdometry(Pose2d pose) {
@@ -89,7 +90,7 @@ public class DriveSubsystem extends SubsystemBase {
     rightFrontMotor.setVoltage(-rightVolts); // eksi
     m_drive.feed();
   }
-  
+
   public double getAverageEncoderDistance() {
     return (leftFrontMotor.getSelectedSensorPosition() + rightFrontMotor.getSelectedSensorPosition()) / 2.0;
   }

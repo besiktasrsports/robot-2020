@@ -15,6 +15,7 @@ public class CloseClimb extends CommandBase {
    * Creates a new OpenCompressor.
    */
   private final ClimbSubsystem m_climb;
+
   public CloseClimb(ClimbSubsystem _climb) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_climb = _climb;

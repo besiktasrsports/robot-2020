@@ -48,13 +48,14 @@ public final class Constants {
         public static final double kTrackWidthMeters = 0.572;
         public static final double kMaxSpeedMetersPerSecond = 2.5;
         public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
-        
+
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 
         public static final double kEncoderDistancePerPulse = 4096;
 
-        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(DriveConstants.kTrackWidthMeters);
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
+                DriveConstants.kTrackWidthMeters);
 
     }
 
@@ -78,7 +79,7 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        public static final int kIntakeMotorPort = 40 ; // PWM Port
+        public static final int kIntakeMotorPort = 40; // PWM Port
     }
 
     public static final class ClimbConstants {

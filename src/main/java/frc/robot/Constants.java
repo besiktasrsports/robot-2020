@@ -78,7 +78,7 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        public static final int kIntakeMotorPort = 0; // PWM Port
+        public static final int kIntakeMotorPort = 40 ; // PWM Port
     }
 
     public static final class ClimbConstants {
@@ -86,10 +86,6 @@ public final class Constants {
         public static final int kCompressorPort = 0;
         public static final int kClimbDoubleSolenoidPort1 = 6;
         public static final int kClimbDoubleSolenoidPort2 = 7;
-    }
-
-    public static final class WoFConstants {
-        public static final int kWoFMotorPort = 40;
     }
 
     public static final class MiscConstants {

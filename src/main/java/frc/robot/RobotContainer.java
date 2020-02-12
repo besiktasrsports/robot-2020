@@ -46,7 +46,7 @@ public class RobotContainer {
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
   public final IntakeSubsystem m_intake = new IntakeSubsystem();
-  public final WoFSubsystem m_wof = new WoFSubsystem();
+
   
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -89,10 +89,8 @@ public class RobotContainer {
     new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
     // Climb Commands
     new JoystickButton(m_driverController, 7).whileHeld(new ToggleClimb(m_climb));
-    // WoF Commands
-    new JoystickButton(m_driverController, 2).whileHeld(new RunWoF(1, m_wof));
     // Intake Commands
-    new JoystickButton(m_driverController, 3).whileHeld(new RunIntake(-0.5, m_intake));
+    new JoystickButton(m_driverController, 3).whileHeld(new RunIntake(0.5, m_intake));
     // Misc commands
     // new JoystickButton(m_driverController, 5).whenPressed(new ToggleLED(m_shooter));
     new JoystickButton(m_driverController, 5).whenPressed(new OpenClimb(m_climb));

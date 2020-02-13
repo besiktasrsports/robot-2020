@@ -37,11 +37,11 @@ public class RunHopper extends CommandBase {
     if (mode == "sync") {
       m_hopper.runHopper("sync", 0.5, 0);
     } else if (mode == "up") {
-      m_hopper.runHopper("up", 0.3, 0);
+      m_hopper.runHopper("up", 0.5, 0);
     } else if (mode == "down") {
       m_hopper.runHopper("down", 0, 0.3);
     } else {
-      m_hopper.runHopper("", 0, 0);
+      m_hopper.runHopper("", -0.5, 0.5);
 
     }
 

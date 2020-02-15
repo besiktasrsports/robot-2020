@@ -56,7 +56,5 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
   public boolean atSetpoint() {
     return m_controller.atSetpoint();
   }
-  public void setSetpoint(double _setpoint){
-    this.goal = _setpoint;
-  }
+  
 }

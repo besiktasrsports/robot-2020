@@ -81,7 +81,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     // System.out.println(m_robotContainer.m_robotDrive.getHeading());
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
+    //SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
   }
 
   /**
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-   System.out.println(m_robotContainer.m_shooter.getRPM());
+   System.out.println(m_robotContainer.m_pidShooter.getRPM());
   }
 
   @Override

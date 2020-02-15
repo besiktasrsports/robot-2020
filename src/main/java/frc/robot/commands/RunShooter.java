@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
+/*
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -14,6 +14,7 @@ public class RunShooter extends CommandBase {
   /**
    * Creates a new RunShooter.
    */
+  /*
   private final ShooterSubsystem m_shooter;
   private final double m_speed;
 
@@ -47,3 +48,4 @@ public class RunShooter extends CommandBase {
     return false;
   }
 }
+*/

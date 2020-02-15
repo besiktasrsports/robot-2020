@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
+/*
 import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
@@ -22,6 +22,7 @@ public class SetShooterToRPM extends ProfiledPIDCommand {
   /**
    * Creates a new SetShooterToRPM.
    */
+  /*
   public SetShooterToRPM(double targetRPM, ShooterSubsystem shooter) {
     super(
         // The ProfiledPIDController used by the command
@@ -50,3 +51,4 @@ public class SetShooterToRPM extends ProfiledPIDCommand {
     return false;
   }
 }
+*/

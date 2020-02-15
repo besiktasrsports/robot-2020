@@ -51,10 +51,14 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
   @Override
   public double getMeasurement() {
     // Return the process variable measurement here
-    return 0;
+    return getRPM();
   }
   public boolean atSetpoint() {
     return m_controller.atSetpoint();
+  }
+
+  public double getRPM() {
+    return shooterEncoder.getRate() * 60;
   }
 
   public void setAndEnable(double setPoint)

@@ -87,7 +87,7 @@ public class RobotContainer {
 
     // Shooter Commands
 
-    new JoystickButton (m_driverController,3).whileHeld(()-> m_pidShooter.setSetpoint(5),m_pidShooter);
+    new JoystickButton (m_driverController,3).whileHeld(() -> m_pidShooter.setAndEnable(500), m_pidShooter);
 
     // Hopper Commands
 

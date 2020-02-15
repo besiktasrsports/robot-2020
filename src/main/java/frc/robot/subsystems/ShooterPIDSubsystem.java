@@ -21,7 +21,7 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
    */
   private WPI_VictorSPX shooterMotor1 = new WPI_VictorSPX(ShooterConstants.kShooterMotor1Port);
   private WPI_VictorSPX shooterMotor2 = new WPI_VictorSPX(ShooterConstants.kShooterMotor2Port);
-  private double goal;
+  // private double goal;
   // private final SpeedControllerGroup shooterMotorGroup = new
   // SpeedControllerGroup(shooterMotor1, shooterMotor2);
   private final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA,
@@ -33,7 +33,7 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
         // The PIDController used by the subsystem
         new PIDController(ShooterConstants.kShootP, ShooterConstants.kShootI, ShooterConstants.kShootD));
         getController().setTolerance(ShooterConstants.kShooterToleranceRPM);
-        setSetpoint(goal);
+        // setSetpoint(goal);
 
       shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR));
       shooterMotor1.setInverted(true);
@@ -56,7 +56,11 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
   public boolean atSetpoint() {
     return m_controller.atSetpoint();
   }
-  public void setSetpoint(double _setpoint){
-    this.goal = _setpoint;
+
+  public void setAndEnable(double setPoint)
+  {
+    this.enable();
+    this.setSetpoint(setPoint);
   }
+
 }

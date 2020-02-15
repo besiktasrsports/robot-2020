@@ -66,11 +66,17 @@ public final class Constants {
         public static final int kShooterEncoderA = 0;
         public static final int kShooterEncoderB = 1;
         public static final int kShooterEncoderPPR = 2048;
-        public static final boolean kShooterEncoderIsReversed = true;
+        public static final boolean kShooterEncoderIsReversed = false;
 
-        public static final double kShootP = 0.2; // 0.02;
+        public static final double kShootP = 0.000; // 0.02;
         public static final double kShootI = 0.000;
         public static final double kShootD = 0.000;// 0.01;
+
+        public static final double kSVolts = 0.000;
+        public static final double kVoltSecondsPerRotation = 0.000;
+
+        public static final int kShooterToleranceRPM = 0;
+
     }
 
     public static final class HopperConstants {

@@ -29,7 +29,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public final DigitalOutput m_relay = new DigitalOutput(MiscConstants.kLEDRelayPort);
 
   public ShooterSubsystem() {
-    shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR / 4));
+    shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR));
     shooterMotor1.setInverted(true);
     shooterMotor2.setInverted(true);
     shooterMotor2.follow(shooterMotor1);

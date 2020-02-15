@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
-
+    
     angle = table.getEntry("yaw");
     autoChooser.setDefaultOption("Auto1", 1);
     autoChooser.addOption("Auto2", 2);
@@ -56,8 +56,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
-    m_robotContainer.m_shooter.toggleRelay(true);
-    //autoCG = new Autonomous();
+    //m_robotContainer.m_shooter.toggleRelay(true); 
+      //autoCG = new Autonomous();
 
   }
 
@@ -103,17 +103,15 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_robotContainer.m_robotDrive.zeroHeading();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //int autoMode = autoChooser.getSelected();
+    //switch (autoMode) {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    // autoCG.addSe
-    // m_autonomousCommand.
-    /*
-     * int autoMode = autoChooser.getSelected(); switch (autoMode) {
-     * 
-     * }
-     */
+
+    
   }
+  
 
   /**
    * This function is called periodically during autonomous.
@@ -140,6 +138,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+   System.out.println(m_robotContainer.m_shooter.getRPM());
   }
 
   @Override

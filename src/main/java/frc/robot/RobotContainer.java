@@ -46,6 +46,7 @@ public class RobotContainer {
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
   public final CellIntakeSubsystem m_intake = new CellIntakeSubsystem();
+  public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -71,7 +72,7 @@ public class RobotContainer {
 
     // Vision Drive
 
-    new JoystickButton(m_driverController, 7).whileHeld(new VisionTurnProfiled(m_robotDrive));
+    //new JoystickButton(m_driverController, 7).whileHeld(new VisionTurnProfiled(m_robotDrive));
 
     // Field Oriented Drive
 
@@ -86,26 +87,23 @@ public class RobotContainer {
 
     // Shooter Commands
 
-    // new JoystickButton(m_driverController, 1).whileHeld(new SetShooterToRPM(50,
-    // m_shooter));
-    // new JoystickButton(m_driverController, 2).whileHeld(new SetShooterToRPM(30,
-    // m_shooter));
+    new JoystickButton (m_driverController,3).whileHeld(()-> m_pidShooter.setSetpoint(5),m_pidShooter);
 
     // Hopper Commands
 
-    new JoystickButton(m_driverController, 4).whileHeld(new RunHopper("", m_hopper));
+    new JoystickButton(m_driverController, 2).whileHeld(new RunHopper("", m_hopper));
     new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
 
     // Climb Commands
 
-    new JoystickButton(m_driverController, 2).whenPressed(new OpenClimb(m_climb));
+    new JoystickButton(m_driverController, 5).whenPressed(new OpenClimb(m_climb));
     new JoystickButton(m_driverController, 6).whenPressed(new CloseClimb(m_climb));
     new JoystickButton(m_driverController, 8).whileHeld(new ToggleCompressor(m_climb));
 
     // Intake Commands
 
-    new JoystickButton(m_driverController, 3).whileHeld(new RunIntake(0.5, m_intake));
-    new JoystickButton(m_driverController, 5).whileHeld(new RunIntake(-0.5, m_intake));
+    new JoystickButton(m_driverController, 4).whileHeld(new RunIntake(0.5, m_intake));
+    new JoystickButton(m_driverController, 7).whileHeld(new RunIntake(-0.5, m_intake));
 
     // Misc commands
 

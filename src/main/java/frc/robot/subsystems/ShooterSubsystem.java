@@ -6,11 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-/*
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -19,10 +21,13 @@ public class ShooterSubsystem extends SubsystemBase {
   /**
    * Creates a new ShooterSubsystem.
    */
-  /*
+  
   private WPI_VictorSPX shooterMotor1 = new WPI_VictorSPX(ShooterConstants.kShooterMotor1Port);
   private WPI_VictorSPX shooterMotor2 = new WPI_VictorSPX(ShooterConstants.kShooterMotor2Port);
-
+  private SimpleMotorFeedforward mShooterFeedForward = new SimpleMotorFeedforward(
+    ShooterConstants.kSVolts, ShooterConstants.kVoltSecondsPerRotation, ShooterConstants.kAVolts);
+  private PIDController mShooterController = new PIDController(0, 0, 0);
+  private double kShooterAccuracy = 100; 
   // private final SpeedControllerGroup shooterMotorGroup = new
   // SpeedControllerGroup(shooterMotor1, shooterMotor2);
   public final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA,
@@ -34,6 +39,9 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor1.setInverted(true);
     shooterMotor2.setInverted(true);
     shooterMotor2.follow(shooterMotor1);
+    mShooterController.setP(ShooterConstants.kShootP);
+    mShooterController.setD(ShooterConstants.kShootD);
+
   }
 
   @Override
@@ -46,12 +54,33 @@ public class ShooterSubsystem extends SubsystemBase {
     // shooterMotorGroup.setVoltage(val);
   }
 
+  public void runShooterVoltage(double voltage)
+  {
+    double output = mShooterController.calculate(getRPM(), getTargetRPM());
+    shooterMotor1.setVoltage(output);
+  }
+
   public double getRPM() {
     return shooterEncoder.getRate() * 60;
+  }
+
+  public double getTargetRPM()
+  {
+      return mShooterController.getSetpoint();
+  }
+
+  public boolean inTargetRange()
+  {
+      return (Math.abs(getTargetRPM() - getRPM()) <= kShooterAccuracy);
   }
 
   public void toggleRelay(boolean _status) {
     m_relay.set(_status);
   }
+
+  public void stop()
+  {
+    runShooterVoltage(0);
+  }
 }
-*/
+

@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-   System.out.println(m_robotContainer.m_pidShooter.getRPM());
+   // System.out.println(m_robotContainer.m_pidShooter.getRPM());
   }
 
   @Override

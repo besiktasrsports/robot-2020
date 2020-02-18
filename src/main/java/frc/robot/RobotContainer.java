@@ -42,11 +42,11 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final DriveSubsystem m_robotDrive = new DriveSubsystem();
-  //public final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  public final ShooterSubsystem m_shooter = new ShooterSubsystem();
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
   public final CellIntakeSubsystem m_intake = new CellIntakeSubsystem();
-  public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
+  // public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -87,7 +87,7 @@ public class RobotContainer {
 
     // Shooter Commands
 
-    new JoystickButton (m_driverController,3).whileHeld(() -> m_pidShooter.setAndEnable(500), m_pidShooter);
+    // new JoystickButton (m_driverController,3).whileHeld(() -> m_pidShooter.setAndEnable(500), m_pidShooter);
 
     // Hopper Commands
 

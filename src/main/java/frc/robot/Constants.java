@@ -74,6 +74,7 @@ public final class Constants {
 
         public static final double kSVolts = 0.838;
         public static final double kVoltSecondsPerRotation = 0.0304;
+        public static final double kAVolts = 0.0036;
 
         public static final int kShooterToleranceRPM = 0;
 

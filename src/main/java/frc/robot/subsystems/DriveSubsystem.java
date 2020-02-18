@@ -52,8 +52,9 @@ public class DriveSubsystem extends SubsystemBase {
     rightFrontMotor.setSafetyEnabled(false);
     m_drive.setSafetyEnabled(false);
 
-    leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PIDIDX, 10);
-    rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PIDIDX, 10);
+    leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PIDIDX, 10);
+    rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PIDIDX, 10);
+    leftFrontMotor.setSensorPhase(true);
     // leftFrontMotor.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
     // rightFrontMotor.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
 
@@ -67,8 +68,10 @@ public class DriveSubsystem extends SubsystemBase {
     // System.out.print("Robot angle:");
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
-    m_odometry.update(Rotation2d.fromDegrees(getHeading()), leftFrontMotor.getSelectedSensorPosition(),
-        rightFrontMotor.getSelectedSensorPosition());
+    m_odometry.update(Rotation2d.fromDegrees(getHeading()), leftFrontMotor.getSelectedSensorPosition()/(DriveConstants.kEncoderDistancePerPulse*2),
+        rightFrontMotor.getSelectedSensorPosition()/(DriveConstants.kEncoderDistancePerPulse*2));
+    // System.out.println(m_odometry.getPoseMeters());
+    // System.out.println(getWheelSpeeds());
   }
 
   public Pose2d getPose() {
@@ -76,8 +79,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(leftFrontMotor.getSelectedSensorVelocity(),
-        rightFrontMotor.getSelectedSensorVelocity());
+    return new DifferentialDriveWheelSpeeds(5*leftFrontMotor.getSelectedSensorVelocity()/DriveConstants.kEncoderDistancePerPulse,
+        5*rightFrontMotor.getSelectedSensorVelocity()/DriveConstants.kEncoderDistancePerPulse);
   }
 
   public void resetOdometry(Pose2d pose) {
@@ -86,13 +89,18 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    leftFrontMotor.setVoltage(leftVolts);
-    rightFrontMotor.setVoltage(-rightVolts); // eksi
-    m_drive.feed();
+    // leftFrontMotor.setVoltage(leftVolts);
+    // rightFrontMotor.setVoltage(-rightVolts); // eksi
+    // m_drive.feed();
+    System.out.print("Left: ");
+    System.out.println(leftVolts);
+    System.out.print("Right: ");
+    System.out.println(rightVolts);
   }
 
   public double getAverageEncoderDistance() {
-    return (leftFrontMotor.getSelectedSensorPosition() + rightFrontMotor.getSelectedSensorPosition()) / 2.0;
+    // 4 olmali
+    return (leftFrontMotor.getSelectedSensorPosition() + rightFrontMotor.getSelectedSensorPosition()) / (2.0*DriveConstants.kEncoderDistancePerPulse);
   }
 
   public void setMaxOutput(double maxOutput) {

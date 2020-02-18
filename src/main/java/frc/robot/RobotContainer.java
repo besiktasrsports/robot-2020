@@ -46,7 +46,7 @@ public class RobotContainer {
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
   public final CellIntakeSubsystem m_intake = new CellIntakeSubsystem();
-  public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
+  // public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -87,8 +87,10 @@ public class RobotContainer {
 
     // Shooter Commands
 
-    new JoystickButton (m_driverController,3).whileHeld(()-> m_pidShooter.setSetpoint(5),m_pidShooter);
-
+    // new JoystickButton (m_driverController,3).whileHeld(()-> m_pidShooter.setSetpoint(5),m_pidShooter);
+    new JoystickButton (m_driverController,3).whileHeld(new SetShooterRPMPF(3000, m_shooter));
+    //new JoystickButton (m_driverController,4).whileHeld(new ShooterSetRPMPID(1500, m_shooter));
+    new JoystickButton (m_driverController,4).whileHeld(new RunIntake(0.8, m_intake));
     // Hopper Commands
 
     new JoystickButton(m_driverController, 2).whileHeld(new RunHopper("", m_hopper));
@@ -102,8 +104,8 @@ public class RobotContainer {
 
     // Intake Commands
 
-    new JoystickButton(m_driverController, 4).whileHeld(new RunIntake(0.5, m_intake));
-    new JoystickButton(m_driverController, 7).whileHeld(new RunIntake(-0.5, m_intake));
+    // new JoystickButton(m_driverController, 4).whileHeld(new RunIntake(0.5, m_intake));
+    new JoystickButton(m_driverController, 7).whileHeld(new RunShooter(0.65, m_shooter));
 
     // Misc commands
 
@@ -142,7 +144,7 @@ public class RobotContainer {
         List.of(new Translation2d(1, 0.5) // new Translation
         ),
         // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
+        new Pose2d(2, 0, new Rotation2d(0)),
         // Pass config
         config);
 

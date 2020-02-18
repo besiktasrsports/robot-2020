@@ -40,12 +40,12 @@ public final class Constants {
         public static final double kTurnToleranceDeg = 2;
         public static final double kTurnRateToleranceDegPerS = 8; // 10
 
-        public static final double ksVolts = 1.41;
-        public static final double kvVoltSecondsPerMeter = 3.14;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.326;
+        public static final double ksVolts = 1.86;
+        public static final double kvVoltSecondsPerMeter = 3.13;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.815;
 
-        public static final double kPDriveVel = 12;
-        public static final double kTrackWidthMeters = 0.572;
+        public static final double kPDriveVel = 1;// 20.2;
+        public static final double kTrackWidthMeters = 0.66;
         public static final double kMaxSpeedMetersPerSecond = 2.5;
         public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
 
@@ -68,12 +68,13 @@ public final class Constants {
         public static final int kShooterEncoderPPR = 2048;
         public static final boolean kShooterEncoderIsReversed = false;
 
-        public static final double kShootP = 0.000; // 0.02;
+        public static final double kShootP = 0.006;// 0.0237 ;// 0.00005; // 0.02;
         public static final double kShootI = 0.000;
         public static final double kShootD = 0.000;// 0.01;
 
-        public static final double kSVolts = 0.000;
-        public static final double kVoltSecondsPerRotation = 0.000;
+        public static final double kS = 0.656;
+        public static final double kV = 0.00202;
+        public static final double kA = 0.000494;
 
         public static final int kShooterToleranceRPM = 0;
 

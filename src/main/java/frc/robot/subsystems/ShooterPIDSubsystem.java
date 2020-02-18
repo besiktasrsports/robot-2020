@@ -26,8 +26,8 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
   // SpeedControllerGroup(shooterMotor1, shooterMotor2);
   private final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA,
       ShooterConstants.kShooterEncoderB, ShooterConstants.kShooterEncoderIsReversed);
-  private final SimpleMotorFeedforward m_shooterFeedForward = new SimpleMotorFeedforward(ShooterConstants.kSVolts,
-   ShooterConstants.kVoltSecondsPerRotation);    
+  private final SimpleMotorFeedforward m_shooterFeedForward = new SimpleMotorFeedforward(ShooterConstants.kS,
+   ShooterConstants.kV, ShooterConstants.kA);    
   public ShooterPIDSubsystem() {
     super(
         // The PIDController used by the subsystem

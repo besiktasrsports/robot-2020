@@ -21,18 +21,28 @@ import frc.robot.trajectories.SneakyTrajectory;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class CenterRight6Cell extends SequentialCommandGroup {
+public class CenterRight8Cell extends SequentialCommandGroup {
   /**
-   * Creates a new Autonomous.
+   * Creates a new CenterRight8Cell.
    */
-  public CenterRight6Cell(SneakyTrajectory s_trajectory, ShooterSubsystem shooter, IntakeSubsystem intake,
+  public CenterRight8Cell(SneakyTrajectory s_trajectory, ShooterSubsystem shooter, IntakeSubsystem intake,
       HopperSubsystem hopper, DriveSubsystem drive) {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());
     super(new SetShooterRPMPF(3000, shooter).withTimeout(0.75),
         new SetShooterRPMPF(3000, shooter).withTimeout(2).alongWith(new RunHopper("sync", hopper)).withTimeout(2),
-        s_trajectory.getRamsete(s_trajectory.centerRightAutoBackwards)
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto8Cell_1)
             .raceWith(new RunIntake(0.7, intake)
                 .alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
-        s_trajectory.getRamsete(s_trajectory.centerRightAutoForward).andThen(() -> drive.tankDriveVolts(0, 0)),
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto8Cell_2),
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto8Cell_3)
+            .raceWith(new RunIntake(0.7, intake)
+                .alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto8Cell_4),
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto8Cell_5)
+            .raceWith(new RunIntake(0.7, intake)
+                .alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto8Cell_6).andThen(() -> drive.tankDriveVolts(0, 0)),
         new RunHopper("", hopper).withTimeout(0.2), new SetShooterRPMPF(3000, shooter).withTimeout(0.75),
         new SetShooterRPMPF(3000, shooter).withTimeout(2)
             .alongWith(new RunHopper("sync", hopper).alongWith(new RunIntake(0.7, intake))).withTimeout(2));

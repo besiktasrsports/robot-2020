@@ -45,13 +45,11 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor1.set(val);
   }
 
-  public double getTargetRPM()
-  {
+  public double getTargetRPM() {
     return 1500; // Change this
   }
 
-  public void runShooterVoltage(double voltage)
-  {
+  public void runShooterVoltage(double voltage) {
     shooterMotor1.setVoltage(voltage);
   }
 

@@ -38,11 +38,21 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(getRPM());
   }
 
   public void runShooter(double val) {
     shooterMotor1.set(val);
-    // shooterMotorGroup.setVoltage(val);
+  }
+
+  public double getTargetRPM()
+  {
+    return 1500; // Change this
+  }
+
+  public void runShooterVoltage(double voltage)
+  {
+    shooterMotor1.setVoltage(voltage);
   }
 
   public double getRPM() {

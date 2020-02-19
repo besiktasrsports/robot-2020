@@ -11,6 +11,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -56,6 +58,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
+
     //m_robotContainer.m_shooter.toggleRelay(true); 
       //autoCG = new Autonomous();
 
@@ -102,6 +105,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_robotContainer.m_robotDrive.zeroHeading();
+    m_robotContainer.m_robotDrive.resetEncoders();
+    m_robotContainer.m_robotDrive.m_odometry.resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     //int autoMode = autoChooser.getSelected();
     //switch (autoMode) {
@@ -126,7 +131,14 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    // m_robotContainer.m_robotDrive.zeroHeading();
+    // m_robotContainer.m_robotDrive.resetEncoders();
+    // m_robotContainer.m_robotDrive.m_odometry.resetPosition(new Pose2d(3.15/2, -2.4/2, new Rotation2d(0)), new Rotation2d(0));
+    // m_robotContainer.m_robotDrive.m_odometry.resetPosition(new Pose2d(-1.55/2, -4.1/2, new Rotation2d(0)), new Rotation2d(0));
     m_robotContainer.m_robotDrive.zeroHeading();
+    m_robotContainer.m_robotDrive.resetEncoders();
+    m_robotContainer.m_robotDrive.m_odometry.resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

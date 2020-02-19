@@ -34,7 +34,7 @@ public class FieldOrientedTurn extends ProfiledPIDCommand {
             new TrapezoidProfile.Constraints(DriveConstants.kMaxTurnRateDegPerS,
                 DriveConstants.kMaxTurnAccelerationDegPerSSquared)),
         // Close loop on heading
-        drive::getHeading,
+        drive::getHeadingCW,
         // Set reference to target
         targetAngleDegrees,
         // Pipe output to turn robot
@@ -64,5 +64,12 @@ public class FieldOrientedTurn extends ProfiledPIDCommand {
   public boolean isFinished() {
     // End when the controller is at the reference.
     return getController().atGoal();
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    // TODO Auto-generated method stub
+    super.end(interrupted);
+    m_drive.arcadeDrive(0, 0);
   }
 }

@@ -27,7 +27,7 @@ public final class Constants {
         public static final int kRightFrontMotorPort = 12;
         public static final int kRightRearMotorPort = 13;
 
-        public static final boolean kGyroReversed = false;
+        public static final boolean kGyroReversed = true;
 
         public static final double kTurnP = 0.8; // 0.8
         public static final double kTurnI = 0;
@@ -40,19 +40,20 @@ public final class Constants {
         public static final double kTurnToleranceDeg = 2;
         public static final double kTurnRateToleranceDegPerS = 8; // 10
 
-        public static final double ksVolts = 1.86;
-        public static final double kvVoltSecondsPerMeter = 3.13;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.815;
+        public static final double ksVolts = 1.86; // 1.88;
+        public static final double kvVoltSecondsPerMeter = 3.13; // 3.16;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.815; // 0.621;
 
-        public static final double kPDriveVel = 1;// 20.2;
+        public static final double kWheelDiameterMeters = 0.1524;
+        public static final double kPDriveVel = 6;// 12.1;// 20.2; // 8.91
         public static final double kTrackWidthMeters = 0.66;
-        public static final double kMaxSpeedMetersPerSecond = 2.5;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+        public static final double kMaxSpeedMetersPerSecond = 2.0; // 2.0;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 2.0; // 2.0;
 
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 
-        public static final double kEncoderDistancePerPulse = 4096;
+        public static final double kEncoderCPR = 4096;
 
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                 DriveConstants.kTrackWidthMeters);

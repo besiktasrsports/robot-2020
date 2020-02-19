@@ -26,7 +26,9 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.DriveConstants;
 
 import frc.robot.commands.*;
+import frc.robot.commands.auto.CenterRight6Cell;
 import frc.robot.subsystems.*;
+import frc.robot.trajectories.SneakyTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -51,7 +53,9 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
+  public final SneakyTrajectory s_trajectory =  new SneakyTrajectory(m_robotDrive);
 
+  // public SneakyTrajectory s_trajectory =  new SneakyTrajectory(m_robotDrive);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -60,6 +64,7 @@ public class RobotContainer {
     configureButtonBindings();
     m_robotDrive.setDefaultCommand(new JoystickDrive(m_robotDrive, () -> -m_driverController.getRawAxis(1),
         () -> m_driverController.getRawAxis(0)));
+
   }
 
   /**
@@ -88,14 +93,14 @@ public class RobotContainer {
     // Shooter Commands
 
     // new JoystickButton (m_driverController,3).whileHeld(()-> m_pidShooter.setSetpoint(5),m_pidShooter);
-    new JoystickButton (m_driverController,3).whileHeld(new SetShooterRPMPF(3000, m_shooter));
+    new JoystickButton (m_driverController,3).toggleWhenPressed(new SetShooterRPMPF(3000, m_shooter));
     //new JoystickButton (m_driverController,4).whileHeld(new ShooterSetRPMPID(1500, m_shooter));
-    new JoystickButton (m_driverController,4).whileHeld(new RunIntake(0.8, m_intake));
+    new JoystickButton (m_driverController,1).whileHeld(new RunIntake(0.8, m_intake));
     // Hopper Commands
 
     new JoystickButton(m_driverController, 2).whileHeld(new RunHopper("", m_hopper));
     new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
-
+    
     // Climb Commands
 
     new JoystickButton(m_driverController, 5).whenPressed(new OpenClimb(m_climb));
@@ -122,32 +127,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // return m_chooser.getSelected();
-    // Create a voltage constraint to ensure we don't accelerate too fast
-    var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
-        new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
-            DriveConstants.kaVoltSecondsSquaredPerMeter),
-        DriveConstants.kDriveKinematics, 10);
-
-    // Create config for trajectory
-    TrajectoryConfig config = new TrajectoryConfig(DriveConstants.kMaxSpeedMetersPerSecond,
-        DriveConstants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(DriveConstants.kDriveKinematics)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint);
-
-    // An example trajectory to follow. All units in meters.
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, 0.5) // new Translation
-        ),
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(2, 0, new Rotation2d(0)),
-        // Pass config
-        config);
-
+    /*
+    Trajectory exampleTrajectory = s_trajectory.centerRightAutoForward;
     RamseteCommand ramseteCommand = new RamseteCommand(exampleTrajectory, m_robotDrive::getPose,
         new RamseteController(DriveConstants.kRamseteB, DriveConstants.kRamseteZeta),
         new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
@@ -158,7 +139,9 @@ public class RobotContainer {
         m_robotDrive::tankDriveVolts, m_robotDrive);
 
     // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+    */
+    return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive).andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+    // return s_trajectory.centerRightAutoForwardCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
   }
 
 }

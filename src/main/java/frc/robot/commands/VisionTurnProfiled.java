@@ -36,7 +36,7 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
             new TrapezoidProfile.Constraints(DriveConstants.kMaxTurnRateDegPerS,
                 DriveConstants.kMaxTurnAccelerationDegPerSSquared)),
         // Close loop on heading
-        drive::getHeading,
+        drive::getHeadingCW,
         // Goal is set after the PID controller
         0,
         // Pipe output to turn robot
@@ -45,7 +45,7 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
                                                                                                            // 0.07
         // Require the drive
         drive);
-    this.m_goal = () -> new TrapezoidProfile.State(Robot.getVisionYawAngle() + drive.getHeading(), 0);
+    this.m_goal = () -> new TrapezoidProfile.State(Robot.getVisionYawAngle() + drive.getHeadingCW(), 0);
 
     getController().setTolerance(DriveConstants.kTurnToleranceDeg, DriveConstants.kTurnRateToleranceDegPerS);
 

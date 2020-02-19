@@ -93,8 +93,8 @@ public final class Constants {
     public static final class ClimbConstants {
         public static final int kPCMPort = 0;
         public static final int kCompressorPort = 0;
-        public static final int kClimbDoubleSolenoidPort1 = 6;
-        public static final int kClimbDoubleSolenoidPort2 = 7;
+        public static final int kClimbDoubleSolenoidPort1 = 4;
+        public static final int kClimbDoubleSolenoidPort2 = 5;
     }
 
     public static final class MiscConstants {

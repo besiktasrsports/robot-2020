@@ -123,6 +123,9 @@ public class RobotContainer {
       case 2:
       return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
       .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+      default:
+      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+      .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));      
     }
     /*return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
         .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));*/

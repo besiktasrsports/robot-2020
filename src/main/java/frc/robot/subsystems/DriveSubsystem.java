@@ -67,8 +67,7 @@ public class DriveSubsystem extends SubsystemBase {
     // System.out.print("Robot angle:");
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
-    m_odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncoderDistance(),
-        getRightEncoderDistance());
+    m_odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncoderDistance(), getRightEncoderDistance());
     // System.out.println(getHeading());
     System.out.println(m_odometry.getPoseMeters());
     // System.out.println(m_odometry.getPoseMeters());
@@ -81,8 +80,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-      10.0*leftFrontMotor.getSelectedSensorVelocity()*(1.0/DriveConstants.kEncoderCPR) * (Math.PI*DriveConstants.kWheelDiameterMeters),
-      10.0*rightFrontMotor.getSelectedSensorVelocity()*(1.0/DriveConstants.kEncoderCPR)*(Math.PI*DriveConstants.kWheelDiameterMeters));
+        10.0 * leftFrontMotor.getSelectedSensorVelocity() * (1.0 / DriveConstants.kEncoderCPR)
+            * (Math.PI * DriveConstants.kWheelDiameterMeters),
+        10.0 * rightFrontMotor.getSelectedSensorVelocity() * (1.0 / DriveConstants.kEncoderCPR)
+            * (Math.PI * DriveConstants.kWheelDiameterMeters));
   }
 
   public void resetOdometry(Pose2d pose) {
@@ -100,15 +101,14 @@ public class DriveSubsystem extends SubsystemBase {
     System.out.println(-rightVolts);
   }
 
-
-  public double getRightEncoderDistance()
-  {
-    return rightFrontMotor.getSelectedSensorPosition() * (1.0 / DriveConstants.kEncoderCPR) * (Math.PI*DriveConstants.kWheelDiameterMeters);
+  public double getRightEncoderDistance() {
+    return rightFrontMotor.getSelectedSensorPosition() * (1.0 / DriveConstants.kEncoderCPR)
+        * (Math.PI * DriveConstants.kWheelDiameterMeters);
   }
 
-  public double getLeftEncoderDistance()
-  {
-    return leftFrontMotor.getSelectedSensorPosition() * (1.0 / DriveConstants.kEncoderCPR) * (Math.PI*DriveConstants.kWheelDiameterMeters);
+  public double getLeftEncoderDistance() {
+    return leftFrontMotor.getSelectedSensorPosition() * (1.0 / DriveConstants.kEncoderCPR)
+        * (Math.PI * DriveConstants.kWheelDiameterMeters);
   }
 
   public double getAverageEncoderDistance() {
@@ -144,8 +144,7 @@ public class DriveSubsystem extends SubsystemBase {
     return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
-  public double getHeadingCW()
-  {
+  public double getHeadingCW() {
     // Not negating
     return Math.IEEEremainder(m_gyro.getAngle(), 360);
   }

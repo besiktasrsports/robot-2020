@@ -7,30 +7,17 @@
 
 package frc.robot;
 
-import java.util.List;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.RamseteController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Constants.DriveConstants;
 
 import frc.robot.commands.*;
 import frc.robot.commands.auto.CenterRight6Cell;
+import frc.robot.commands.auto.CenterRight8Cell;
 import frc.robot.subsystems.*;
 import frc.robot.trajectories.SneakyTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
@@ -47,15 +34,14 @@ public class RobotContainer {
   public final ShooterSubsystem m_shooter = new ShooterSubsystem();
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
-  public final CellIntakeSubsystem m_intake = new CellIntakeSubsystem();
+  public final IntakeSubsystem m_intake = new IntakeSubsystem();
+  public final SneakyTrajectory s_trajectory = new SneakyTrajectory(m_robotDrive);
   // public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  public final SneakyTrajectory s_trajectory =  new SneakyTrajectory(m_robotDrive);
 
-  // public SneakyTrajectory s_trajectory =  new SneakyTrajectory(m_robotDrive);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -77,7 +63,8 @@ public class RobotContainer {
 
     // Vision Drive
 
-    //new JoystickButton(m_driverController, 7).whileHeld(new VisionTurnProfiled(m_robotDrive));
+     new JoystickButton(m_driverController, 9).whileHeld(new
+     VisionTurnProfiled(m_robotDrive));
 
     // Field Oriented Drive
 
@@ -92,15 +79,17 @@ public class RobotContainer {
 
     // Shooter Commands
 
-    // new JoystickButton (m_driverController,3).whileHeld(()-> m_pidShooter.setSetpoint(5),m_pidShooter);
-    new JoystickButton (m_driverController,3).toggleWhenPressed(new SetShooterRPMPF(3000, m_shooter));
-    //new JoystickButton (m_driverController,4).whileHeld(new ShooterSetRPMPID(1500, m_shooter));
-    new JoystickButton (m_driverController,1).whileHeld(new RunIntake(0.8, m_intake));
+    // new JoystickButton (m_driverController,3).whileHeld(()->
+    // m_pidShooter.setSetpoint(5),m_pidShooter);
+    new JoystickButton(m_driverController, 3).toggleWhenPressed(new SetShooterRPMPF(3000, m_shooter));
+    // new JoystickButton (m_driverController,4).whileHeld(new
+    // ShooterSetRPMPID(1500, m_shooter));
+    new JoystickButton(m_driverController, 1).whileHeld(new RunIntake(0.8, m_intake));
     // Hopper Commands
 
     new JoystickButton(m_driverController, 2).whileHeld(new RunHopper("", m_hopper));
     new JoystickButton(m_driverController, 1).whileHeld(new RunHopper("sync", m_hopper));
-    
+
     // Climb Commands
 
     new JoystickButton(m_driverController, 5).whenPressed(new OpenClimb(m_climb));
@@ -109,13 +98,14 @@ public class RobotContainer {
 
     // Intake Commands
 
-    // new JoystickButton(m_driverController, 4).whileHeld(new RunIntake(0.5, m_intake));
+    // new JoystickButton(m_driverController, 4).whileHeld(new RunIntake(0.5,
+    // m_intake));
     new JoystickButton(m_driverController, 7).whileHeld(new RunShooter(0.65, m_shooter));
 
     // Misc commands
 
-    // new JoystickButton(m_driverController, 5).whenPressed(new
-    // ToggleLED(m_shooter));
+     new JoystickButton(m_driverController, 10).whenPressed(new
+     ToggleLED(m_shooter));
 
   }
 
@@ -127,21 +117,21 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // return m_chooser.getSelected();
+    switch (Robot.autoChooser.getSelected()) {
+    case 1:
+      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+    case 2:
+      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+    default:
+      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));      
+    }
     /*
-    Trajectory exampleTrajectory = s_trajectory.centerRightAutoForward;
-    RamseteCommand ramseteCommand = new RamseteCommand(exampleTrajectory, m_robotDrive::getPose,
-        new RamseteController(DriveConstants.kRamseteB, DriveConstants.kRamseteZeta),
-        new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
-            DriveConstants.kaVoltSecondsSquaredPerMeter),
-        DriveConstants.kDriveKinematics, m_robotDrive::getWheelSpeeds,
-        new PIDController(DriveConstants.kPDriveVel, 0, 0), new PIDController(DriveConstants.kPDriveVel, 0, 0),
-        // RamseteCommand passes volts to the callback
-        m_robotDrive::tankDriveVolts, m_robotDrive);
-
-    // Run path following command, then stop at the end.
-    */
-    return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive).andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
-    // return s_trajectory.centerRightAutoForwardCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+     * return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper,
+     * m_robotDrive) .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+     */
   }
 
 }

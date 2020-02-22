@@ -41,14 +41,10 @@ public class RunHopper extends CommandBase {
       m_hopper.runHopper("up", m_speed, 0);
     } else if (mode == "down") {
       m_hopper.runHopper("down", 0, l_speed);
-    }
-    else if(mode == "slow_sync")
-    {
+    } else if (mode == "slow_sync") {
       m_hopper.runHopper("sync", 0.35, 0);
-    }
-    else {
+    } else {
       m_hopper.runHopper("", -m_speed, m_speed);
-
     }
 
   }

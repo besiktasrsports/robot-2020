@@ -12,13 +12,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
-public class CellIntakeSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
   /**
    * Creates a new CellIntakeSubsystem.
    */
   private final WPI_VictorSPX intakeMotor = new WPI_VictorSPX(IntakeConstants.kIntakeMotorPort);
 
-  public CellIntakeSubsystem() {
+  public IntakeSubsystem() {
 
   }
 

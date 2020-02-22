@@ -27,18 +27,19 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
   private final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA,
       ShooterConstants.kShooterEncoderB, ShooterConstants.kShooterEncoderIsReversed);
   private final SimpleMotorFeedforward m_shooterFeedForward = new SimpleMotorFeedforward(ShooterConstants.kS,
-   ShooterConstants.kV, ShooterConstants.kA);    
+      ShooterConstants.kV, ShooterConstants.kA);
+
   public ShooterPIDSubsystem() {
     super(
         // The PIDController used by the subsystem
         new PIDController(ShooterConstants.kShootP, ShooterConstants.kShootI, ShooterConstants.kShootD));
-        getController().setTolerance(ShooterConstants.kShooterToleranceRPM);
-        setSetpoint(goal);
+    getController().setTolerance(ShooterConstants.kShooterToleranceRPM);
+    setSetpoint(goal);
 
-      shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR));
-      shooterMotor1.setInverted(true);
-      shooterMotor2.setInverted(true);
-      shooterMotor2.follow(shooterMotor1);
+    shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR));
+    shooterMotor1.setInverted(true);
+    shooterMotor2.setInverted(true);
+    shooterMotor2.follow(shooterMotor1);
 
   }
 
@@ -53,8 +54,12 @@ public class ShooterPIDSubsystem extends PIDSubsystem {
     // Return the process variable measurement here
     return 0;
   }
+
   public boolean atSetpoint() {
     return m_controller.atSetpoint();
   }
-  
+
+  public void setSetpoint(double _setpoint) {
+    this.goal = _setpoint;
+  }
 }

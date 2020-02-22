@@ -40,7 +40,7 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
         // Goal is set after the PID controller
         0,
         // Pipe output to turn robot
-        (output, setpoint) -> drive.arcadeDrive(0, (output > 0) ? 0.0 + output / 12 : -0.0 + output / 12), // min
+        (output, setpoint) -> drive.arcadeDrive(0, (Robot.isVisionValid())?((output > 0) ? 0.0 + output / 12 : -0.0 + output / 12):0), // min
                                                                                                            // command =
                                                                                                            // 0.07
         // Require the drive

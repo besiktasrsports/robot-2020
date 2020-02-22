@@ -23,7 +23,7 @@ public class SetShooterRPMPF extends PIDCommand {
   private ShooterSubsystem m_shooter;
   // private static double lastOutput = 0;
   private final static SimpleMotorFeedforward m_shooterFeedForward = new SimpleMotorFeedforward(ShooterConstants.kS,
-   ShooterConstants.kV, ShooterConstants.kA);
+      ShooterConstants.kV, ShooterConstants.kA);
   private static double m_motorOutput;
 
   public SetShooterRPMPF(double targetRPM, ShooterSubsystem shooter) {
@@ -50,21 +50,23 @@ public class SetShooterRPMPF extends PIDCommand {
 
   @Override
   public void initialize() {
-    // TODO Auto-generated method stub
     super.initialize();
     m_motorOutput = 0;
   }
+
   @Override
   public void execute() {
-    // TODO Auto-generated method stub
     super.execute();
+    if (!m_shooter.getSetpointStatus())
+      m_shooter.setSetpointStatus(m_controller.atSetpoint());
     /*
-    System.out.print("Set point:");
-    System.out.println(this.m_controller.getSetpoint());
-    System.out.print("Position Error: ");
-    System.out.println(this.m_controller.getPositionError());
-    */
+     * System.out.print("Set point:");
+     * System.out.println(this.m_controller.getSetpoint());
+     * System.out.print("Position Error: ");
+     * System.out.println(this.m_controller.getPositionError());
+     */
   }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
@@ -73,8 +75,8 @@ public class SetShooterRPMPF extends PIDCommand {
 
   @Override
   public void end(boolean interrupted) {
-    // TODO Auto-generated method stub
     super.end(interrupted);
+    m_shooter.setSetpointStatus(false);
     m_shooter.runShooterVoltage(0);
   }
 }

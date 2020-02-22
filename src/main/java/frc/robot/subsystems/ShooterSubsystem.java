@@ -19,6 +19,7 @@ public class ShooterSubsystem extends SubsystemBase {
   /**
    * Creates a new ShooterSubsystem.
    */
+  public boolean isAtSetpoint = false;
   private WPI_VictorSPX shooterMotor1 = new WPI_VictorSPX(ShooterConstants.kShooterMotor1Port);
   private WPI_VictorSPX shooterMotor2 = new WPI_VictorSPX(ShooterConstants.kShooterMotor2Port);
 
@@ -39,6 +40,14 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // System.out.println(getRPM());
+  }
+
+  public void setSetpointStatus(boolean status){
+    this.isAtSetpoint = status;
+  }
+
+  public boolean getSetpointStatus(){
+    return isAtSetpoint;
   }
 
   public void runShooter(double val) {

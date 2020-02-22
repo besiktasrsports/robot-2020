@@ -98,7 +98,7 @@ public final class Constants {
     }
 
     public static final class MiscConstants {
-        public static final int kLEDRelayPort = 2;
+        public static final int kLEDRelayPort = 9;
     }
 
     public static final class OIConstants {

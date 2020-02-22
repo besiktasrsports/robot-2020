@@ -74,22 +74,22 @@ public class SneakyTrajectory {
                                 .generateTrajectory(
                                                 List.of(new Pose2d(8 / divisor, -7.55 / divisor, new Rotation2d(0)),
                                                                 new Pose2d(10 / divisor, -6.1 / divisor,
-                                                                                new Rotation2d(1.3526))),
+                                                                                new Rotation2d(-Math.toRadians(67.5)))),
                                                 configForward);
                 centerRightAuto8Cell_3 = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(10 / divisor, -6.1 / divisor, new Rotation2d(1.3526)),
-                                                new Pose2d(9.75 / divisor, -5.5 / divisor, new Rotation2d(1.3526))),
+                                List.of(new Pose2d(10 / divisor, -6.1 / divisor, new Rotation2d(-Math.toRadians(67.5))),
+                                                new Pose2d(9.75 / divisor, -5.5 / divisor, new Rotation2d(-Math.toRadians(67.5)))),
                                 configReversed);
                 centerRightAuto8Cell_4 = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(9.75 / divisor, -5.5 / divisor, new Rotation2d(1.3526)),
-                                                new Pose2d(10.3 / divisor, -5.9 / divisor, new Rotation2d(1.3526))),
+                                List.of(new Pose2d(9.75 / divisor, -5.5 / divisor, new Rotation2d(-Math.toRadians(67.5))),
+                                                new Pose2d(10.3 / divisor, -5.9 / divisor, new Rotation2d(-Math.toRadians(67.5)))),
                                 configForward);
                 centerRightAuto8Cell_5 = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(10.3 / divisor, -5.9 / divisor, new Rotation2d(1.3526)),
-                                                new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(1.3526))),
+                                List.of(new Pose2d(10.3 / divisor, -5.9 / divisor, new Rotation2d(-Math.toRadians(67.5))),
+                                                new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(-Math.toRadians(67.5)))),
                                 configReversed);
                 centerRightAuto8Cell_6 = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(1.3526)),
+                                List.of(new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(-Math.toRadians(67.5))),
                                                 new Pose2d(11 / divisor, -5.9 / divisor, new Rotation2d(0)),
                                                 new Pose2d(13 / divisor, -5.9 / divisor, new Rotation2d(0))),
                                 configForward);

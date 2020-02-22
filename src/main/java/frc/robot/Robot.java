@@ -32,9 +32,10 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = inst.getTable("chameleon-vision").getSubTable("PS3 Eye");
+  NetworkTable table = inst.getTable("chameleon-vision").getSubTable("picam");
   public static boolean compressorState = false;
   public static boolean climbState = false;
+  public static NetworkTableEntry validAngle;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -48,7 +49,8 @@ public class Robot extends TimedRobot {
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
 
-    angle = table.getEntry("yaw");
+    angle = table.getEntry("targetYaw");
+    validAngle = table.getEntry("isValid");
     autoChooser.setDefaultOption("Right 6 Ball", 1);
     autoChooser.addOption("Right 8 Ball", 2);
     // autoChooser.addDefault("Auto1", 1);
@@ -57,7 +59,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
 
-    // m_robotContainer.m_shooter.toggleRelay(true);
+    m_robotContainer.m_shooter.toggleRelay(true);
     // autoCG = new Autonomous();
 
   }
@@ -150,7 +152,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    System.out.println(m_robotContainer.m_shooter.getRPM());
+    //System.out.println(m_robotContainer.m_shooter.getRPM());
+    System.out.println(getVisionYawAngle());
   }
 
   @Override
@@ -168,5 +171,8 @@ public class Robot extends TimedRobot {
 
   public static double getVisionYawAngle() {
     return angle.getDouble(0);
+  }
+  public static boolean isVisionValid(){
+    return validAngle.getBoolean(false);
   }
 }

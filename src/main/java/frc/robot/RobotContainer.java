@@ -14,6 +14,7 @@ import frc.robot.Constants.OIConstants;
 
 import frc.robot.commands.*;
 import frc.robot.commands.auto.CenterRight6Cell;
+import frc.robot.commands.auto.CenterRight8Cell;
 import frc.robot.subsystems.*;
 import frc.robot.trajectories.SneakyTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -62,8 +63,8 @@ public class RobotContainer {
 
     // Vision Drive
 
-    // new JoystickButton(m_driverController, 7).whileHeld(new
-    // VisionTurnProfiled(m_robotDrive));
+     new JoystickButton(m_driverController, 9).whileHeld(new
+     VisionTurnProfiled(m_robotDrive));
 
     // Field Oriented Drive
 
@@ -103,8 +104,8 @@ public class RobotContainer {
 
     // Misc commands
 
-    // new JoystickButton(m_driverController, 5).whenPressed(new
-    // ToggleLED(m_shooter));
+     new JoystickButton(m_driverController, 10).whenPressed(new
+     ToggleLED(m_shooter));
 
   }
 
@@ -116,16 +117,22 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // return m_chooser.getSelected();
-    switch(Robot.autoChooser.getSelected()){
-      case 1:
+    switch (Robot.autoChooser.getSelected()) {
+    case 1:
       return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
-      .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
-      case 2:
+          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+    case 2:
+      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+    default:
       return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
-      .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+
     }
-    /*return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
-        .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));*/
+    /*
+     * return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper,
+     * m_robotDrive) .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+     */
   }
 
 }

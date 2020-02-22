@@ -50,15 +50,15 @@ public class SetShooterRPMPF extends PIDCommand {
 
   @Override
   public void initialize() {
-    // TODO Auto-generated method stub
     super.initialize();
     m_motorOutput = 0;
   }
 
   @Override
   public void execute() {
-    // TODO Auto-generated method stub
     super.execute();
+    if (!m_shooter.getSetpointStatus())
+      m_shooter.setSetpointStatus(m_controller.atSetpoint());
     /*
      * System.out.print("Set point:");
      * System.out.println(this.m_controller.getSetpoint());
@@ -75,8 +75,8 @@ public class SetShooterRPMPF extends PIDCommand {
 
   @Override
   public void end(boolean interrupted) {
-    // TODO Auto-generated method stub
     super.end(interrupted);
+    m_shooter.setSetpointStatus(false);
     m_shooter.runShooterVoltage(0);
   }
 }

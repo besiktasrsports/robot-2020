@@ -69,7 +69,7 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncoderDistance(), getRightEncoderDistance());
     // System.out.println(getHeading());
-    System.out.println(m_odometry.getPoseMeters());
+    //System.out.println(m_odometry.getPoseMeters());
     // System.out.println(m_odometry.getPoseMeters());
     // System.out.println(getWheelSpeeds());
   }
@@ -77,6 +77,7 @@ public class DriveSubsystem extends SubsystemBase {
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
   }
+
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(

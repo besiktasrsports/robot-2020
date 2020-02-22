@@ -27,14 +27,14 @@ public class CenterRight6Cell extends SequentialCommandGroup {
    */
   public CenterRight6Cell(SneakyTrajectory s_trajectory, ShooterSubsystem shooter, IntakeSubsystem intake,
       HopperSubsystem hopper, DriveSubsystem drive) {
-    super(new SetShooterRPMPF(3000, shooter).withTimeout(0.75),
-        new SetShooterRPMPF(3000, shooter).withTimeout(2).alongWith(new RunHopper("sync", hopper)).withTimeout(2),
+    super(new SetShooterRPMPF(3000, shooter,true).withTimeout(0.75),
+        new SetShooterRPMPF(3000, shooter,true).withTimeout(2).alongWith(new RunHopper("sync", hopper)).withTimeout(2),
         s_trajectory.getRamsete(s_trajectory.centerRightAutoBackwards)
             .raceWith(new RunIntake(0.7, intake)
                 .alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
         s_trajectory.getRamsete(s_trajectory.centerRightAutoForward).andThen(() -> drive.tankDriveVolts(0, 0)),
-        new RunHopper("", hopper).withTimeout(0.2), new SetShooterRPMPF(3000, shooter).withTimeout(0.75),
-        new SetShooterRPMPF(3000, shooter).withTimeout(2)
+        new RunHopper("", hopper).withTimeout(0.2), new SetShooterRPMPF(3000, shooter,true).withTimeout(0.75),
+        new SetShooterRPMPF(3000, shooter,true).withTimeout(2)
             .alongWith(new RunHopper("sync", hopper).alongWith(new RunIntake(0.7, intake))).withTimeout(2));
   }
 }

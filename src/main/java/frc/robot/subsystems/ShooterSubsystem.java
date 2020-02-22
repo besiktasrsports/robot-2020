@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.Random;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -42,20 +44,13 @@ public class ShooterSubsystem extends SubsystemBase {
     // System.out.println(getRPM());
   }
 
-  public void setSetpointStatus(boolean status){
-    this.isAtSetpoint = status;
-  }
-
-  public boolean getSetpointStatus(){
-    return isAtSetpoint;
-  }
-
   public void runShooter(double val) {
     shooterMotor1.set(val);
   }
 
   public double getTargetRPM() {
-    return 1500; // Change this
+    Random rnd = new Random();
+    return Math.abs(rnd.nextDouble())*3000+1000; // TODO: Implement target RPM
   }
 
   public void runShooterVoltage(double voltage) {

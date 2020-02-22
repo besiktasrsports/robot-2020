@@ -81,7 +81,9 @@ public class RobotContainer {
 
     // new JoystickButton (m_driverController,3).whileHeld(()->
     // m_pidShooter.setSetpoint(5),m_pidShooter);
-    new JoystickButton(m_driverController, 3).toggleWhenPressed(new SetShooterRPMPF(3000, m_shooter));
+    new JoystickButton(m_driverController, 3).toggleWhenPressed(new SetShooterRPMPF(m_shooter.getTargetRPM(), m_shooter,false));
+    //new JoystickButton(m_driverController, 3).whenPressed(new VisionTurnCG(m_shooter, m_robotDrive));
+    
     // new JoystickButton (m_driverController,4).whileHeld(new
     // ShooterSetRPMPID(1500, m_shooter));
     new JoystickButton(m_driverController, 1).whileHeld(new RunIntake(0.8, m_intake));

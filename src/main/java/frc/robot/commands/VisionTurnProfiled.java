@@ -40,9 +40,12 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
         // Goal is set after the PID controller
         0,
         // Pipe output to turn robot
-        (output, setpoint) -> drive.arcadeDrive(0, (Robot.isVisionValid())?((output > 0) ? 0.0 + output / 12 : -0.0 + output / 12):0), // min
-                                                                                                           // command =
-                                                                                                           // 0.07
+        (output, setpoint) -> {
+          double arbitraryFF = (Math
+              .abs((Robot.isVisionValid()) ? Robot.getVisionYawAngle() - drive.getHeadingCW() : 6) < 5) ? 0.2 : 0;
+          drive.arcadeDrive(0,
+              (Robot.isVisionValid()) ? ((output > 0) ? arbitraryFF + output / 12 : -arbitraryFF + output / 12) : 0);
+        },
         // Require the drive
         drive);
     this.m_goal = () -> new TrapezoidProfile.State(Robot.getVisionYawAngle() + drive.getHeadingCW(), 0);

@@ -29,8 +29,8 @@ public final class Constants {
 
         public static final boolean kGyroReversed = true;
 
-        public static final double kTurnP = 0.8; // 0.8
-        public static final double kTurnI = 0;
+        public static final double kTurnP = 0.6; // 0.8
+        public static final double kTurnI = 0.01;
         public static final double kTurnD = 0.045; // 0.045
         public static final double kMinCommand = 0.07;
 
@@ -45,7 +45,7 @@ public final class Constants {
         public static final double kaVoltSecondsSquaredPerMeter = 0.815; // 0.621;
 
         public static final double kWheelDiameterMeters = 0.1524;
-        public static final double kPDriveVel = 6;// 12.1;// 20.2; // 8.91
+        public static final double kPDriveVel = 2;// 12.1;// 20.2; // 8.91
         public static final double kTrackWidthMeters = 0.66;
         public static final double kMaxSpeedMetersPerSecond = 2.0; // 2.0;
         public static final double kMaxAccelerationMetersPerSecondSquared = 2.0; // 2.0;

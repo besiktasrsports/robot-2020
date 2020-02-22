@@ -153,7 +153,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //System.out.println(m_robotContainer.m_shooter.getRPM());
-    System.out.println(getVisionYawAngle());
+    //System.out.println(getVisionYawAngle());
   }
 
   @Override

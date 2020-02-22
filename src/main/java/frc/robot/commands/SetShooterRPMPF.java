@@ -25,8 +25,9 @@ public class SetShooterRPMPF extends PIDCommand {
   private final static SimpleMotorFeedforward m_shooterFeedForward = new SimpleMotorFeedforward(ShooterConstants.kS,
       ShooterConstants.kV, ShooterConstants.kA);
   private static double m_motorOutput;
+  private boolean isInterruptable;
 
-  public SetShooterRPMPF(double targetRPM, ShooterSubsystem shooter) {
+  public SetShooterRPMPF(double targetRPM, ShooterSubsystem shooter, boolean _isInterruptable) {
     super(
         // The controller that the command will use
         new PIDController(ShooterConstants.kShootP, ShooterConstants.kShootI, ShooterConstants.kShootD),
@@ -39,12 +40,14 @@ public class SetShooterRPMPF extends PIDCommand {
           // Use the output here
           m_motorOutput = output + m_shooterFeedForward.calculate(targetRPM);
           shooter.runShooterVoltage(m_motorOutput);
-          System.out.print("Output");
-          System.out.println(m_motorOutput);
+          // System.out.print("Output");
+          // System.out.println(m_motorOutput);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
+    getController().setTolerance(100);
     m_shooter = shooter;
+    this.isInterruptable = _isInterruptable;
     addRequirements(m_shooter);
   }
 
@@ -57,26 +60,27 @@ public class SetShooterRPMPF extends PIDCommand {
   @Override
   public void execute() {
     super.execute();
-    if (!m_shooter.getSetpointStatus())
-      m_shooter.setSetpointStatus(m_controller.atSetpoint());
-    /*
-     * System.out.print("Set point:");
-     * System.out.println(this.m_controller.getSetpoint());
-     * System.out.print("Position Error: ");
-     * System.out.println(this.m_controller.getPositionError());
-     */
+    System.out.print("Set point:");
+    System.out.println(this.m_controller.getSetpoint());
+    System.out.print("Position Error: ");
+    System.out.println(this.m_controller.getPositionError());
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (isInterruptable && getController().atSetpoint()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
     super.end(interrupted);
-    m_shooter.setSetpointStatus(false);
-    m_shooter.runShooterVoltage(0);
+    if (!isInterruptable)
+      m_shooter.runShooterVoltage(0);
   }
 }

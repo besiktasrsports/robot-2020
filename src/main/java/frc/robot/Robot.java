@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = inst.getTable("chameleon-vision").getSubTable("picam");
+  NetworkTable table = inst.getTable("chameleon-vision").getSubTable("mmal service 16.1");
   public static boolean compressorState = false;
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
 
-    m_robotContainer.m_shooter.toggleRelay(true);
+    m_robotContainer.m_led.toggleRelay(true);
     // autoCG = new Autonomous();
 
   }

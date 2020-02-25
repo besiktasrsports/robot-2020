@@ -7,14 +7,9 @@
 
 package frc.robot.subsystems;
 
-import java.util.Random;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -29,7 +24,6 @@ public class ShooterSubsystem extends SubsystemBase {
   // SpeedControllerGroup(shooterMotor1, shooterMotor2);
   public final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA,
       ShooterConstants.kShooterEncoderB, ShooterConstants.kShooterEncoderIsReversed);
-  public final DigitalOutput m_relay = new DigitalOutput(MiscConstants.kLEDRelayPort);
 
   public ShooterSubsystem() {
     shooterEncoder.setDistancePerPulse(1.0 / (ShooterConstants.kShooterEncoderPPR));
@@ -49,8 +43,9 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public double getTargetRPM() {
-    Random rnd = new Random();
-    return Math.abs(rnd.nextDouble())*3000+1000; // TODO: Implement target RPM
+    return 3000;
+    // Random rnd = new Random();
+    // return Math.abs(rnd.nextDouble())*3000+1000;
   }
 
   public void runShooterVoltage(double voltage) {
@@ -61,7 +56,4 @@ public class ShooterSubsystem extends SubsystemBase {
     return shooterEncoder.getRate() * 60;
   }
 
-  public void toggleRelay(boolean _status) {
-    m_relay.set(_status);
-  }
 }

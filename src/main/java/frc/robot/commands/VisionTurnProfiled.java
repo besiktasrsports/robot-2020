@@ -42,7 +42,7 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
         // Pipe output to turn robot
         (output, setpoint) -> {
           double arbitraryFF = (Math
-              .abs((Robot.isVisionValid()) ? Robot.getVisionYawAngle() - drive.getHeadingCW() : 6) < 5) ? 0.2 : 0;
+              .abs((Robot.isVisionValid()) ? Robot.getVisionYawAngle() - drive.getHeadingCW() : 6) < 5) ? 0.35 : 0;
           drive.arcadeDrive(0,
               (Robot.isVisionValid()) ? ((output > 0) ? arbitraryFF + output / 12 : -arbitraryFF + output / 12) : 0);
         },

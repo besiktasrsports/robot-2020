@@ -35,6 +35,7 @@ public class RobotContainer {
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
   public final IntakeSubsystem m_intake = new IntakeSubsystem();
+  public final VisionLED m_led = new VisionLED();
   public final SneakyTrajectory s_trajectory = new SneakyTrajectory(m_robotDrive);
   // public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
 
@@ -79,11 +80,14 @@ public class RobotContainer {
 
     // Shooter Commands
 
-    // new JoystickButton (m_driverController,3).whileHeld(()->
+    // new JoystickButton (m_driverController,3).whileHeld(()->,
     // m_pidShooter.setSetpoint(5),m_pidShooter);
-    new JoystickButton(m_driverController, 3).toggleWhenPressed(new SetShooterRPMPF(m_shooter.getTargetRPM(), m_shooter,false));
-    //new JoystickButton(m_driverController, 3).whenPressed(new VisionTurnCG(m_shooter, m_robotDrive));
-    
+    // new JoystickButton(m_driverController, 3).toggleWhenPressed(new SetShooterRPMPF(m_shooter.getTargetRPM(), m_shooter,false));
+    // new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnCG(m_shooter, m_robotDrive));
+    new JoystickButton(m_driverController, 4).whileHeld(new SetShooterRPMPF(2800, m_shooter, false));
+    new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
+    new JoystickButton(m_driverController, 3).whileHeld(new CloseLED(m_led));
+    // new JoystickButton(m_driverController, 3).whileHeld(new ToggleLED(m_shooter).andThen(new ToggleLED(m_shooter)));
     // new JoystickButton (m_driverController,4).whileHeld(new
     // ShooterSetRPMPID(1500, m_shooter));
     new JoystickButton(m_driverController, 1).whileHeld(new RunIntake(0.8, m_intake));
@@ -107,7 +111,7 @@ public class RobotContainer {
     // Misc commands
 
      new JoystickButton(m_driverController, 10).whenPressed(new
-     ToggleLED(m_shooter));
+     ToggleLED(m_led));
 
   }
 

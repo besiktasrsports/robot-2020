@@ -8,23 +8,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.VisionLED;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class ToggleLED extends InstantCommand {
-  private final ShooterSubsystem m_shooter;
+  private final VisionLED m_led;
 
-  public ToggleLED(ShooterSubsystem shooter) {
+  public ToggleLED(VisionLED led) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_shooter = shooter;
-    addRequirements(m_shooter);
+    m_led = led;
+    addRequirements(m_led);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.toggleRelay(!m_shooter.m_relay.get());
+    m_led.toggleRelay(!m_led.m_relay.get());
   }
 }

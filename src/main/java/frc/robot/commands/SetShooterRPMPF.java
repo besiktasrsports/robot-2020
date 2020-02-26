@@ -82,6 +82,7 @@ public class SetShooterRPMPF extends PIDCommand {
   @Override
   public void end(boolean interrupted) {
     super.end(interrupted);
+    Robot.ledColor = "black";
     if (!isInterruptable)
       m_shooter.runShooterVoltage(0);
   }

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.StatusLED;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,6 +39,9 @@ public class Robot extends TimedRobot {
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
   public static String ledColor;
+  public static StatusLED m_statusLED;
+  public static double blinkInterval = 0;
+  public static int blinkCounter = 0;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -68,6 +72,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_visionLed.toggleRelay(true);
+    m_statusLED = new StatusLED();
     // autoCG = new Autonomous();
 
   }
@@ -93,6 +98,30 @@ public class Robot extends TimedRobot {
     // System.out.println(m_robotContainer.m_robotDrive.getHeading());
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
+    if(blinkInterval == 0)
+    {
+      m_statusLED.setLEDColor(ledColor);
+    }
+    else
+    {
+      blinkCounter++;
+      if(blinkCounter <= blinkInterval)
+      {
+        // Color
+        m_statusLED.setLEDColor(ledColor);
+      }
+      else if (blinkCounter <= blinkInterval*2)
+      {
+        // Black
+        m_statusLED.setLEDColor("black");
+      }
+      if (blinkCounter == blinkInterval*2)
+      {
+        // Reset the counter
+        blinkCounter = 0;
+      }
+    }
+
   }
 
   /**

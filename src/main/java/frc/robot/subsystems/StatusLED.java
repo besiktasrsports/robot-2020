@@ -36,7 +36,7 @@ public class StatusLED {
         m_statusLED.setData(m_ledBuffer);
     }
 
-    public void setLEDColor(String color, int ledNumber) {
+    public void setLEDColor(String color) {
         Robot.ledColor = color;
         switch (color) {
         default:
@@ -75,4 +75,5 @@ public class StatusLED {
 
         }
     }
+
 }

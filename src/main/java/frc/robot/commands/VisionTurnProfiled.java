@@ -53,10 +53,15 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
     getController().setTolerance(DriveConstants.kTurnToleranceDeg, DriveConstants.kTurnRateToleranceDegPerS);
 
   }
+  @Override
+  public void execute() {
+    super.execute();
+    System.out.println(getController().atSetpoint());
+  }
 
   @Override
   public boolean isFinished() {
     // End when the controller is at the reference.
-    return getController().atGoal();
+    return (Robot.isVisionValid()&&getController().atGoal());
   }
 }

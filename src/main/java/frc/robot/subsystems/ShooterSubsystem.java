@@ -44,8 +44,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getTargetRPM() {
     return 3000;
-    // Random rnd = new Random();
-    // return Math.abs(rnd.nextDouble())*3000+1000;
   }
 
   public void runShooterVoltage(double voltage) {

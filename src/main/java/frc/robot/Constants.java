@@ -59,8 +59,8 @@ public final class Constants {
                 DriveConstants.kTrackWidthMeters);
 
         
-        public static final double kVisionTurnP = 0.03;
-        public static final double kVisionMinCommand = 0.1;
+        public static final double kVisionTurnP = 0.045;
+        public static final double kVisionMinCommand = 0.35;
         public static final double kVisionTurnToleranceDeg = 1;
 
     }

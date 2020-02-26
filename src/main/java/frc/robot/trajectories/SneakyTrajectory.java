@@ -107,6 +107,7 @@ public class SneakyTrajectory {
                                 new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(bottomRectAngle))),
                                 configReversed);
                 centerRightAuto8Cell_6 = TrajectoryGenerator.generateTrajectory(
+<<<<<<< HEAD
                                 List.of(new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(bottomRectAngle)),
                                                 new Pose2d(11 / divisor, -5.9 / divisor, new Rotation2d(0))
                                 // ,new Pose2d(13 / divisor, -5.9 / divisor, new Rotation2d(0))
@@ -155,6 +156,12 @@ public class SneakyTrajectory {
                 leftAuto5Cell_4 = TrajectoryGenerator.generateTrajectory(
                                 List.of(new Pose2d(9.7 / divisor, -0.95 / divisor, new Rotation2d(0)),
                                                 new Pose2d(11.4 / divisor, -5.15 / divisor, new Rotation2d(0))),
+=======
+                                List.of(new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(-Math.toRadians(67.5))),
+                                                new Pose2d(11 / divisor, -5.9 / divisor, new Rotation2d(0))
+                                                //,new Pose2d(13 / divisor, -5.9 / divisor, new Rotation2d(0))
+                                               ),
+>>>>>>> VisionTurn
                                 configForward);
                 leftAuto6Cell_1 = TrajectoryGenerator.generateTrajectory(
                                 List.of(new Pose2d(13 / divisor, -4.5 / divisor, new Rotation2d(0)),

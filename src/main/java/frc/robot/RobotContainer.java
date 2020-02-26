@@ -91,7 +91,7 @@ public class RobotContainer {
     // new JoystickButton(m_driverController, 3).whileHeld(new ToggleLED(m_shooter).andThen(new ToggleLED(m_shooter)));
     // new JoystickButton (m_driverController,4).whileHeld(new
     // ShooterSetRPMPID(1500, m_shooter));
-    new JoystickButton(m_driverController, 1).whileHeld(new RunIntake(0.8, m_intake));
+    new JoystickButton(m_driverController, 1).whileHeld(new RunIntake(1, m_intake));
     // Hopper Commands
 
     new JoystickButton(m_driverController, 2).whileHeld(new RunHopper("", m_hopper));

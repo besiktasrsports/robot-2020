@@ -37,7 +37,7 @@ public final class Constants {
         public static final double kMaxTurnRateDegPerS = 120;
         public static final double kMaxTurnAccelerationDegPerSSquared = 300;
 
-        public static final double kTurnToleranceDeg = 2;
+        public static final double kTurnToleranceDeg = 1;
         public static final double kTurnRateToleranceDegPerS = 8; // 10
 
         public static final double ksVolts = 1.86; // 1.88;

@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import frc.robot.Robot;
 import frc.robot.Constants.MiscConstants;
 
 /**
@@ -18,7 +19,6 @@ public class StatusLED {
 
     private final AddressableLED m_statusLED = new AddressableLED(MiscConstants.kStatusLEDPort);
     private final AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(MiscConstants.kStatusLEDLength);
-    public String ledColor;
 
     public StatusLED() {
         m_statusLED.setLength(m_ledBuffer.getLength());
@@ -36,8 +36,8 @@ public class StatusLED {
         m_statusLED.setData(m_ledBuffer);
     }
 
-    public void setLEDColor(String color, boolean blink, int ledNumber) {
-        this.ledColor = color;
+    public void setLEDColor(String color, int ledNumber) {
+        Robot.ledColor = color;
         switch (color) {
         default:
             setLEDColorValue(MiscConstants.kStatusLEDLength, 0, 255, 0);

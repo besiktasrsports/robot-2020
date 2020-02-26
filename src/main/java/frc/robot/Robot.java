@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
   public static boolean compressorState = false;
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
+  public static String ledColor;
 
   /**
    * This function is run when the robot is first started up and should be used

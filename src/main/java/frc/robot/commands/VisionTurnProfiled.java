@@ -53,6 +53,12 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
     getController().setTolerance(DriveConstants.kTurnToleranceDeg, DriveConstants.kTurnRateToleranceDegPerS);
 
   }
+
+  @Override
+  public void initialize() {
+    Robot.ledColor = "purple";
+  }
+
   @Override
   public void execute() {
     super.execute();
@@ -62,6 +68,11 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
   @Override
   public boolean isFinished() {
     // End when the controller is at the reference.
-    return (Robot.isVisionValid()&&getController().atGoal());
+    return (Robot.isVisionValid() && getController().atGoal());
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    Robot.ledColor = "blue";
   }
 }

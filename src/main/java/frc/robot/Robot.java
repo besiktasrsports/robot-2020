@@ -54,8 +54,13 @@ public class Robot extends TimedRobot {
     chameleon.startClient("10.72.85.12");
     angle = table.getEntry("targetYaw");
     validAngle = table.getEntry("isValid");
-    autoChooser.setDefaultOption("Right 6 Ball", 1);
-    autoChooser.addOption("Right 8 Ball", 2);
+    autoChooser.setDefaultOption("3 Cell Straight", 0);
+    autoChooser.addOption("Center Right 6 Cell", 1);
+    autoChooser.addOption("Center Right 8 Cell", 2);
+    autoChooser.addOption("Right 6 Cell", 3);
+    autoChooser.addOption("Right 8 Cell", 4);
+    autoChooser.addOption("Left 5 Cell", 5);
+    autoChooser.addOption("Right 6 Cell", 6);
     // autoChooser.addDefault("Auto1", 1);
     // autoChooser.addObject("Auto2", 2);
     SmartDashboard.putData("Autonomous Selector", autoChooser);

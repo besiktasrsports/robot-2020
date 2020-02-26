@@ -15,6 +15,11 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.*;
 import frc.robot.commands.auto.CenterRight6Cell;
 import frc.robot.commands.auto.CenterRight8Cell;
+import frc.robot.commands.auto.DefaultAuto;
+import frc.robot.commands.auto.Left5Cell;
+import frc.robot.commands.auto.Left6Cell;
+import frc.robot.commands.auto.Right6Cell;
+import frc.robot.commands.auto.Right8Cell;
 import frc.robot.subsystems.*;
 import frc.robot.trajectories.SneakyTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -64,8 +69,7 @@ public class RobotContainer {
 
     // Vision Drive
 
-     new JoystickButton(m_driverController, 9).whileHeld(new
-     VisionTurnProfiled(m_robotDrive));
+    new JoystickButton(m_driverController, 9).whileHeld(new VisionTurnProfiled(m_robotDrive));
 
     // Field Oriented Drive
 
@@ -82,13 +86,17 @@ public class RobotContainer {
 
     // new JoystickButton (m_driverController,3).whileHeld(()->,
     // m_pidShooter.setSetpoint(5),m_pidShooter);
-    // new JoystickButton(m_driverController, 3).toggleWhenPressed(new SetShooterRPMPF(m_shooter.getTargetRPM(), m_shooter,false));
-    // new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnCG(m_shooter, m_robotDrive));
+    // new JoystickButton(m_driverController, 3).toggleWhenPressed(new
+    // SetShooterRPMPF(m_shooter.getTargetRPM(), m_shooter,false));
+    // new JoystickButton(m_driverController, 3).whileHeld(new
+    // VisionTurnCG(m_shooter, m_robotDrive));
     new JoystickButton(m_driverController, 4).whileHeld(new SetShooterRPMPF(2800, m_shooter, false));
-    //new JoystickButton(m_driverController, 3).whenPressed(new VisionTurnCG(m_shooter, m_robotDrive, m_led));
+    // new JoystickButton(m_driverController, 3).whenPressed(new
+    // VisionTurnCG(m_shooter, m_robotDrive, m_led));
     new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
     new JoystickButton(m_driverController, 3).whileHeld(new CloseLED(m_led));
-    // new JoystickButton(m_driverController, 3).whileHeld(new ToggleLED(m_shooter).andThen(new ToggleLED(m_shooter)));
+    // new JoystickButton(m_driverController, 3).whileHeld(new
+    // ToggleLED(m_shooter).andThen(new ToggleLED(m_shooter)));
     // new JoystickButton (m_driverController,4).whileHeld(new
     // ShooterSetRPMPID(1500, m_shooter));
     new JoystickButton(m_driverController, 1).whileHeld(new RunIntake(1, m_intake));
@@ -111,8 +119,7 @@ public class RobotContainer {
 
     // Misc commands
 
-     new JoystickButton(m_driverController, 10).whenPressed(new
-     ToggleLED(m_led));
+    new JoystickButton(m_driverController, 10).whenPressed(new ToggleLED(m_led));
 
   }
 
@@ -126,14 +133,19 @@ public class RobotContainer {
     // return m_chooser.getSelected();
     switch (Robot.autoChooser.getSelected()) {
     case 1:
-      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive,m_led)
-          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
     case 2:
-      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive,m_led)
-          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+    case 3:
+      return new Right6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+    case 4:
+      return new Right8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+    case 5:
+      return new Left5Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+    case 6:
+      return new Left6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
     default:
-      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive,m_led)
-          .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));      
+      return new DefaultAuto(m_shooter, m_robotDrive, m_led, m_hopper, s_trajectory);
     }
     /*
      * return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper,

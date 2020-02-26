@@ -66,8 +66,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
-
-    m_robotContainer.m_led.toggleRelay(true);
+    m_robotContainer.m_visionLed.toggleRelay(true);
     // autoCG = new Autonomous();
 
   }

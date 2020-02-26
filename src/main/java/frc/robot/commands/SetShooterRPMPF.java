@@ -10,8 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.StatusLED;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -26,8 +29,7 @@ public class SetShooterRPMPF extends PIDCommand {
       ShooterConstants.kV, ShooterConstants.kA);
   private static double m_motorOutput;
   private boolean isInterruptable;
-
-  public SetShooterRPMPF(double targetRPM, ShooterSubsystem shooter, boolean _isInterruptable) {
+  public SetShooterRPMPF(double targetRPM, ShooterSubsystem shooter,boolean _isInterruptable) {
     super(
         // The controller that the command will use
         new PIDController(ShooterConstants.kShootP, ShooterConstants.kShootI, ShooterConstants.kShootD),
@@ -60,11 +62,12 @@ public class SetShooterRPMPF extends PIDCommand {
   @Override
   public void execute() {
     super.execute();
+    /*
     System.out.print("Set point:");
     System.out.println(this.m_controller.getSetpoint());
     System.out.print("Position Error: ");
     System.out.println(this.m_controller.getPositionError());
-
+    */
   }
 
   // Returns true when the command should end.

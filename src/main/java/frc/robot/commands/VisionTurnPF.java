@@ -33,7 +33,7 @@ public class VisionTurnPF extends PIDCommand {
         // This uses the output
         output -> {
           drive.arcadeDrive(0,
-              (Robot.isVisionValid()) ? ((output > 0) ? DriveConstants.kVisionMinCommand + output : -DriveConstants.kVisionMinCommand + output ) : 0);
+              (Robot.isVisionValid()) ? ((output > 0) ? -DriveConstants.kVisionMinCommand - output : DriveConstants.kVisionMinCommand - output ) : 0);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
@@ -46,6 +46,6 @@ public class VisionTurnPF extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return getController().atSetpoint();
+    return (Robot.isVisionValid()&&getController().atSetpoint());
   }
 }

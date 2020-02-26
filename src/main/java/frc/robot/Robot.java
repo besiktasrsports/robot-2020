@@ -25,14 +25,14 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-
+  NetworkTableInstance chameleon = NetworkTableInstance.create();
   public static SendableChooser<Integer> autoChooser = new SendableChooser<>();
   private Command m_autonomousCommand;
   // private static Autonomous autoCG;
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = inst.getTable("chameleon-vision").getSubTable("mmal service 16.1");
+  NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("mmal service 16.1");
   public static boolean compressorState = false;
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
-
+    chameleon.startClient("10.72.85.12");
     angle = table.getEntry("targetYaw");
     validAngle = table.getEntry("isValid");
     autoChooser.setDefaultOption("Right 6 Ball", 1);
@@ -152,8 +152,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    //System.out.println(m_robotContainer.m_shooter.getRPM());
-    //System.out.println(getVisionYawAngle());
+    // System.out.println(m_robotContainer.m_shooter.getRPM());
+    // System.out.println(getVisionYawAngle());
   }
 
   @Override
@@ -172,7 +172,8 @@ public class Robot extends TimedRobot {
   public static double getVisionYawAngle() {
     return angle.getDouble(0);
   }
-  public static boolean isVisionValid(){
+
+  public static boolean isVisionValid() {
     return validAngle.getBoolean(false);
   }
 }

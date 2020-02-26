@@ -85,6 +85,7 @@ public class RobotContainer {
     // new JoystickButton(m_driverController, 3).toggleWhenPressed(new SetShooterRPMPF(m_shooter.getTargetRPM(), m_shooter,false));
     // new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnCG(m_shooter, m_robotDrive));
     new JoystickButton(m_driverController, 4).whileHeld(new SetShooterRPMPF(2800, m_shooter, false));
+    //new JoystickButton(m_driverController, 3).whenPressed(new VisionTurnCG(m_shooter, m_robotDrive, m_led));
     new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
     new JoystickButton(m_driverController, 3).whileHeld(new CloseLED(m_led));
     // new JoystickButton(m_driverController, 3).whileHeld(new ToggleLED(m_shooter).andThen(new ToggleLED(m_shooter)));
@@ -125,13 +126,13 @@ public class RobotContainer {
     // return m_chooser.getSelected();
     switch (Robot.autoChooser.getSelected()) {
     case 1:
-      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive,m_led)
           .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
     case 2:
-      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive,m_led)
           .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
     default:
-      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive)
+      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive,m_led)
           .andThen(() -> m_robotDrive.tankDriveVolts(0, 0));      
     }
     /*

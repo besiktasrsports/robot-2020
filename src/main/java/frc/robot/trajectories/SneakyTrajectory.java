@@ -90,8 +90,9 @@ public class SneakyTrajectory {
                                 configReversed);
                 centerRightAuto8Cell_6 = TrajectoryGenerator.generateTrajectory(
                                 List.of(new Pose2d(10.1 / divisor, -5.4 / divisor, new Rotation2d(-Math.toRadians(67.5))),
-                                                new Pose2d(11 / divisor, -5.9 / divisor, new Rotation2d(0)),
-                                                new Pose2d(13 / divisor, -5.9 / divisor, new Rotation2d(0))),
+                                                new Pose2d(11 / divisor, -5.9 / divisor, new Rotation2d(0))
+                                                //,new Pose2d(13 / divisor, -5.9 / divisor, new Rotation2d(0))
+                                               ),
                                 configForward);
         }
 

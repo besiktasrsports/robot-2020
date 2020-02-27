@@ -40,8 +40,9 @@ public class RobotContainer {
   public final HopperSubsystem m_hopper = new HopperSubsystem();
   public final ClimbSubsystem m_climb = new ClimbSubsystem();
   public final IntakeSubsystem m_intake = new IntakeSubsystem();
-  public final VisionLED m_led = new VisionLED();
+  public final VisionLED m_visionLed = new VisionLED();
   public final SneakyTrajectory s_trajectory = new SneakyTrajectory(m_robotDrive);
+  public final StatusLED m_statusLed = new StatusLED();
   // public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -92,9 +93,9 @@ public class RobotContainer {
     // VisionTurnCG(m_shooter, m_robotDrive));
     new JoystickButton(m_driverController, 4).whileHeld(new SetShooterRPMPF(2800, m_shooter, false));
     // new JoystickButton(m_driverController, 3).whenPressed(new
-    // VisionTurnCG(m_shooter, m_robotDrive, m_led));
+    // VisionTurnCG(m_shooter, m_robotDrive, m_visionLed));
     new JoystickButton(m_driverController, 3).whileHeld(new VisionTurnProfiled(m_robotDrive));
-    new JoystickButton(m_driverController, 3).whileHeld(new CloseLED(m_led));
+    new JoystickButton(m_driverController, 3).whileHeld(new CloseLED(m_visionLed));
     // new JoystickButton(m_driverController, 3).whileHeld(new
     // ToggleLED(m_shooter).andThen(new ToggleLED(m_shooter)));
     // new JoystickButton (m_driverController,4).whileHeld(new
@@ -119,7 +120,7 @@ public class RobotContainer {
 
     // Misc commands
 
-    new JoystickButton(m_driverController, 10).whenPressed(new ToggleLED(m_led));
+    new JoystickButton(m_driverController, 10).whenPressed(new ToggleLED(m_visionLed));
 
   }
 
@@ -133,19 +134,19 @@ public class RobotContainer {
     // return m_chooser.getSelected();
     switch (Robot.autoChooser.getSelected()) {
     case 1:
-      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+      return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     case 2:
-      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+      return new CenterRight8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     case 3:
-      return new Right6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+      return new Right6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     case 4:
-      return new Right8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+      return new Right8Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     case 5:
-      return new Left5Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+      return new Left5Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     case 6:
-      return new Left6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_led);
+      return new Left6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     default:
-      return new DefaultAuto(m_shooter, m_robotDrive, m_led, m_hopper, s_trajectory);
+      return new DefaultAuto(m_shooter, m_robotDrive, m_visionLed, m_hopper, s_trajectory);
     }
     /*
      * return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper,

@@ -33,8 +33,8 @@ public class RunHopper extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double m_speed = 0.5;
-    double l_speed = 0.3;
+    double m_speed = 0.6;
+    double l_speed = 0.4;
     if (mode == "sync") {
       m_hopper.runHopper("sync", m_speed, 0);
     } else if (mode == "up") {

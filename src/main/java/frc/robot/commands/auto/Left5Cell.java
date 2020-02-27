@@ -34,13 +34,13 @@ public class Left5Cell extends SequentialCommandGroup {
     super(new VisionTurnCG(shooter, drive, led),
         new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
         s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_1).raceWith(
-            new RunIntake(1, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
+            new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
         s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_2),
         s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_3).raceWith(
-            new RunIntake(1, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
+            new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
         s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_4).andThen(() -> drive.tankDriveVolts(0, 0)),
         new RunHopper("", hopper).withTimeout(0.2).alongWith(new VisionTurnCG(shooter, drive, led)),
         new SetShooterRPMPF(3000, shooter, false).withTimeout(2)
-            .raceWith(new RunHopper("sync", hopper).alongWith(new RunIntake(1, intake))));
+            .raceWith(new RunHopper("sync", hopper).alongWith(new RunIntake(0.7, intake))));
   }
 }

@@ -29,7 +29,7 @@ public final class Constants {
 
         public static final boolean kGyroReversed = true;
 
-        public static final double kTurnP = 1.0; // 0.8
+        public static final double kTurnP = 1.1; // 0.8
         public static final double kTurnI = 0.00;
         public static final double kTurnD = 0.045; // 0.045
         public static final double kMinCommand = 0.07;

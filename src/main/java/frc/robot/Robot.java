@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
   public static String ledColor;
-  public static StatusLED m_statusLED;
+  //public static StatusLED m_statusLED;
   public static double blinkInterval = 0;
   public static int blinkCounter = 0;
 
@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_visionLed.toggleRelay(true);
-    m_statusLED = new StatusLED();
+   // m_statusLED = new StatusLED();
     // autoCG = new Autonomous();
 
   }
@@ -97,7 +97,9 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     // System.out.println(m_robotContainer.m_robotDrive.getHeading());
     CommandScheduler.getInstance().run();
+    System.out.println("Gyro : " +m_robotContainer.m_robotDrive.getHeadingCW());
     SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
+    /*
     if(blinkInterval == 0)
     {
       m_statusLED.setLEDColor(ledColor);
@@ -120,7 +122,7 @@ public class Robot extends TimedRobot {
         // Reset the counter
         blinkCounter = 0;
       }
-    }
+    }*/
 
   }
 

@@ -64,14 +64,14 @@ public class SneakyTrajectory {
                                                 .addConstraint(autoVoltageConstraint);
                 double divisor = 1.0;
                 centerRightAutoBackwards = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(13 / divisor, -5.75 / divisor, new Rotation2d(0)),
+                                List.of(new Pose2d(13 / divisor, -5.80 / divisor, new Rotation2d(0)),
                                                 new Pose2d(11.5 / divisor, -7.6 / divisor, new Rotation2d(0)),
                                                 new Pose2d(8 / divisor, -7.55 / divisor, new Rotation2d(0))),
                                 configReversed);
                 centerRightAutoForward = TrajectoryGenerator.generateTrajectory(
                                 List.of(new Pose2d(8 / divisor, -7.55 / divisor, new Rotation2d(0)),
-                                                new Pose2d(10.5 / divisor, -5.75 / divisor, new Rotation2d(0)),
-                                                new Pose2d(13 / divisor, -5.75 / divisor, new Rotation2d(0))),
+                                                new Pose2d(10.5 / divisor, -5.80 / divisor, new Rotation2d(0)),
+                                                new Pose2d(13 / divisor, -5.80 / divisor, new Rotation2d(0))),
                                 configForward);
                 rightAutoBackwards = TrajectoryGenerator.generateTrajectory(
                                 List.of(new Pose2d(13 / divisor, -7 / divisor, new Rotation2d(0)),

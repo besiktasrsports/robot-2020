@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("mmal service 16.1");
+  NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
   public static boolean compressorState = false;
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
@@ -54,9 +54,9 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
-    CameraServer server = CameraServer.getInstance();
-    server.startAutomaticCapture();
-    chameleon.startClient("10.72.85.12");
+    //CameraServer server = CameraServer.getInstance();
+    //server.startAutomaticCapture();
+    chameleon.startClient("10.72.85.32");
     angle = table.getEntry("targetYaw");
     validAngle = table.getEntry("isValid");
     autoChooser.setDefaultOption("3 Cell Straight", 0);
@@ -97,8 +97,10 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     // System.out.println(m_robotContainer.m_robotDrive.getHeading());
     CommandScheduler.getInstance().run();
-    System.out.println("Gyro : " +m_robotContainer.m_robotDrive.getHeadingCW());
+    // System.out.println("Gyro : " +m_robotContainer.m_robotDrive.getHeadingCW());
     SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
+    //System.out.println(angle.getDouble(0));
+    
     /*
     if(blinkInterval == 0)
     {
@@ -175,10 +177,10 @@ public class Robot extends TimedRobot {
     // -2.4/2, new Rotation2d(0)), new Rotation2d(0));
     // m_robotContainer.m_robotDrive.m_odometry.resetPosition(new Pose2d(-1.55/2,
     // -4.1/2, new Rotation2d(0)), new Rotation2d(0));
-    m_robotContainer.m_robotDrive.zeroHeading();
-    m_robotContainer.m_robotDrive.resetEncoders();
-    m_robotContainer.m_robotDrive.m_odometry
-        .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
+    // m_robotContainer.m_robotDrive.zeroHeading();
+    // m_robotContainer.m_robotDrive.resetEncoders();
+    // m_robotContainer.m_robotDrive.m_odometry
+    //     .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();

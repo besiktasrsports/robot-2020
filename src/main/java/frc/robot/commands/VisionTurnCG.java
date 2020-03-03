@@ -22,6 +22,6 @@ public class VisionTurnCG extends SequentialCommandGroup {
   public VisionTurnCG(ShooterSubsystem m_shooter, DriveSubsystem m_drive, VisionLED m_led) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new VisionTurnProfiled(m_drive).withTimeout(2).raceWith(new CloseLED(m_led)).andThen(() -> m_drive.tankDriveVolts(0, 0)),new SetShooterRPMPF(3000, m_shooter, true));
+    super(new VisionTurnPF(m_drive).withTimeout(2).raceWith(new CloseLED(m_led)).andThen(() -> m_drive.tankDriveVolts(0, 0)),new SetShooterRPMPF(3000, m_shooter, true));
   }
 }

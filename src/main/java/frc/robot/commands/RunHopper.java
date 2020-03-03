@@ -34,11 +34,14 @@ public class RunHopper extends CommandBase {
   @Override
   public void execute() {
     double m_speed = 0.6;
+    double h_speed = 0.8;
     double l_speed = 0.4;
     if (mode == "sync") {
       m_hopper.runHopper("sync", m_speed, 0);
     } else if (mode == "up") {
       m_hopper.runHopper("up", m_speed, 0);
+    } else if (mode == "fast_sync") {
+      m_hopper.runHopper("sync", h_speed, 0);
     } else if (mode == "down") {
       m_hopper.runHopper("down", 0, l_speed);
     } else if (mode == "slow_sync") {

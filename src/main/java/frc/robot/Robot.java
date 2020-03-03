@@ -147,8 +147,25 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_robotDrive.resetEncoders();
+    /*
     m_robotContainer.m_robotDrive.m_odometry
         .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
+    */
+    if (autoChooser.getSelected() == 3 || autoChooser.getSelected() == 4)
+    {
+      m_robotContainer.m_robotDrive.m_odometry
+      .resetPosition(m_robotContainer.s_trajectory.rightAutoBackwards.getInitialPose(), new Rotation2d(0));
+    }
+    else if (autoChooser.getSelected() == 5 || autoChooser.getSelected() == 6)
+    {
+      m_robotContainer.m_robotDrive.m_odometry
+      .resetPosition(m_robotContainer.s_trajectory.leftAuto5Cell_1.getInitialPose(), new Rotation2d(0));
+    }
+    else
+    {
+      m_robotContainer.m_robotDrive.m_odometry
+      .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));      
+    }
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // int autoMode = autoChooser.getSelected();
     // switch (autoMode) {

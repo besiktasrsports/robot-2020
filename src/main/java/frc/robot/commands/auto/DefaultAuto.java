@@ -28,6 +28,8 @@ public class DefaultAuto extends SequentialCommandGroup {
       SneakyTrajectory s_trajectory) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
+
+    // TODO: Make this with timer
     super(new VisionTurnCG(shooter, drive, led),
         new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
         s_trajectory.getRamsete(s_trajectory.defaultAuto).andThen(() -> drive.tankDriveVolts(0, 0)));

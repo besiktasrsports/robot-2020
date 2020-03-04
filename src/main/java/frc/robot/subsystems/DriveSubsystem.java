@@ -72,7 +72,7 @@ public class DriveSubsystem extends SubsystemBase {
     if(m_gyro.isConnected() != true){
       System.out.println("GYRO DISCONNECTED");
     }
-    System.out.println(m_odometry.getPoseMeters());
+    // System.out.println(m_odometry.getPoseMeters());
     // System.out.println(m_odometry.getPoseMeters());
     // System.out.println(getWheelSpeeds());
   }

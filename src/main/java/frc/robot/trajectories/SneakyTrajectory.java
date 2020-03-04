@@ -38,7 +38,7 @@ public class SneakyTrajectory {
                         rightAuto8Cell_6;
         private DriveSubsystem m_drive;
         private static double bottomRectAngle = -Math.toRadians(67.5);
-        private static double topRectAngle = -Math.toRadians(22.5);
+        private static double topRectAngle = Math.toRadians(22.5);
 
         public SneakyTrajectory(DriveSubsystem drive) {
                 m_drive = drive;
@@ -64,7 +64,7 @@ public class SneakyTrajectory {
                                                 .addConstraint(autoVoltageConstraint);
                 double divisor = 1.0;
                 centerRightAutoBackwards = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(13 / divisor, -5.80 / divisor, new Rotation2d(0)),
+                                List.of(new Pose2d(13 / divisor, -5.8 / divisor, new Rotation2d(0)),
                                                 new Pose2d(11.5 / divisor, -7.6 / divisor, new Rotation2d(0)),
                                                 new Pose2d(8 / divisor, -7.55 / divisor, new Rotation2d(0))),
                                 configReversed);
@@ -162,20 +162,20 @@ public class SneakyTrajectory {
 
                 leftAuto5Cell_1 = TrajectoryGenerator.generateTrajectory(
                         List.of(new Pose2d(13 / divisor, -5.10 / divisor, new Rotation2d(0)),
-                                        new Pose2d(10.5 / divisor, -4.4 / divisor, new Rotation2d(topRectAngle))),
+                                        new Pose2d(10.7 / divisor, -4.30 / divisor, new Rotation2d(topRectAngle))),
                         configReversed);
         
                 leftAuto5Cell_2 = TrajectoryGenerator.generateTrajectory(
-                        List.of(new Pose2d(10.5 / divisor, -4.4 / divisor, new Rotation2d(topRectAngle)),
-                                        new Pose2d(11.0 / divisor, -3.95 / divisor, new Rotation2d(Math.toRadians(-112.5)))),
+                        List.of(new Pose2d(10.7 / divisor, -4.30 / divisor, new Rotation2d(topRectAngle)),
+                                        new Pose2d(11.7 / divisor, -3.95 / divisor, new Rotation2d(Math.toRadians(-112.5)))),
                         configForward);                
 
                 leftAuto5Cell_3 = TrajectoryGenerator.generateTrajectory(
-                        List.of(new Pose2d(11.0 / divisor, -3.95 / divisor, new Rotation2d(topRectAngle)),
-                                        new Pose2d(10.15 / divisor, -3.6 / divisor, new Rotation2d(topRectAngle))),
+                        List.of(new Pose2d(11.7 / divisor, -3.95 / divisor, new Rotation2d(topRectAngle)),
+                                        new Pose2d(10.25 / divisor, -3.75 / divisor, new Rotation2d(topRectAngle))),
                         configReversed);       
                 leftAuto5Cell_4 = TrajectoryGenerator.generateTrajectory(
-                        List.of(new Pose2d(10.15 / divisor, -3.6 / divisor, new Rotation2d(0)),
+                        List.of(new Pose2d(10.25 / divisor, -3.75 / divisor, new Rotation2d(0)),
                                         new Pose2d(13 / divisor, -5.10 / divisor, new Rotation2d(0))), // 5.80
                         configForward);    
 

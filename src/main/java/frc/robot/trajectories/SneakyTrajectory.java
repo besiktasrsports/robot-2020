@@ -176,7 +176,7 @@ public class SneakyTrajectory {
                         configReversed);       
                 leftAuto5Cell_4 = TrajectoryGenerator.generateTrajectory(
                         List.of(new Pose2d(10.25 / divisor, -3.75 / divisor, new Rotation2d(0)),
-                                        new Pose2d(13 / divisor, -5.10 / divisor, new Rotation2d(0))), // 5.80
+                                        new Pose2d(13 / divisor, -5.80 / divisor, new Rotation2d(0))), // 5.80
                         configForward);    
 
                 leftAuto6Cell_1 = TrajectoryGenerator.generateTrajectory(

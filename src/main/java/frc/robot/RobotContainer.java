@@ -24,7 +24,6 @@ import frc.robot.subsystems.*;
 import frc.robot.trajectories.SneakyTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -152,7 +151,7 @@ public class RobotContainer {
     case 6:
       return new Left6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     default:
-      return new DefaultAuto(m_shooter, m_robotDrive, m_visionLed, m_hopper, s_trajectory);
+      return new DefaultAuto(m_shooter, m_robotDrive, m_visionLed, m_hopper);
     }
     /*
      * return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper,

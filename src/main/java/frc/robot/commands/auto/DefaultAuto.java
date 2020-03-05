@@ -7,6 +7,7 @@
 
 package frc.robot.commands.auto;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.RunHopper;
 import frc.robot.commands.SetShooterRPMPF;
@@ -15,7 +16,6 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionLED;
-import frc.robot.trajectories.SneakyTrajectory;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -24,14 +24,14 @@ public class DefaultAuto extends SequentialCommandGroup {
   /**
    * Creates a new DefaultAuto.
    */
-  public DefaultAuto(ShooterSubsystem shooter, DriveSubsystem drive, VisionLED led, HopperSubsystem hopper,
-      SneakyTrajectory s_trajectory) {
+  public DefaultAuto(ShooterSubsystem shooter, DriveSubsystem drive, VisionLED led, HopperSubsystem hopper) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
 
-    // TODO: Make this with timer
     super(new VisionTurnCG(shooter, drive, led),
-        new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
-        s_trajectory.getRamsete(s_trajectory.defaultAuto).andThen(() -> drive.tankDriveVolts(0, 0)));
+        new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)).andThen(() -> {
+          drive.arcadeDrive(0.5, 1);
+          Timer.delay(1);
+        }).andThen(() -> drive.tankDriveVolts(0, 0)));
   }
 }

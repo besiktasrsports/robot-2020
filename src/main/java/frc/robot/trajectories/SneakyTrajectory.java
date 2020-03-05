@@ -28,7 +28,6 @@ import frc.robot.subsystems.DriveSubsystem;
 public class SneakyTrajectory {
         public Trajectory centerRightAutoBackwards, centerRightAutoForward;
         public Trajectory rightAutoBackwards, rightAutoForward;
-        public Trajectory defaultAuto;
         public Trajectory leftAuto5Cell_1, leftAuto5Cell_2, leftAuto5Cell_3, leftAuto5Cell_4;
         public Trajectory leftAuto6Cell_1, leftAuto6Cell_2, leftAuto6Cell_3, leftAuto6Cell_4, leftAuto6Cell_5,
                         leftAuto6Cell_6;
@@ -203,10 +202,6 @@ public class SneakyTrajectory {
                                 List.of(new Pose2d(10 / divisor, -3.7 / divisor, new Rotation2d(topRectAngle)),
                                                 new Pose2d(11.6 / divisor, -4.2 / divisor, new Rotation2d(-Math.toRadians(20)))),
                                 configForward);
-                defaultAuto =TrajectoryGenerator.generateTrajectory(
-                        List.of(new Pose2d(0 / divisor, 0 / divisor, new Rotation2d(0)),
-                                        new Pose2d(1 / divisor, 0 / divisor, new Rotation2d(0))),
-                        configForward);
 
         }
 

@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
     // m_robotContainer.m_robotDrive.zeroHeading();
     //CameraServer server = CameraServer.getInstance();
     //server.startAutomaticCapture();
-    chameleon.startClient("10.72.85.32");
+    chameleon.startClient("10.72.85.12");
     angle = table.getEntry("targetYaw");
     validAngle = table.getEntry("isValid");
     autoChooser.setDefaultOption("3 Cell Straight", 0);

@@ -28,7 +28,7 @@ public class CenterRight6Cell extends SequentialCommandGroup {
    * Creates a new Autonomous.
    */
   public CenterRight6Cell(SneakyTrajectory s_trajectory, ShooterSubsystem shooter, IntakeSubsystem intake,
-  HopperSubsystem hopper, DriveSubsystem drive, VisionLED led) {
+      HopperSubsystem hopper, DriveSubsystem drive, VisionLED led) {
     super(new SetShooterRPMPF(2900, shooter, true),
         new SetShooterRPMPF(2900, shooter, false).withTimeout(1.5).raceWith(new RunHopper("sync", hopper)),
         s_trajectory.getRamsete(s_trajectory.centerRightAutoBackwards)

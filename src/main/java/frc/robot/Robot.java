@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -33,17 +32,17 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   // private static Autonomous autoCG;
   private RobotContainer m_robotContainer;
-  //private double intakeCurrent;
-  //private boolean isIntakeStuck;
+  // private double intakeCurrent;
+  // private boolean isIntakeStuck;
   public static NetworkTableEntry angle;
-  //private static PowerDistributionPanel m_pdp;
+  // private static PowerDistributionPanel m_pdp;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("USB Camera-B4.09.24.1");
   public static boolean compressorState = false;
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
   public static String ledColor;
-  //public static StatusLED m_statusLED;
+  // public static StatusLED m_statusLED;
   public static double blinkInterval = 0;
   public static int blinkCounter = 0;
 
@@ -59,25 +58,25 @@ public class Robot extends TimedRobot {
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
     CameraServer server = CameraServer.getInstance();
-    //m_pdp = new PowerDistributionPanel();
+    // m_pdp = new PowerDistributionPanel();
     server.startAutomaticCapture();
     chameleon.startClient("10.72.85.12");
     angle = table.getEntry("targetYaw");
     validAngle = table.getEntry("isValid");
     autoChooser.setDefaultOption("3 Cell Straight", 0);
     autoChooser.addOption("Center Right 6 Cell", 1);
-    autoChooser.addOption("Center Right 8 Cell", 2);
-    autoChooser.addOption("Right 6 Cell", 3);
-    autoChooser.addOption("Right 8 Cell", 4);
-    autoChooser.addOption("Left 5 Cell", 5);
-    autoChooser.addOption("Right 6 Cell", 6);
+    autoChooser.addOption("Left 5 Cell", 2);
+    // autoChooser.addOption("Center Right 8 Cell", 2);
+    // autoChooser.addOption("Right 6 Cell", 3);
+    // autoChooser.addOption("Right 8 Cell", 4);
+    // autoChooser.addOption("Right 6 Cell", 6);
     // autoChooser.addDefault("Auto1", 1);
     // autoChooser.addObject("Auto2", 2);
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_visionLed.toggleRelay(true);
-   // m_statusLED = new StatusLED();
+    // m_statusLED = new StatusLED();
     // autoCG = new Autonomous();
 
   }
@@ -101,51 +100,29 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     // System.out.println(m_robotContainer.m_robotDrive.getHeading());
-    
+
     CommandScheduler.getInstance().run();
     // System.out.println("Gyro : " +m_robotContainer.m_robotDrive.getHeadingCW());
     /*
-    intakeCurrent = m_pdp.getCurrent(8);
-    if(intakeCurrent >= 10){
-      isIntakeStuck = true;
-    }
-    else {
-      isIntakeStuck = false;
-    }
-    */
+     * intakeCurrent = m_pdp.getCurrent(8); if(intakeCurrent >= 10){ isIntakeStuck =
+     * true; } else { isIntakeStuck = false; }
+     */
     SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
     SmartDashboard.putBoolean("Compressor State", compressorState);
     SmartDashboard.putBoolean("Vision Available", isVisionValid());
-   // System.out.println("Current : " +intakeCurrent);
-    //SmartDashboard.putBoolean("Intake Status", isIntakeStuck);
-    
-    //System.out.println(angle.getDouble(0));
-    
-    
+    // System.out.println("Current : " +intakeCurrent);
+    // SmartDashboard.putBoolean("Intake Status", isIntakeStuck);
+
+    // System.out.println(angle.getDouble(0));
+
     /*
-    if(blinkInterval == 0)
-    {
-      m_statusLED.setLEDColor(ledColor);
-    }
-    else
-    {
-      blinkCounter++;
-      if(blinkCounter <= blinkInterval)
-      {
-        // Color
-        m_statusLED.setLEDColor(ledColor);
-      }
-      else if (blinkCounter <= blinkInterval*2)
-      {
-        // Black
-        m_statusLED.setLEDColor("black");
-      }
-      if (blinkCounter == blinkInterval*2)
-      {
-        // Reset the counter
-        blinkCounter = 0;
-      }
-    }*/
+     * if(blinkInterval == 0) { m_statusLED.setLEDColor(ledColor); } else {
+     * blinkCounter++; if(blinkCounter <= blinkInterval) { // Color
+     * m_statusLED.setLEDColor(ledColor); } else if (blinkCounter <=
+     * blinkInterval*2) { // Black m_statusLED.setLEDColor("black"); } if
+     * (blinkCounter == blinkInterval*2) { // Reset the counter blinkCounter = 0; }
+     * }
+     */
 
   }
 
@@ -169,23 +146,16 @@ public class Robot extends TimedRobot {
     m_robotContainer.m_robotDrive.zeroHeading();
     m_robotContainer.m_robotDrive.resetEncoders();
     /*
-    m_robotContainer.m_robotDrive.m_odometry
-        .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
-    */
-    if (autoChooser.getSelected() == 3 || autoChooser.getSelected() == 4)
-    {
+     * m_robotContainer.m_robotDrive.m_odometry
+     * .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.
+     * getInitialPose(), new Rotation2d(0));
+     */
+    if (autoChooser.getSelected() == 2) {
       m_robotContainer.m_robotDrive.m_odometry
-      .resetPosition(m_robotContainer.s_trajectory.rightAutoBackwards.getInitialPose(), new Rotation2d(0));
-    }
-    else if (autoChooser.getSelected() == 5 || autoChooser.getSelected() == 6)
-    {
+          .resetPosition(m_robotContainer.s_trajectory.leftAuto5Cell_1.getInitialPose(), new Rotation2d(0));
+    } else {
       m_robotContainer.m_robotDrive.m_odometry
-      .resetPosition(m_robotContainer.s_trajectory.leftAuto5Cell_1.getInitialPose(), new Rotation2d(0));
-    }
-    else
-    {
-      m_robotContainer.m_robotDrive.m_odometry
-      .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));      
+          .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
     }
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // int autoMode = autoChooser.getSelected();
@@ -218,7 +188,8 @@ public class Robot extends TimedRobot {
     // m_robotContainer.m_robotDrive.zeroHeading();
     // m_robotContainer.m_robotDrive.resetEncoders();
     // m_robotContainer.m_robotDrive.m_odometry
-    //     .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(), new Rotation2d(0));
+    // .resetPosition(m_robotContainer.s_trajectory.centerRightAutoBackwards.getInitialPose(),
+    // new Rotation2d(0));
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();

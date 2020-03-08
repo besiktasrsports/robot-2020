@@ -29,7 +29,7 @@ public class DefaultAuto extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
 
     super(new VisionTurnCG(shooter, drive, led),
-        new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)).andThen(() -> {
+        new SetShooterRPMPF(2900, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)).andThen(() -> {
           drive.arcadeDrive(0.8, 0);
           Timer.delay(1);
         }).andThen(() -> drive.tankDriveVolts(0, 0)));

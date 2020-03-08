@@ -29,7 +29,7 @@ public final class Constants {
 
         public static final boolean kGyroReversed = true;
 
-        public static final double kTurnP = 0.92; // 0.8
+        public static final double kTurnP = 0.94; // 0.8
         public static final double kTurnI = 0.00;
         public static final double kTurnD = 0.04; // 0.045
         public static final double kMinCommand = 0.07;
@@ -37,7 +37,7 @@ public final class Constants {
         public static final double kMaxTurnRateDegPerS = 120;
         public static final double kMaxTurnAccelerationDegPerSSquared = 300;
 
-        public static final double kTurnToleranceDeg = 1;
+        public static final double kTurnToleranceDeg = 0.5;
         public static final double kTurnRateToleranceDegPerS = 8; // 10
 
         public static final double ksVolts = 1.86; // 1.88;
@@ -61,7 +61,7 @@ public final class Constants {
         
         public static final double kVisionTurnP = 0.02;
         public static final double kVisionTurnD = 0.08;
-        public static final double kVisionMinCommand = 0.3;
+        public static final double kVisionMinCommand = 0.35;
         public static final double kVisionTurnToleranceDeg = 1;
 
     }

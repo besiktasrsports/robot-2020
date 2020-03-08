@@ -8,9 +8,9 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.FieldOrientedTurn;
 import frc.robot.commands.RunHopper;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.RunShooter;
 import frc.robot.commands.SetShooterRPMPF;
 import frc.robot.commands.VisionTurnCG;
 import frc.robot.subsystems.DriveSubsystem;
@@ -32,25 +32,31 @@ public class Left5Cell extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     /*
+     * super(new VisionTurnCG(shooter, drive, led), new SetShooterRPMPF(3000,
+     * shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
+     * s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_1).raceWith( new
+     * RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new
+     * RunShooter(-0.3, shooter)))),
+     * s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_2),
+     * s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_3).raceWith( new
+     * RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new
+     * RunShooter(-0.3, shooter)))),
+     * s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_4).andThen(() ->
+     * drive.tankDriveVolts(0, 0)), new RunHopper("",
+     * hopper).withTimeout(0.2).alongWith(new VisionTurnCG(shooter, drive, led)),
+     * new SetShooterRPMPF(3000, shooter, false).withTimeout(2) .raceWith(new
+     * RunHopper("sync", hopper).alongWith(new RunIntake(0.7, intake))));
+     */
     super(new VisionTurnCG(shooter, drive, led),
-        new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
-        s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_1).raceWith(
-            new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
+        new SetShooterRPMPF(2900, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
+        new FieldOrientedTurn(0, drive).withTimeout(2),
+        s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_1)
+            .raceWith(new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper))),
         s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_2),
-        s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_3).raceWith(
-            new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
+        s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_3)
+            .raceWith(new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper))),
         s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_4).andThen(() -> drive.tankDriveVolts(0, 0)),
-        new RunHopper("", hopper).withTimeout(0.2).alongWith(new VisionTurnCG(shooter, drive, led)),
-        new SetShooterRPMPF(3000, shooter, false).withTimeout(2)
-            .raceWith(new RunHopper("sync", hopper).alongWith(new RunIntake(0.7, intake))));
-    */
-    super(
-    // new VisionTurnCG(shooter, drive, led),
-    // new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
-    s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_1).raceWith(new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper))),
-    s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_2),
-    s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_3).raceWith(new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper))),
-    s_trajectory.getRamsete(s_trajectory.leftAuto5Cell_4).andThen(() -> drive.tankDriveVolts(0,0))
-    );
+        new VisionTurnCG(shooter, drive, led),
+        new SetShooterRPMPF(2900, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)));
   }
 }

@@ -11,12 +11,14 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,9 +33,12 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   // private static Autonomous autoCG;
   private RobotContainer m_robotContainer;
+  //private double intakeCurrent;
+  //private boolean isIntakeStuck;
   public static NetworkTableEntry angle;
+  //private static PowerDistributionPanel m_pdp;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
+  NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("USB Camera-B4.09.24.1");
   public static boolean compressorState = false;
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
@@ -53,8 +58,9 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     // m_robotContainer.m_robotDrive.m_gyro.calibrate();
     // m_robotContainer.m_robotDrive.zeroHeading();
-    //CameraServer server = CameraServer.getInstance();
-    //server.startAutomaticCapture();
+    CameraServer server = CameraServer.getInstance();
+    //m_pdp = new PowerDistributionPanel();
+    server.startAutomaticCapture();
     chameleon.startClient("10.72.85.12");
     angle = table.getEntry("targetYaw");
     validAngle = table.getEntry("isValid");
@@ -95,10 +101,26 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     // System.out.println(m_robotContainer.m_robotDrive.getHeading());
+    
     CommandScheduler.getInstance().run();
     // System.out.println("Gyro : " +m_robotContainer.m_robotDrive.getHeadingCW());
+    /*
+    intakeCurrent = m_pdp.getCurrent(8);
+    if(intakeCurrent >= 10){
+      isIntakeStuck = true;
+    }
+    else {
+      isIntakeStuck = false;
+    }
+    */
     SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
+    SmartDashboard.putBoolean("Compressor State", compressorState);
+    SmartDashboard.putBoolean("Vision Available", isVisionValid());
+   // System.out.println("Current : " +intakeCurrent);
+    //SmartDashboard.putBoolean("Intake Status", isIntakeStuck);
+    
     //System.out.println(angle.getDouble(0));
+    
     
     /*
     if(blinkInterval == 0)

@@ -61,7 +61,7 @@ public final class Constants {
         
         public static final double kVisionTurnP = 0.02;
         public static final double kVisionTurnD = 0.08;
-        public static final double kVisionMinCommand = 0.35;
+        public static final double kVisionMinCommand = 0.3;
         public static final double kVisionTurnToleranceDeg = 1;
 
     }

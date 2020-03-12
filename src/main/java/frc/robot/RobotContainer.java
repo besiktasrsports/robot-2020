@@ -126,7 +126,8 @@ public class RobotContainer {
     new JoystickButton(m_operatorController, 1).whileHeld(new RunIntake(-0.5, m_intake));
     // new JoystickButton(m_driverController, 4).whileHeld(new RunIntake(0.5,
     // m_intake));
-    new JoystickButton(m_operatorController, 7).whileHeld(new RunShooter(0.65, m_shooter));
+    new JoystickButton(m_operatorController, 4).whileHeld(new RunShooter(0.65, m_shooter));
+    new JoystickButton(m_operatorController, 2).whileHeld(new RunShooter(-0.3, m_shooter));
 
     // Misc commands
 

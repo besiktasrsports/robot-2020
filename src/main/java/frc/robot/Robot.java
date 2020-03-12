@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry angle;
   // private static PowerDistributionPanel m_pdp;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("USB Camera-B4.09.24.1");
+  NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
   public static boolean compressorState = false;
   public static boolean climbState = false;
   public static NetworkTableEntry validAngle;

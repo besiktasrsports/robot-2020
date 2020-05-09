@@ -33,15 +33,15 @@ public class Left6Cell extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(new VisionTurnCG(shooter, drive, led),
         new SetShooterRPMPF(3000, shooter, false).withTimeout(2).raceWith(new RunHopper("sync", hopper)),
-        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell_1).raceWith(
+        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell[0]).raceWith(
             new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
-        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell_2),
-        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell_3).raceWith(
+        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell[1]),
+        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell[2]).raceWith(
             new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
-        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell_4),
-        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell_5).raceWith(
+        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell[3]),
+        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell[4]).raceWith(
             new RunIntake(0.7, intake).alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
-        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell_6).andThen(() -> drive.tankDriveVolts(0, 0)),
+        s_trajectory.getRamsete(s_trajectory.leftAuto6Cell[5]).andThen(() -> drive.tankDriveVolts(0, 0)),
         new RunHopper("", hopper).withTimeout(0.2).alongWith(new VisionTurnCG(shooter, drive, led)),
         new SetShooterRPMPF(3000, shooter, false).withTimeout(2)
             .raceWith(new RunHopper("sync", hopper).alongWith(new RunIntake(0.7, intake))));

@@ -28,14 +28,8 @@ public class ClimbSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // System.out.println(Robot.compressorState);
   }
 
-  /*
-   * public void toggleCyclinders(){ boolean status = false; if(status == false){
-   * climbSolenoid.set(Value.kForward); status = !status; } else if(status ==
-   * true){ climbSolenoid.set(Value.kReverse); status = !status; } }
-   */
   public void climberUp() {
     climbSolenoid.set(Value.kForward);
   }

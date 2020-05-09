@@ -40,8 +40,6 @@ public class SetShooterRPMPF extends PIDCommand {
           // Use the output here
           m_motorOutput = output + m_shooterFeedForward.calculate(targetRPM);
           shooter.runShooterVoltage(m_motorOutput);
-          // System.out.print("Output");
-          // System.out.println(m_motorOutput);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
@@ -61,12 +59,6 @@ public class SetShooterRPMPF extends PIDCommand {
   @Override
   public void execute() {
     super.execute();
-    /*
-    System.out.print("Set point:");
-    System.out.println(this.m_controller.getSetpoint());
-    System.out.print("Position Error: ");
-    System.out.println(this.m_controller.getPositionError());
-    */
   }
 
   // Returns true when the command should end.

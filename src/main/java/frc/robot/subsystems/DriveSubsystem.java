@@ -54,8 +54,6 @@ public class DriveSubsystem extends SubsystemBase {
     leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PIDIDX, 10);
     rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PIDIDX, 10);
     leftFrontMotor.setSensorPhase(true);
-    // leftFrontMotor.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    // rightFrontMotor.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
 
     resetEncoders();
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
@@ -64,17 +62,12 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // System.out.print("Robot angle:");
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncoderDistance(), getRightEncoderDistance());
-    //System.out.println(getHeading());
     if(m_gyro.isConnected() != true){
       System.out.println("GYRO DISCONNECTED");
     }
-    // System.out.println(m_odometry.getPoseMeters());
-    // System.out.println(m_odometry.getPoseMeters());
-    // System.out.println(getWheelSpeeds());
   }
 
   public Pose2d getPose() {
@@ -97,7 +90,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
     leftFrontMotor.setVoltage(leftVolts);
-    rightFrontMotor.setVoltage(-rightVolts); // eksiydi
+    rightFrontMotor.setVoltage(-rightVolts);
     m_drive.feed();
     System.out.print("Left: ");
     System.out.println(leftVolts);

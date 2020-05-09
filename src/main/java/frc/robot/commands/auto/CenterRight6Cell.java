@@ -31,10 +31,10 @@ public class CenterRight6Cell extends SequentialCommandGroup {
       HopperSubsystem hopper, DriveSubsystem drive, VisionLED led) {
     super(new SetShooterRPMPF(2900, shooter, true),
         new SetShooterRPMPF(2900, shooter, false).withTimeout(1.5).raceWith(new RunHopper("sync", hopper)),
-        s_trajectory.getRamsete(s_trajectory.centerRightAutoBackwards)
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto[0])
             .raceWith(new RunIntake(0.7, intake)
                 .alongWith(new RunHopper("sync", hopper).alongWith(new RunShooter(-0.3, shooter)))),
-        s_trajectory.getRamsete(s_trajectory.centerRightAutoForward).andThen(() -> drive.tankDriveVolts(0, 0)),
+        s_trajectory.getRamsete(s_trajectory.centerRightAuto[1]).andThen(() -> drive.tankDriveVolts(0, 0)),
         new RunHopper("", hopper).withTimeout(0.2).alongWith(new VisionTurnCG(shooter, drive, led)),
         new SetShooterRPMPF(2900, shooter, false).withTimeout(1.5)
             .raceWith(new RunHopper("sync", hopper).alongWith(new RunIntake(0.7, intake))));

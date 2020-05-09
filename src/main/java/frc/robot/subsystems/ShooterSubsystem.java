@@ -20,8 +20,6 @@ public class ShooterSubsystem extends SubsystemBase {
   private WPI_VictorSPX shooterMotor1 = new WPI_VictorSPX(ShooterConstants.kShooterMotor1Port);
   private WPI_VictorSPX shooterMotor2 = new WPI_VictorSPX(ShooterConstants.kShooterMotor2Port);
 
-  // private final SpeedControllerGroup shooterMotorGroup = new
-  // SpeedControllerGroup(shooterMotor1, shooterMotor2);
   public final Encoder shooterEncoder = new Encoder(ShooterConstants.kShooterEncoderA,
       ShooterConstants.kShooterEncoderB, ShooterConstants.kShooterEncoderIsReversed);
 
@@ -35,15 +33,10 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // System.out.println(getRPM());
   }
 
   public void runShooter(double val) {
     shooterMotor1.set(val);
-  }
-
-  public double getTargetRPM() {
-    return 3000;
   }
 
   public void runShooterVoltage(double voltage) {

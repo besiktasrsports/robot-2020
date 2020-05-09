@@ -29,26 +29,26 @@ public final class Constants {
 
         public static final boolean kGyroReversed = true;
 
-        public static final double kTurnP = 0.94; // 0.8
+        public static final double kTurnP = 0.94;
         public static final double kTurnI = 0.00;
-        public static final double kTurnD = 0.04; // 0.045
+        public static final double kTurnD = 0.04;
         public static final double kMinCommand = 0.07;
 
         public static final double kMaxTurnRateDegPerS = 120;
         public static final double kMaxTurnAccelerationDegPerSSquared = 300;
 
         public static final double kTurnToleranceDeg = 0.5;
-        public static final double kTurnRateToleranceDegPerS = 8; // 10
+        public static final double kTurnRateToleranceDegPerS = 8;
 
-        public static final double ksVolts = 1.86; // 1.88;
-        public static final double kvVoltSecondsPerMeter = 3.13; // 3.16;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.815; // 0.621;
+        public static final double ksVolts = 1.86;
+        public static final double kvVoltSecondsPerMeter = 3.13;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.815;
 
         public static final double kWheelDiameterMeters = 0.1524;
-        public static final double kPDriveVel = 2;// 12.1;// 20.2; // 8.91
+        public static final double kPDriveVel = 2;
         public static final double kTrackWidthMeters = 0.66;
-        public static final double kMaxSpeedMetersPerSecond = 2.0; // 2.0;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 2.0; // 2.0;
+        public static final double kMaxSpeedMetersPerSecond = 2.0;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 2.0;
 
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
@@ -75,9 +75,9 @@ public final class Constants {
         public static final int kShooterEncoderPPR = 2048;
         public static final boolean kShooterEncoderIsReversed = false;
 
-        public static final double kShootP = 0.006;// 0.0237 ;// 0.00005; // 0.02;
+        public static final double kShootP = 0.006;
         public static final double kShootI = 0.000;
-        public static final double kShootD = 0.000;// 0.01;
+        public static final double kShootD = 0.000;
 
         public static final double kS = 0.656;
         public static final double kV = 0.00202;

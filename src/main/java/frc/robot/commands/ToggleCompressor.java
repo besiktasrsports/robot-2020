@@ -26,7 +26,6 @@ public class ToggleCompressor extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_climb.compressorState = !m_climb.compressorState;
     Robot.compressorState = !Robot.compressorState;
   }
 

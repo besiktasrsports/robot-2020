@@ -65,9 +65,11 @@ public class DriveSubsystem extends SubsystemBase {
     angular_velocity = m_gyro.getRate();
     SmartDashboard.putNumber("Angular velocity", angular_velocity);
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncoderDistance(), getRightEncoderDistance());
+    /*
     if(m_gyro.isConnected() != true){
       System.out.println("GYRO DISCONNECTED");
     }
+    */
   }
 
   public Pose2d getPose() {

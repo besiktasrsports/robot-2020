@@ -7,6 +7,7 @@
 
 package frc.robot.trajectories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -26,12 +27,12 @@ import frc.robot.subsystems.DriveSubsystem;
  * Add your docs here.
  */
 public class SneakyTrajectory {
-        public Trajectory centerRightAuto[];
-        public Trajectory rightAuto[];
-        public Trajectory leftAuto5Cell[];
-        public Trajectory leftAuto6Cell[];
-        public Trajectory centerRightAuto8Cell[];
-        public Trajectory rightAuto8Cell[];
+        public Trajectory[] centerRightAuto = new Trajectory[2];
+        public Trajectory[] rightAuto = new Trajectory[2];
+        public Trajectory[] leftAuto5Cell = new Trajectory[4];
+        public Trajectory[] leftAuto6Cell = new Trajectory[6];
+        public Trajectory[] centerRightAuto8Cell = new Trajectory[6];
+        public Trajectory[] rightAuto8Cell = new Trajectory[6];
         private DriveSubsystem m_drive;
         private static double bottomRectAngle = -Math.toRadians(67.5);
         private static double topRectAngle = Math.toRadians(22.5);
@@ -59,7 +60,7 @@ public class SneakyTrajectory {
                                                 // Apply the voltage constraint
                                                 .addConstraint(autoVoltageConstraint);
                 double divisor = 1.0;
-                centerRightAuto[0] = TrajectoryGenerator.generateTrajectory(
+                centerRightAuto[0]= TrajectoryGenerator.generateTrajectory(
                                 List.of(new Pose2d(13 / divisor, -5.8 / divisor, new Rotation2d(0)),
                                                 new Pose2d(11.5 / divisor, -7.0 / divisor, new Rotation2d(0)),
                                                 new Pose2d(8 / divisor, -7.0 / divisor, new Rotation2d(0))),
@@ -172,32 +173,6 @@ public class SneakyTrajectory {
                         List.of(new Pose2d(10.25 / divisor, -3.75 / divisor, new Rotation2d(0)),
                                         new Pose2d(13 / divisor, -5.80 / divisor, new Rotation2d(0))), // 5.80
                         configForward);    
-
-                leftAuto6Cell[0] = TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(13 / divisor, -4.5 / divisor, new Rotation2d(0)),
-                                new Pose2d(10.3 / divisor, -4.5 / divisor, new Rotation2d(topRectAngle))),
-                configReversed);
-                leftAuto6Cell[1] = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(10.3 / divisor, -4.5 / divisor, new Rotation2d(topRectAngle)),
-                                                new Pose2d(11.1 / divisor, -3.8 / divisor, new Rotation2d(topRectAngle))),
-                                configForward);
-                leftAuto6Cell[2] = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(11.1 / divisor, -3.8 / divisor, new Rotation2d(topRectAngle)),
-                                                new Pose2d(10.06 / divisor, -4.15 / divisor, new Rotation2d(topRectAngle))),
-                                configReversed);
-                leftAuto6Cell[3] = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(10.06 / divisor, -4.15 / divisor, new Rotation2d(topRectAngle)),
-                                                new Pose2d(10.65 / divisor, -3.6 / divisor, new Rotation2d(topRectAngle))),
-                                configForward);
-                leftAuto6Cell[4] = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(10.65 / divisor, -3.6 / divisor, new Rotation2d(topRectAngle)),
-                                                new Pose2d(10 / divisor, -3.7 / divisor, new Rotation2d(topRectAngle))),
-                                configReversed);
-                leftAuto6Cell[5] = TrajectoryGenerator.generateTrajectory(
-                                List.of(new Pose2d(10 / divisor, -3.7 / divisor, new Rotation2d(topRectAngle)),
-                                                new Pose2d(11.6 / divisor, -4.2 / divisor, new Rotation2d(-Math.toRadians(20)))),
-                                configForward);
-
         }
 
         public RamseteCommand getRamsete(Trajectory traj) {

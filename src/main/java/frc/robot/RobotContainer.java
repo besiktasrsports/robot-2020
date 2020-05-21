@@ -105,9 +105,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousCommand(Integer auto) {
     // An ExampleCommand will run in autonomous
-    switch (Robot.autoChooser.getSelected()) {
+    switch (auto) {
     case 1:
       return new CenterRight6Cell(s_trajectory, m_shooter, m_intake, m_hopper, m_robotDrive, m_visionLed);
     case 2:

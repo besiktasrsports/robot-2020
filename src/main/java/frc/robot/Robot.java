@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
       m_robotContainer.m_robotDrive.m_odometry
           .resetPosition(m_robotContainer.s_trajectory.centerRightAuto[0].getInitialPose(), new Rotation2d(0));
     }
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand(autoChooser.getSelected());
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

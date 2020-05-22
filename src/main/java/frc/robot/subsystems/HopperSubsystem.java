@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.HopperConstants;
 
@@ -16,6 +17,7 @@ public class HopperSubsystem extends SubsystemBase {
   /**
    * Creates a new HopperSubsystem.
    */
+  private String hopperState;
   private final WPI_VictorSPX hopperMotor1 = new WPI_VictorSPX(HopperConstants.kHopperMotor1Port);
   private final WPI_VictorSPX hopperMotor2 = new WPI_VictorSPX(HopperConstants.kHopperMotor2Port);
 
@@ -27,6 +29,7 @@ public class HopperSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putString("hopper/hopperState", hopperState);
   }
 
   public void runHopper(String _mode, double _speed1, double _speed2) {
@@ -43,6 +46,7 @@ public class HopperSubsystem extends SubsystemBase {
       hopperMotor1.set(_speed1);
       hopperMotor2.set(_speed2);
     }
+    hopperState = _mode;
 
   }
 }

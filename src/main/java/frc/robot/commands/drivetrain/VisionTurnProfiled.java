@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
@@ -56,13 +56,11 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
 
   @Override
   public void initialize() {
-    Robot.ledColor = "purple";
   }
 
   @Override
   public void execute() {
     super.execute();
-    System.out.println(getController().atSetpoint());
   }
 
   @Override
@@ -73,6 +71,5 @@ public class VisionTurnProfiled extends ProfiledPIDCommand {
 
   @Override
   public void end(boolean interrupted) {
-    Robot.ledColor = "blue";
   }
 }

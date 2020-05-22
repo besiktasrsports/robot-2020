@@ -31,14 +31,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
-  NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  public static NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
-  public static boolean compressorState = false;
-  public static boolean climbState = false;
   public static NetworkTableEntry validAngle;
-  public static String ledColor;
-  public static double blinkInterval = 0;
-  public static int blinkCounter = 0;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -59,8 +54,6 @@ public class Robot extends TimedRobot {
     autoChooser.addOption("Left 5 Cell", 2);
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
-    m_robotContainer.m_robotDrive.zeroHeading();
-    m_robotContainer.m_visionLed.toggleRelay(true);
 
   }
 
@@ -84,8 +77,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
 
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("RPM", m_robotContainer.m_shooter.shooterEncoder.getRate() * 60);
-    SmartDashboard.putBoolean("Compressor State", compressorState);
     SmartDashboard.putBoolean("Vision Available", isVisionValid());
   }
 

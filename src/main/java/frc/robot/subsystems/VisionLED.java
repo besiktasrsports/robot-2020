@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MiscConstants;
 
@@ -15,15 +16,17 @@ public class VisionLED extends SubsystemBase {
   /**
    * Creates a new VisionLED.
    */
+  private boolean ledState;
   public final DigitalOutput m_relay = new DigitalOutput(MiscConstants.kLEDRelayPort);
-
   public VisionLED() {
-
+    toggleRelay(true);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    ledState = !m_relay.get();
+    SmartDashboard.putBoolean("led/ledState", ledState);
   }
 
   

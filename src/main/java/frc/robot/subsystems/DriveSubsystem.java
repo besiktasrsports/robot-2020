@@ -39,22 +39,23 @@ public class DriveSubsystem extends SubsystemBase {
   public final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   private double angular_velocity;
   private double target;
+  private boolean gyroState;
 
   public DriveSubsystem() {
-
     leftRearMotor.follow(leftFrontMotor);
     rightRearMotor.follow(rightFrontMotor);
-
+    
     leftRearMotor.setSafetyEnabled(false);
     leftFrontMotor.setSafetyEnabled(false);
     rightRearMotor.setSafetyEnabled(false);
     rightFrontMotor.setSafetyEnabled(false);
     m_drive.setSafetyEnabled(false);
-
+    
     leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PIDIDX, 10);
     rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PIDIDX, 10);
     leftFrontMotor.setSensorPhase(true);
-
+    
+    zeroHeading();
     resetEncoders();
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
@@ -63,13 +64,12 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     angular_velocity = m_gyro.getRate();
-    SmartDashboard.putNumber("Angular velocity", angular_velocity);
+    gyroState = m_gyro.isConnected();
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncoderDistance(), getRightEncoderDistance());
-    /*
-    if(m_gyro.isConnected() != true){
-      System.out.println("GYRO DISCONNECTED");
-    }
-    */
+    
+    SmartDashboard.putBoolean("drive/gyroState", gyroState);
+    SmartDashboard.putNumber("drive/Angular velocity", angular_velocity);
+    
   }
 
   public Pose2d getPose() {
@@ -94,10 +94,6 @@ public class DriveSubsystem extends SubsystemBase {
     leftFrontMotor.setVoltage(leftVolts);
     rightFrontMotor.setVoltage(-rightVolts);
     m_drive.feed();
-    System.out.print("Left: ");
-    System.out.println(leftVolts);
-    System.out.print("Right: ");
-    System.out.println(-rightVolts);
   }
 
   public double getRightEncoderDistance() {

@@ -5,12 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import frc.robot.Robot;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -27,7 +26,8 @@ public class SetShooterRPMPF extends PIDCommand {
       ShooterConstants.kV, ShooterConstants.kA);
   private static double m_motorOutput;
   private boolean isInterruptable;
-  public SetShooterRPMPF(double targetRPM, ShooterSubsystem shooter,boolean _isInterruptable) {
+
+  public SetShooterRPMPF(double targetRPM, ShooterSubsystem shooter, boolean _isInterruptable) {
     super(
         // The controller that the command will use
         new PIDController(ShooterConstants.kShootP, ShooterConstants.kShootI, ShooterConstants.kShootD),
@@ -53,12 +53,12 @@ public class SetShooterRPMPF extends PIDCommand {
   public void initialize() {
     super.initialize();
     m_motorOutput = 0;
-    Robot.ledColor = "yellow";
   }
 
   @Override
   public void execute() {
     super.execute();
+    m_shooter.isAtSetpoint = getController().atSetpoint();
   }
 
   // Returns true when the command should end.
@@ -74,8 +74,9 @@ public class SetShooterRPMPF extends PIDCommand {
   @Override
   public void end(boolean interrupted) {
     super.end(interrupted);
-    Robot.ledColor = "black";
-    if (!isInterruptable)
+    if (!isInterruptable) {
       m_shooter.runShooterVoltage(0);
+      m_shooter.isAtSetpoint = false;
+    }
   }
 }

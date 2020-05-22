@@ -9,9 +9,9 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.RunHopper;
-import frc.robot.commands.SetShooterRPMPF;
-import frc.robot.commands.VisionTurnCG;
+import frc.robot.commands.hopper.RunHopper;
+import frc.robot.commands.shooter.SetShooterRPMPF;
+import frc.robot.commands.drivetrain.VisionTurnCG;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;

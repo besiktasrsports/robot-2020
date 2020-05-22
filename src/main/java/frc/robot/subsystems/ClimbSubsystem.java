@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimbConstants;
 
@@ -17,6 +18,8 @@ public class ClimbSubsystem extends SubsystemBase {
   /**
    * Creates a new ClimbSubsystem.
    */
+  public boolean compressorState = false;
+  public boolean climbState = false;
   private final Compressor compressor = new Compressor(ClimbConstants.kCompressorPort);
   private final DoubleSolenoid climbSolenoid = new DoubleSolenoid(ClimbConstants.kPCMPort,
       ClimbConstants.kClimbDoubleSolenoidPort1, ClimbConstants.kClimbDoubleSolenoidPort2);
@@ -28,6 +31,8 @@ public class ClimbSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("climber/compressorState", compressorState);
+    SmartDashboard.putBoolean("climber/climberState", climbState);
   }
 
   public void climberUp() {

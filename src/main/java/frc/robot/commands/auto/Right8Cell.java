@@ -8,17 +8,17 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.RunHopper;
-import frc.robot.commands.RunIntake;
-import frc.robot.commands.RunShooter;
-import frc.robot.commands.SetShooterRPMPF;
-import frc.robot.commands.VisionTurnCG;
+import frc.robot.commands.hopper.RunHopper;
+import frc.robot.commands.intake.RunIntake;
+import frc.robot.commands.shooter.RunShooter;
+import frc.robot.commands.shooter.SetShooterRPMPF;
+import frc.robot.commands.drivetrain.VisionTurnCG;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionLED;
-import frc.robot.trajectories.SneakyTrajectory;
+import frc.robot.SneakyTrajectory;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

@@ -5,36 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ClimbSubsystem;
 
-import frc.robot.subsystems.VisionLED;
+public class CloseClimb extends CommandBase {
+  /**
+   * Creates a new OpenCompressor.
+   */
+  private final ClimbSubsystem m_climb;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class CloseLED extends CommandBase {
-  private final VisionLED m_led;
-
-  public CloseLED(VisionLED led) {
+  public CloseClimb(ClimbSubsystem _climb) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_led = led;
-    addRequirements(m_led);
+    this.m_climb = _climb;
+    addRequirements(m_climb);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_led.m_relay.set(false);
+    m_climb.climberDown();
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_led.m_relay.set(false);
   }
+
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_led.m_relay.set(true);
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
   }
 }

@@ -5,43 +5,58 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.hopper;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.HopperSubsystem;
 
-public class ToggleCompressor extends CommandBase {
+public class RunHopper extends CommandBase {
   /**
-   * Creates a new ToggleCompressor.
+   * Creates a new RunHopper.
    */
-  private final ClimbSubsystem m_climb;
+  private final String mode;
+  private final HopperSubsystem m_hopper;
+  private double m_speed = 0.6;
+  private double h_speed = 0.8;
+  private double l_speed = 0.4;
+  private double syncspeed = 0.35;
 
-  public ToggleCompressor(ClimbSubsystem _climb) {
+  public RunHopper(final String _mode, final HopperSubsystem _hopper) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_climb = _climb;
-    addRequirements(m_climb);
+    this.mode = _mode;
+    this.m_hopper = _hopper;
+    addRequirements(_hopper);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.compressorState = !Robot.compressorState;
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Robot.compressorState == true) {
-      m_climb.openCompressor();
+    if (mode == "sync") {
+      m_hopper.runHopper("sync", m_speed, 0);
+    } else if (mode == "up") {
+      m_hopper.runHopper("up", m_speed, 0);
+    } else if (mode == "fast_sync") {
+      m_hopper.runHopper("sync", h_speed, 0);
+    } else if (mode == "down") {
+      m_hopper.runHopper("down", 0, l_speed);
+    } else if (mode == "slow_sync") {
+      m_hopper.runHopper("sync", syncspeed, 0);
     } else {
-      m_climb.closeCompressor();
+      m_hopper.runHopper("", -m_speed, m_speed);
     }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_hopper.runHopper("", 0, 0);
   }
 
   // Returns true when the command should end.

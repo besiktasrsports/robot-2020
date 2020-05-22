@@ -12,7 +12,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
 
-import frc.robot.commands.*;
+import frc.robot.commands.climber.*;
+import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.hopper.*;
+import frc.robot.commands.intake.*;
+import frc.robot.commands.shooter.*;
+import frc.robot.commands.visionLed.*;
 import frc.robot.commands.auto.CenterRight6Cell;
 import frc.robot.commands.auto.CenterRight8Cell;
 import frc.robot.commands.auto.DefaultAuto;
@@ -21,7 +26,7 @@ import frc.robot.commands.auto.Left6Cell;
 import frc.robot.commands.auto.Right6Cell;
 import frc.robot.commands.auto.Right8Cell;
 import frc.robot.subsystems.*;
-import frc.robot.trajectories.SneakyTrajectory;
+import frc.robot.SneakyTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -41,7 +46,6 @@ public class RobotContainer {
   public final IntakeSubsystem m_intake = new IntakeSubsystem();
   public final VisionLED m_visionLed = new VisionLED();
   public final SneakyTrajectory s_trajectory = new SneakyTrajectory(m_robotDrive);
-  public final StatusLED m_statusLed = new StatusLED();
   // public final ShooterPIDSubsystem m_pidShooter = new ShooterPIDSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();

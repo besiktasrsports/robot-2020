@@ -17,7 +17,7 @@ public class HopperSubsystem extends SubsystemBase {
   /**
    * Creates a new HopperSubsystem.
    */
-  private String hopperState;
+  private String hopperState = "";
   private final WPI_VictorSPX hopperMotor1 = new WPI_VictorSPX(HopperConstants.kHopperMotor1Port);
   private final WPI_VictorSPX hopperMotor2 = new WPI_VictorSPX(HopperConstants.kHopperMotor2Port);
 

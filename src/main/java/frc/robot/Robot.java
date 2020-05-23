@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +35,9 @@ public class Robot extends TimedRobot {
   public static NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
   public static NetworkTableEntry validAngle;
+  NetworkTable webds = inst.getTable("webds");
+  double robotX,robotY,robotH;
+  double startTime, currTime;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -54,7 +58,6 @@ public class Robot extends TimedRobot {
     autoChooser.addOption("Left 5 Cell", 2);
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
-
   }
 
   /**
@@ -110,6 +113,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    startTime = Timer.getFPGATimestamp();
 
   }
 
@@ -118,6 +122,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    currTime = Timer.getFPGATimestamp() - startTime;
+    webds.getEntry("robot/x").setDouble(m_robotContainer.s_trajectory.centerRightAuto[0].sample(currTime).poseMeters.getTranslation().getX());
+    webds.getEntry("robot/y").setDouble(m_robotContainer.s_trajectory.centerRightAuto[0].sample(currTime).poseMeters.getTranslation().getY());
+    webds.getEntry("robot/rotation").setDouble(m_robotContainer.s_trajectory.centerRightAuto[0].sample(currTime).poseMeters.getRotation().getDegrees());
   }
 
   @Override

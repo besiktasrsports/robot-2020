@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
   NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
   NetworkTable falconDB = inst.getTable("Live_Dashboard");
   public static NetworkTableEntry validAngle;
-  NetworkTableEntry robot_x, robot_y, robot_h, traj_x, traj_y, traj_h, is_following, is_locked, turret_angle;
+  NetworkTableEntry robot_x, robot_y, robot_h, traj_x, traj_y, traj_h, is_following, is_locked, turret_angle,matchTime,shooterRPM;
   double startTime, currentTime;
   Pose2d robotPose;
 
@@ -69,6 +69,8 @@ public class Robot extends TimedRobot {
     is_following = falconDB.getEntry("isFollowingPath");
     is_locked = falconDB.getEntry("isTurretLocked");
     turret_angle = falconDB.getEntry("turretAngle");
+    matchTime = falconDB.getEntry("matchTime");
+    shooterRPM = falconDB.getEntry("shooterRPM");
   }
 
   /**
@@ -143,6 +145,8 @@ public class Robot extends TimedRobot {
     traj_h.setDouble(robotPose.getRotation().getRadians());
     turret_angle.setDouble(robotPose.getRotation().getRadians()+(currentTime%(Math.PI*2)));
     is_locked.setBoolean(currentTime%2>1 ? true : false);
+    shooterRPM.setDouble((currentTime*400)%5000);
+    matchTime.setDouble(currentTime);
 
   }
 

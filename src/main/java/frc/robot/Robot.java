@@ -12,6 +12,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,7 +35,11 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry angle;
   public static NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
+  NetworkTable falconDB = inst.getTable("Live_Dashboard");
   public static NetworkTableEntry validAngle;
+  NetworkTableEntry robot_x, robot_y, robot_h, traj_x, traj_y, traj_h, is_following, is_locked, turret_angle;
+  double startTime, currentTime;
+  Pose2d robotPose;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -54,7 +60,15 @@ public class Robot extends TimedRobot {
     autoChooser.addOption("Left 5 Cell", 2);
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
-
+    robot_x = falconDB.getEntry("robotX");
+    robot_y = falconDB.getEntry("robotY");
+    robot_h = falconDB.getEntry("robotHeading");
+    traj_x = falconDB.getEntry("pathX");
+    traj_y = falconDB.getEntry("pathY");
+    traj_h = falconDB.getEntry("pathHeading");
+    is_following = falconDB.getEntry("isFollowingPath");
+    is_locked = falconDB.getEntry("isTurretLocked");
+    turret_angle = falconDB.getEntry("turretAngle");
   }
 
   /**
@@ -110,7 +124,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-
+    startTime = Timer.getFPGATimestamp();
+    is_following.setBoolean(true);
   }
 
   /**
@@ -118,6 +133,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    currentTime = Timer.getFPGATimestamp() - startTime;
+    robotPose = m_robotContainer.s_trajectory.wpilib.sample(currentTime).poseMeters;
+    robot_x.setDouble(robotPose.getTranslation().getX());
+    robot_y.setDouble(robotPose.getTranslation().getY());
+    robot_h.setDouble(robotPose.getRotation().getRadians());
+    traj_x.setDouble(robotPose.getTranslation().getX());
+    traj_y.setDouble(robotPose.getTranslation().getY());
+    traj_h.setDouble(robotPose.getRotation().getRadians());
+    turret_angle.setDouble(robotPose.getRotation().getRadians()+(currentTime%(Math.PI*2)));
+    is_locked.setBoolean(currentTime%2>1 ? true : false);
+
   }
 
   @Override

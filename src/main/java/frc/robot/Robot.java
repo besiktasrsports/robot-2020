@@ -13,6 +13,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,13 +28,16 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   NetworkTableInstance chameleon = NetworkTableInstance.create();
+  NetworkTableInstance limePlotter = NetworkTableInstance.create();
   public static SendableChooser<Integer> autoChooser = new SendableChooser<>();
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   public static NetworkTableEntry angle;
   public static NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = chameleon.getTable("chameleon-vision").getSubTable("Microsoft LifeCam HD-3000");
+  NetworkTable limeTable = limePlotter.getTable("limePlotter");
   public static NetworkTableEntry validAngle;
+  public static NetworkTableEntry estimated_x_position, estimated_y_position;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -47,6 +51,7 @@ public class Robot extends TimedRobot {
     CameraServer server = CameraServer.getInstance();
     server.startAutomaticCapture();
     chameleon.startClient("10.72.85.12");
+    limePlotter.startClient("10.72.85.5");
     angle = table.getEntry("targetYaw");
     validAngle = table.getEntry("isValid");
     autoChooser.setDefaultOption("3 Cell Straight", 0);
@@ -55,6 +60,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Autonomous Selector", autoChooser);
     m_robotContainer = new RobotContainer();
 
+    estimated_x_position = limePlotter.getEntry("estimated_x_position");
+    estimated_y_position = limePlotter.getEntry("estimated_y_position");
   }
 
   /**
@@ -78,6 +85,11 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().run();
     SmartDashboard.putBoolean("Vision Available", isVisionValid());
+
+    Translation2d odometryData = m_robotContainer.m_robotDrive.m_odometry.getPoseMeters().getTranslation();
+
+    estimated_x_position.setDouble(odometryData.getX());
+    estimated_y_position.setDouble(odometryData.getY());
   }
 
   /**
